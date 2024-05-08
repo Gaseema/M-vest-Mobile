@@ -6,7 +6,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:invest/utils/constants.dart';
 import 'package:invest/widgets/buttons.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import '../../utils/validation.dart';
+import '../../../utils/validation.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);

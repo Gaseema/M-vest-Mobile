@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:invest/screens/dashboard/dashboard.dart';
+import 'package:invest/screens/onboarding/welcome.dart';
+
 import 'package:invest/utils/constants.dart';
+import 'package:invest/screens/dashboard/goals/new_goal/savings/savings_type.dart';
+import 'package:invest/screens/dashboard/goals/new_goal/savings/payment_plan.dart';
+import 'package:invest/screens/dashboard/goals/new_goal/savings/timeline_plan.dart';
+import 'package:invest/screens/dashboard/goals/new_goal/savings/summary.dart';
 import 'package:invest/providers/user_provider.dart';
-import 'screens/onboarding/welcome.dart';
+import 'screens/authentication/existing_user/pin_code.dart';
+import 'package:invest/widgets/splash_screen.dart';
 import 'screens/authentication/email.dart';
 import 'screens/authentication/existing_user/password.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -35,19 +42,29 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isFirstInstall = false;
-
   // GoRouter configuration
   final _router = GoRouter(
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const WelcomePage(),
+        builder: (context, state) => const AnimatedTextWidget(),
         routes: <RouteBase>[
+          GoRoute(
+            path: 'welcome',
+            builder: (BuildContext context, GoRouterState state) {
+              return const WelcomePage();
+            },
+          ),
           GoRoute(
             path: 'email',
             builder: (BuildContext context, GoRouterState state) {
               return const EmailPage();
+            },
+          ),
+          GoRoute(
+            path: 'pincode',
+            builder: (BuildContext context, GoRouterState state) {
+              return const PinCodePage();
             },
           ),
           GoRoute(
@@ -56,27 +73,40 @@ class _MyAppState extends State<MyApp> {
               return PasswordPage(user: state.extra as Map);
             },
           ),
+          GoRoute(
+            path: 'dashboard',
+            builder: (BuildContext context, GoRouterState state) {
+              return const Dashboard();
+            },
+          ),
+          GoRoute(
+            path: 'choose_savings_type',
+            builder: (BuildContext context, GoRouterState state) {
+              return const SavingsType();
+            },
+          ),
+          GoRoute(
+            path: 'payment_plan',
+            builder: (BuildContext context, GoRouterState state) {
+              return const PaymentPlan();
+            },
+          ),
+          GoRoute(
+            path: 'timeline_plan',
+            builder: (BuildContext context, GoRouterState state) {
+              return const TimelinePlan();
+            },
+          ),
+          GoRoute(
+            path: 'summary',
+            builder: (BuildContext context, GoRouterState state) {
+              return const Summary();
+            },
+          ),
         ],
       ),
     ],
   );
-
-  @override
-  void initState() {
-    super.initState();
-    checkFirstInstall();
-  }
-
-  void checkFirstInstall() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isFirstInstall = prefs.getBool('isFirstInstall') ?? true;
-    setState(() {
-      this.isFirstInstall = isFirstInstall;
-    });
-    if (isFirstInstall) {
-      await prefs.setBool('isFirstInstall', false);
-    }
-  }
 
   // This widget is the root of your application.
   @override
@@ -98,7 +128,7 @@ class _MyAppState extends State<MyApp> {
 
             //Body Medium
             bodyMedium: GoogleFonts.montserrat(
-              fontSize: 16,
+              fontSize: 14,
               color: Colors.black,
               fontWeight: FontWeight.w500,
             ),

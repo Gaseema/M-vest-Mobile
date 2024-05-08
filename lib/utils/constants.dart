@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:invest/providers/user_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
@@ -17,7 +15,7 @@ class ApiClient {
 
   ApiClient(String token) {
     _token = token;
-    _dio.options.baseUrl = 'http://192.168.100.20:8080';
+    _dio.options.baseUrl = 'http://192.168.1.34:8080';
   }
 
   Future<Response> get(String url,

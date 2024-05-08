@@ -45,5 +45,7 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSFaceIDUsageDescription</key>
+	<string>To enhance security and streamline user authentication, our app offers the option to use Face ID for login and secure access. This ensures a seamless and convenient user experience while maintaining the highest standards of data protection.</string>
 </dict>
 </plist>

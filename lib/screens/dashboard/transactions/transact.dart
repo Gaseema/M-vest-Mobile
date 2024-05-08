@@ -244,41 +244,41 @@ class MakeTransactionState extends State<MakeTransaction> {
                       }
                     }),
               ),
-              Keypad(
-                dot: true,
-                callback: (val) {
-                  setState(() {
-                    buttonError = false;
-                    if (val == '<') {
-                      if (amountText.isNotEmpty) {
-                        amountText = amountText.substring(
-                          0,
-                          amountText.length - 1,
-                        );
-                        if (amountText.isEmpty) {
-                          amountText = '0';
-                          setState(() {
-                            buttonError = true;
-                          });
-                        }
-                      }
-                    } else if (val == '.') {
-                      if (!amountText.contains('.')) {
-                        amountText = '$amountText.';
-                      }
-                    } else {
-                      if (amountText == '0') {
-                        amountText = '$val';
-                      } else {
-                        amountText = '$amountText$val';
-                      }
-                    }
-                    if (num.parse(amountText) < 1) {
-                      buttonError = true;
-                    }
-                  });
-                },
-              ),
+              // Keypad(
+              //   dot: true,
+              //   callback: (val) {
+              //     setState(() {
+              //       buttonError = false;
+              //       if (val == '<') {
+              //         if (amountText.isNotEmpty) {
+              //           amountText = amountText.substring(
+              //             0,
+              //             amountText.length - 1,
+              //           );
+              //           if (amountText.isEmpty) {
+              //             amountText = '0';
+              //             setState(() {
+              //               buttonError = true;
+              //             });
+              //           }
+              //         }
+              //       } else if (val == '.') {
+              //         if (!amountText.contains('.')) {
+              //           amountText = '$amountText.';
+              //         }
+              //       } else {
+              //         if (amountText == '0') {
+              //           amountText = '$val';
+              //         } else {
+              //           amountText = '$amountText$val';
+              //         }
+              //       }
+              //       if (num.parse(amountText) < 1) {
+              //         buttonError = true;
+              //       }
+              //     });
+              //   },
+              // ),
             ],
           ),
         ),

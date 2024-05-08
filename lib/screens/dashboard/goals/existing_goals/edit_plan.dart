@@ -1,34 +1,69 @@
+// ignore_for_file: avoid_print
+
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:invest/screens/dashboard/plans/contacts_list.dart';
-import 'package:invest/screens/dashboard/plans/success.dart';
+import 'package:invest/screens/dashboard/goals/contacts_list.dart';
+import 'package:invest/screens/dashboard/goals/success.dart';
+import 'package:invest/utils/constants.dart';
 import 'package:invest/widgets/buttons.dart';
 import 'package:invest/utils/theme.dart';
+import 'package:invest/widgets/currency_converter.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 
-class NewPlan extends StatefulWidget {
-  const NewPlan({Key? key}) : super(key: key);
+class EditPlan extends StatefulWidget {
+  final String? initialGoalName;
+  final String? initialGoalDescription;
+  final int? initialTargetAmount;
+  final String? initialCategory;
+  final DateTime? initialMaturityDate;
+  final bool initialLockPlan;
+  final String? initialFrequency;
+  final num? planId;
+  final List? initialmembersList;
+  // EditPlan({Key? key, required String initialGoalName}) : super(key: key);
+  const EditPlan({
+    Key? key,
+    this.initialGoalName,
+    this.initialGoalDescription,
+    this.initialTargetAmount,
+    this.initialCategory,
+    this.initialMaturityDate,
+    this.initialLockPlan = false,
+    this.initialFrequency,
+    this.planId,
+    this.initialmembersList,
+  }) : super(key: key);
 
   @override
-  State<NewPlan> createState() => _NewPlanState();
+  State<EditPlan> createState() => _EditPlanState();
 }
 
-class _NewPlanState extends State<NewPlan> {
+class _EditPlanState extends State<EditPlan> {
   TextEditingController goalName = TextEditingController();
   TextEditingController goalDescription = TextEditingController();
   TextEditingController targetAmount = TextEditingController();
   TextEditingController maturityDate = TextEditingController();
   bool locked = false;
-  String? selectedDay;
-  bool lockPlan = false;
-  String? selectedFrequency;
-  String? selectedSavings;
-  String? selectedCategory;
+  String planCategory = '';
 
-  DateTime? selectedDate;
   List<Contact> selectedContacts = [];
+  List? membersList;
+
+  @override
+  void initState() {
+    super.initState();
+    // Set initial values from widget parameters
+    goalName.text = widget.initialGoalName ?? '';
+    goalDescription.text = widget.initialGoalDescription ?? '';
+    targetAmount.text = widget.initialTargetAmount?.toString() ?? '';
+    selectedCategory = widget.initialCategory;
+    selectedDate = widget.initialMaturityDate;
+    lockPlan = widget.initialLockPlan;
+    selectedFrequency = widget.initialFrequency;
+    membersList = widget.initialmembersList;
+  }
 
   void navigateToContactsPage(BuildContext context) async {
     final result = await Navigator.push<List<Contact>>(
@@ -57,13 +92,21 @@ class _NewPlanState extends State<NewPlan> {
     );
   }
 
+  String? selectedDay;
+  bool lockPlan = false;
+  String? selectedFrequency;
+
+  DateTime? selectedDate;
+
   String goalNameError = '';
   String goalDescriptionError = '';
   String targetAmountError = '';
   String categoryError = '';
   String dateError = '';
   String frequencyError = '';
-  num? planId;
+
+  String? selectedSavings;
+  String? selectedCategory;
 
   bool validateFields() {
     bool isValid = true;
@@ -264,10 +307,18 @@ class _NewPlanState extends State<NewPlan> {
                     ),
                   ),
                   Text(
-                    'Add New Plan',
+                    'Confirm Changes',
                     style: displayNormalBiggerSlightlyBoldBlack,
                   ),
-                  Container(width: 30),
+                  GestureDetector(
+                    onTap: () {
+                      _showBottomSheet();
+                    },
+                    child: Image.asset(
+                      'assets/icons/delete.png',
+                      width: 30,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -602,7 +653,9 @@ class _NewPlanState extends State<NewPlan> {
                         'Get notifications after:',
                         style: displayNormalBlack,
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(
+                        height: 12,
+                      ),
                       SizedBox(
                         height: 60,
                         child: DropdownButtonFormField<String>(
@@ -629,10 +682,6 @@ class _NewPlanState extends State<NewPlan> {
                             labelStyle: displayNormalGrey1,
                             border: const OutlineInputBorder(),
                             prefixIcon: const Icon(Icons.timeline),
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
                           ),
                           onChanged: (newValue) {
                             setState(() {
@@ -654,9 +703,11 @@ class _NewPlanState extends State<NewPlan> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(
+                        height: 12,
+                      ),
                       Text(
-                        'Add memebers to your plan',
+                        'Add members to your plan',
                         style: displayNormalBolderDarkBlue,
                       ),
                       const SizedBox(height: 10),
@@ -720,43 +771,39 @@ class _NewPlanState extends State<NewPlan> {
                         height: 20,
                       ),
                       CustomButton(
-                        url: '/plan/create',
+                        url: '/plan/edit',
                         method: 'POST',
-                        text: 'Create Plan',
+                        text: 'Edit Plan',
                         body: {
+                          "goalId": widget.planId,
                           "goal_name": goalName.text,
-                          "plan_id": planId,
                           "type": "individual",
                           "description": goalDescription.text,
                           "target_amount": int.tryParse(targetAmount.text
                                   .replaceAll(RegExp(r'[^0-9]'), '')) ??
                               0,
+
+                          //targetAmount.text,
                           "category": selectedCategory,
+                          // "maturity_date": selectedDate.toString(),
                           "maturity_date": selectedDate != null
                               ? DateFormat('yyyy-MM-dd').format(selectedDate!)
                               : '',
-                          "locked": lockPlan,
                           "frequency": selectedFrequency,
-                          "plan_members": selectedContacts.isNotEmpty
-                              ? getMembersList()
-                              : null,
+                          "locked": lockPlan,
+                          "members": getMembersList(),
+                          //goal_id, goal_name, description, target_amount, category
                         },
                         onCompleted: (res) {
                           setState(() {
                             validateFields();
                           });
-                          print(
-                              'I want to see how the list of members appears--------------------------------------');
-                          print(getMembersList());
                           if (res['isSuccessful'] == true && validateFields()) {
-                            print(
-                                'This is my response when creating a plan  ++++++++++++++++++++++++++');
-                            print(res);
+                            //print('Target Amount: ${targetAmount.text}');
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Success(
-                                  planId: planId,
                                   goalName: goalName.text,
                                   description: goalDescription.text,
                                   //targetAmount: int.parse(targetAmount.text),
@@ -764,16 +811,13 @@ class _NewPlanState extends State<NewPlan> {
                                       targetAmount.text.replaceAll(',', '')),
                                   category: selectedCategory,
                                   maturityDate: selectedDate.toString(),
-                                  frequency: selectedFrequency,
                                   locked: lockPlan,
                                   screen:
-                                      'Congratulations! Your plan has successfully been created.',
-                                  membersList: getMembersList() ?? [],
+                                      'Congratulations! Your plan has been successfully editted.',
+                                  membersList: getMembersList(),
                                 ),
                               ),
                             );
-                            // print('+++++++++++++++++++++++++');
-                            // print(selectedFrequency);
                           } else {
                             // showToast(
                             //   context,
@@ -795,21 +839,125 @@ class _NewPlanState extends State<NewPlan> {
     );
   }
 
-  // Function to get the members list
-  List<Map<String, dynamic>>? getMembersList() {
-    if (selectedContacts.isNotEmpty) {
-      List<Map<String, dynamic>> membersList = [];
-      for (Contact contact in selectedContacts) {
-        String? phoneNumber =
-            contact.phones.isNotEmpty ? contact.phones.first.number : null;
-        Map<String, dynamic> memberMap = {
-          'name': contact.displayName,
-          'phone_number': phoneNumber ?? '',
-        };
-        membersList.add(memberMap);
-      }
-      return membersList;
+  _showBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // Set this property to true
+      builder: (BuildContext context) {
+        return FractionallySizedBox(
+          heightFactor: 0.25, // Set the height factor to occupy half the screen
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                // Add content for the delete confirmation modal
+                Text(
+                  'Are you sure you want to delete',
+                  style: displayNormalBlack,
+                ),
+
+                Text(
+                  '${widget.initialGoalName},',
+                  style: displayNormalBolderBlack,
+                ),
+
+                Text(
+                  'of Amount, ${CurrencyConverter().convert(widget.initialTargetAmount.toString())} ',
+                  style: displayNormalBlack,
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: primaryDarkColor.withOpacity(0.3),
+                          ),
+                          child: Text('Cancel', style: displayNormalWhiteBold),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(
+                        height: 48,
+                        child: CustomButton(
+                          url: '/plan/delete',
+                          method: 'POST',
+                          text: 'Delete',
+                          body: {
+                            "goalId": widget.planId,
+                          },
+                          onCompleted: (res) {
+                            setState(() {
+                              validateFields();
+                            });
+                            if (res['isSuccessful']) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Success(
+                                    goalName: goalName.text,
+                                    description: goalDescription.text,
+                                    //targetAmount: int.parse(targetAmount.text),
+                                    targetAmount: int.parse(
+                                        targetAmount.text.replaceAll(',', '')),
+                                    category: selectedCategory,
+                                    maturityDate: selectedDate.toString(),
+                                    locked: lockPlan,
+                                    screen:
+                                        'Your plan has been successfully deleted.',
+                                    membersList: membersList ?? [],
+                                  ),
+                                ),
+                              );
+                            } else {
+                              // showToast(
+                              //   context,
+                              //   'Error!',
+                              //   res['error'],
+                              //   Colors.red,
+                              // );
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+// Function to get the members list
+  List<Map<String, dynamic>> getMembersList() {
+    List<Map<String, dynamic>> membersList = [];
+    for (Contact contact in selectedContacts) {
+      Map<String, dynamic> memberMap = {
+        'name': contact.displayName,
+        'phone_number': contact.phones.isNotEmpty
+            //phoneNumbers.isNotEmpty
+            ? contact.phones.first
+            //contact.phones.first.value
+            : '',
+      };
+      membersList.add(memberMap);
     }
-    return null; // Return null if the members list is empty or null
+    print('these are the members i have selected');
+    print(membersList);
+    return membersList;
   }
 }

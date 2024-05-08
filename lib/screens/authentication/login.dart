@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import 'package:invest/screens/authentication/forgot_password.dart';
+import 'package:invest/screens/authentication/existing_user/forgot_password.dart';
 import 'package:invest/screens/authentication/signup.dart';
 
 import '../../utils/constants.dart';

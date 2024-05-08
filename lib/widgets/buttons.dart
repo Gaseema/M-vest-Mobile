@@ -169,3 +169,36 @@ class _CustomButtonState extends State<CustomButton> {
     );
   }
 }
+
+class Budge extends StatelessWidget {
+  final String text;
+  final Function(dynamic) onTap;
+
+  const Budge({
+    super.key,
+    required this.text,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        onTap(true);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        decoration: BoxDecoration(
+          color: const Color.fromRGBO(231, 231, 239, 1),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                fontWeight: FontWeight.w300,
+              ),
+        ),
+      ),
+    );
+  }
+}

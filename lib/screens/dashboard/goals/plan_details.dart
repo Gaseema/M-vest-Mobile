@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:invest/screens/dashboard/plans/edit_plan.dart';
+import 'package:invest/screens/dashboard/goals/existing_goals/edit_plan.dart';
 import 'package:invest/screens/dashboard/transactions/transact.dart';
 import 'package:invest/utils/constants.dart';
 import 'package:invest/utils/theme.dart';

@@ -1,15 +1,60 @@
-import 'package:flutter/material.dart';
-import 'package:invest/screens/dashboard/plans/new_plan.dart';
-import 'package:invest/screens/dashboard/profile.dart';
 import 'package:invest/utils/constants.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/utils/widgets.dart';
-import 'dart:ui' as ui;
 import 'package:provider/provider.dart';
 import 'package:invest/providers/user_provider.dart';
-import 'package:invest/providers/transaction_provider.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:invest/widgets/currency_converter.dart';
+import 'package:local_auth/local_auth.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
+
+Future<Map<String, dynamic>> handleBiometricAuthentication() async {
+  try {
+    final LocalAuthentication auth = LocalAuthentication();
+    bool canCheckBiometrics = await auth.canCheckBiometrics;
+
+    if (!canCheckBiometrics) {
+      return {
+        'isSuccessful': false,
+        'error': 'Biometric authentication not available'
+      };
+    }
+
+    List<BiometricType> availableBiometrics =
+        await auth.getAvailableBiometrics();
+    if (availableBiometrics.isEmpty) {
+      return {'isSuccessful': false, 'error': 'No biometric sensors available'};
+    }
+
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String? userEmail = prefs.getString('email');
+    // String? userPassword = prefs.getString('password');
+
+    // if (userEmail == null ||
+    //     userEmail.isEmpty ||
+    //     userPassword == null ||
+    //     userPassword.isEmpty) {
+    //   return {
+    //     'isSuccessful': false,
+    //     'error':
+    //         'Please log in using your credentials to activate biometric authentication'
+    //   };
+    // }
+
+    bool authenticated = await auth.authenticate(
+      localizedReason: 'Please authenticate to proceed',
+    );
+
+    if (authenticated) {
+      return {'isSuccessful': true};
+    } else {
+      return {'isSuccessful': false, 'error': 'Authentication failed'};
+    }
+  } on PlatformException catch (e) {
+    print('Biometric authentication error: $e');
+    return {
+      'isSuccessful': false,
+      'error': 'Biometric authentication error: $e'
+    };
+  }
+}
 
 fetchPlans(context) async {
   try {

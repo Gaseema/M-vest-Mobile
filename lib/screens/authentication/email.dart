@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:invest/widgets/appbar.dart';
 import 'package:invest/widgets/buttons.dart';
@@ -59,7 +58,7 @@ class EmailPageState extends State<EmailPage> {
                 leadingOnTap: () {
                   context.pop();
                 },
-                overlay: SystemUiOverlayStyle.dark,
+                statusBarBrightness: Brightness.light,
               ),
               Expanded(
                 child: Center(

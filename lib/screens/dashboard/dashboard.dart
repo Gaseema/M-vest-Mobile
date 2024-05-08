@@ -8,6 +8,7 @@ import 'package:invest/screens/dashboard/transactions.dart';
 import 'package:invest/screens/dashboard/profile.dart';
 import 'package:invest/providers/user_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({
@@ -102,6 +103,11 @@ class DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.light,
+      ),
+    );
     return Scaffold(
       body: PersistentTabView(
         context,

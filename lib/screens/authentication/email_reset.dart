@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invest/screens/authentication/forgot_password.dart';
+import 'package:invest/screens/authentication/existing_user/forgot_password.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 

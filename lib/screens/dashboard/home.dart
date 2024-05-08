@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invest/screens/dashboard/plans/new_plan.dart';
+import 'package:invest/screens/dashboard/goals/new_goal/new_goal.dart';
 import 'package:invest/screens/dashboard/profile.dart';
 import 'package:invest/utils/constants.dart';
 import 'package:invest/utils/theme.dart';
@@ -224,7 +224,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               PersistentNavBarNavigator.pushNewScreen(
                                 context,
-                                screen: const NewPlan(),
+                                screen: const NewGoal(),
                                 withNavBar: false,
                                 pageTransitionAnimation:
                                     PageTransitionAnimation.cupertino,
@@ -345,7 +345,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               PersistentNavBarNavigator.pushNewScreen(
                                 context,
-                                screen: const NewPlan(),
+                                screen: const NewGoal(),
                                 withNavBar: false,
                                 pageTransitionAnimation:
                                     PageTransitionAnimation.cupertino,
@@ -372,7 +372,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               PersistentNavBarNavigator.pushNewScreen(
                                 context,
-                                screen: const NewPlan(),
+                                screen: const NewGoal(),
                                 withNavBar: false,
                                 pageTransitionAnimation:
                                     PageTransitionAnimation.cupertino,

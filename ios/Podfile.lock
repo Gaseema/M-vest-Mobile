@@ -25,6 +25,8 @@ PODS:
   - libphonenumber_plugin (0.0.1):
     - Flutter
     - PhoneNumberKit
+  - local_auth_darwin (0.0.1):
+    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -44,6 +46,7 @@ DEPENDENCIES:
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - libphonenumber_plugin (from `.symlinks/plugins/libphonenumber_plugin/ios`)
+  - local_auth_darwin (from `.symlinks/plugins/local_auth_darwin/darwin`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
 
@@ -66,6 +69,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/google_sign_in_ios/darwin"
   libphonenumber_plugin:
     :path: ".symlinks/plugins/libphonenumber_plugin/ios"
+  local_auth_darwin:
+    :path: ".symlinks/plugins/local_auth_darwin/darwin"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   shared_preferences_foundation:
@@ -81,6 +86,7 @@ SPEC CHECKSUMS:
   GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
   libphonenumber_plugin: 48bf4078546377eedaab4aa54978cd0f6fa23072
+  local_auth_darwin: c7e464000a6a89e952235699e32b329457608d98
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
   PhoneNumberKit: f3980e01b84615524dd496adee6a1b5ced87d3f4
   shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695

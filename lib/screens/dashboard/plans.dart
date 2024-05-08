@@ -1,10 +1,11 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:invest/screens/dashboard/plans/new_plan.dart';
+import 'package:invest/screens/dashboard/goals/new_goal/new_goal.dart';
 import 'package:invest/utils/constants.dart';
 import 'package:invest/utils/theme.dart';
 import 'package:invest/utils/widgets.dart';
+import 'package:invest/utils/functions.dart';
 import 'package:provider/provider.dart';
 import 'package:invest/providers/user_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -20,40 +21,15 @@ class PlansState extends State<Plans> {
   // Plan variables
   bool fetchingUserPlans = true;
 
-  _fetchPlans(BuildContext context) async {
-    setState(() {
-      fetchingUserPlans = true;
-    });
-    // Retrieve user information from provider
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-    final token = userProvider.user?.token;
-
-    // final postData = {};
-    // final apiClient = ApiClient();
-    // final headers = {
-    //   'Authorization': 'Bearer $token',
-    //   'Content-Type': 'application/json',
-    // };
-    // await apiClient
-    //     .post('/plan/fetch/user_plans', postData, headers: headers)
-    //     .then((response) {
-    //   setState(() {
-    //     userPlans = response['plans'];
-    //   });
-    // }).catchError((error) {
-    //   // Handle the error
-    //   print('error');
-    //   print(error);
-    // });
-    // setState(() {
-    //   fetchingUserPlans = false;
-    // });
-  }
-
   @override
   void initState() {
     super.initState();
-    _fetchPlans(context);
+    fetchPlans(context).then((res) {
+      setState(() {
+        userPlans = res['data'];
+        fetchingUserPlans = false;
+      });
+    });
   }
 
   @override
@@ -78,7 +54,7 @@ class PlansState extends State<Plans> {
                       onTap: () {
                         PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          screen: const NewPlan(),
+                          screen: const NewGoal(),
                           withNavBar: false,
                           pageTransitionAnimation:
                               PageTransitionAnimation.cupertino,
@@ -136,7 +112,7 @@ class PlansState extends State<Plans> {
                                   onTap: () {
                                     PersistentNavBarNavigator.pushNewScreen(
                                       context,
-                                      screen: const NewPlan(),
+                                      screen: const NewGoal(),
                                       withNavBar: false,
                                       pageTransitionAnimation:
                                           PageTransitionAnimation.cupertino,

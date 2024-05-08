@@ -5,19 +5,25 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget> actions;
   final VoidCallback? leadingOnTap;
-  final SystemUiOverlayStyle overlay;
+  final Brightness statusBarBrightness;
 
   const CustomAppBar({
     Key? key,
     required this.title,
-    required this.overlay,
     this.actions = const [],
     this.leadingOnTap,
+    this.statusBarBrightness = Brightness.light,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarBrightness: statusBarBrightness,
+      ),
+    );
     return AppBar(
+      foregroundColor: Colors.white,
       title: Text(
         title,
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -32,7 +38,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: const IconThemeData(color: Colors.black),
       backgroundColor: Colors.transparent,
       elevation: 0,
-      systemOverlayStyle: overlay,
     );
   }
 
