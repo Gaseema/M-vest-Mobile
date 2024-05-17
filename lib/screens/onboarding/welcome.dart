@@ -3,6 +3,7 @@ import 'package:invest/utils/theme.dart';
 import 'package:invest/widgets/buttons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/services.dart';
+import 'dart:async';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -14,10 +15,6 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
-    precacheImage(
-      const AssetImage('assets/illustrations/welcome.jpg'),
-      context,
-    );
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarBrightness: Brightness.dark,

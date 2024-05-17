@@ -7,6 +7,8 @@ import 'package:invest/widgets/keypad.dart';
 import 'package:invest/widgets/pin_code_field.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:async';
+import 'package:invest/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class PinCodePage extends StatefulWidget {
   final String email;
@@ -50,6 +52,7 @@ class PinCodePageState extends State<PinCodePage> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -120,17 +123,27 @@ class PinCodePageState extends State<PinCodePage> {
                           '/user/login',
                           {'email': widget.email, 'password': codeValue},
                         ).then((res) {
-                          print(res);
-                          if (res['isSuccessful'] == true) {
-                            context.go('/dashboard');
-                          } else {
-                            showToast(
-                              context,
-                              'Error!',
-                              res['error'] ?? 'Error logging in',
-                              Colors.red,
-                            );
-                          }
+                          try {
+                            print(res);
+                            if (res['isSuccessful'] == true) {
+                              userProvider.setUser(
+                                User(
+                                  name: res['data']['user']['first_name'],
+                                  email: res['data']['user']['email'],
+                                  phoneNo: res['data']['user']['phone_number'],
+                                  token: res['data']['token'],
+                                ),
+                              );
+                              context.go('/dashboard');
+                            } else {
+                              showToast(
+                                context,
+                                'Error!',
+                                res['error'] ?? 'Error logging in',
+                                Colors.red,
+                              );
+                            }
+                          } catch (e) {}
                           stopProcessing();
                         });
                       }

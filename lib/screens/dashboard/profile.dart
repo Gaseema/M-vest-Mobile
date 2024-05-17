@@ -22,7 +22,7 @@ class ProfileState extends State<Profile> {
       padding: const EdgeInsets.all(20),
       width: SizeConfig.blockSizeHorizontal * 100,
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.5),
+        color: primaryColor.withOpacity(0.3),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -212,7 +212,7 @@ class ProfileState extends State<Profile> {
                 end: Alignment.topRight,
                 colors: [
                   const Color.fromARGB(255, 2, 7, 93).withOpacity(0.8),
-                  const Color.fromARGB(255, 22, 6, 112).withOpacity(0.1),
+                  const Color.fromARGB(255, 22, 6, 112).withOpacity(0.3),
                 ],
               ),
             ),

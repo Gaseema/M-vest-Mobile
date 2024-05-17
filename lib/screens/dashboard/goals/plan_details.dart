@@ -95,7 +95,7 @@ class PlanDetailsState extends State<PlanDetails> {
     Widget balCard = Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.5),
+        color: primaryColor.withOpacity(0.3),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -107,20 +107,19 @@ class PlanDetailsState extends State<PlanDetails> {
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 3, 10, 3),
                 decoration: BoxDecoration(
-                  color: secondaryGoldColorDarker,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  '${widget.category}',
-                  style: displaySmallWhite,
+                  'Goal: ${widget.plan}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(fontSize: 12),
                 ),
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 3, 10, 3),
-                // child: Image.asset(
-                //   'assets/icons/unlock.png',
-                //   width: SizeConfig.blockSizeHorizontal * 5,
-                // ),
                 child: widget.locked!
                     ? Image.asset(
                         'assets/icons/lock.png',
@@ -133,38 +132,36 @@ class PlanDetailsState extends State<PlanDetails> {
               ),
             ],
           ),
-          Container(
-            margin: const EdgeInsets.only(right: 10, top: 20),
-            child: Image.asset(
-              'assets/icons/other.png',
-              width: SizeConfig.blockSizeHorizontal * 5,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 20, bottom: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${widget.plan}',
-                  style: displaySmallBoldWhite,
+          const SizedBox(height: 20),
+          Text(
+            'Goal Balance',
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  color: Colors.white,
+                  fontSize: 12,
                 ),
-                const SizedBox(height: 5),
-              ],
-            ),
           ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Created on ${formatDate(widget.createdAt!, false)}',
-                  style: displaySmallWhite,
+          const SizedBox(height: 10),
+          Text(
+            'KES. 20,000',
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-                const SizedBox(height: 5),
-              ],
-            ),
+          ),
+          const SizedBox(height: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Created on ${formatDate(widget.createdAt!, false)}',
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Colors.white.withOpacity(0.7),
+                      fontSize: 10,
+                    ),
+              ),
+              const SizedBox(height: 5),
+            ],
           ),
         ],
       ),
@@ -192,7 +189,7 @@ class PlanDetailsState extends State<PlanDetails> {
                 Container(
                   padding: const EdgeInsets.all(15),
                   decoration: const BoxDecoration(
-                    color: secondaryGoldColorDarker,
+                    color: primaryColor,
                     shape: BoxShape.circle,
                   ),
                   child: Image.asset(
@@ -227,7 +224,7 @@ class PlanDetailsState extends State<PlanDetails> {
                 Container(
                   padding: const EdgeInsets.all(15),
                   decoration: const BoxDecoration(
-                    color: secondaryGoldColorDarker,
+                    color: primaryColor,
                     shape: BoxShape.circle,
                   ),
                   child: Image.asset(
@@ -247,11 +244,12 @@ class PlanDetailsState extends State<PlanDetails> {
       ),
     );
     Widget description = Container(
-      margin: const EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20, left: 3, right: 3),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
+        boxShadow: [customBoxShadow],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -301,11 +299,12 @@ class PlanDetailsState extends State<PlanDetails> {
       ),
     );
     Widget progressBar = Container(
-      margin: const EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20, left: 3, right: 3),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
+        boxShadow: [customBoxShadow],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -320,7 +319,7 @@ class PlanDetailsState extends State<PlanDetails> {
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 3, 10, 3),
                 decoration: BoxDecoration(
-                  color: secondaryGoldColorDarker,
+                  color: primaryColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
@@ -512,9 +511,9 @@ class PlanDetailsState extends State<PlanDetails> {
                         ),
                       ],
                     ),
+                    progressBar,
                     transactButtons,
                     description,
-                    progressBar,
                     widget.membersList!.isEmpty
                         ? Container()
                         : membersListWidget,

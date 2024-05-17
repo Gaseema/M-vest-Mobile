@@ -7,7 +7,7 @@ class ApiClient {
 
   ApiClient(String token) {
     _token = token;
-    _dio.options.baseUrl = 'http://192.168.1.10:8080';
+    _dio.options.baseUrl = 'http://192.168.100.19:8080';
   }
 
   Future<Response> get(String url,

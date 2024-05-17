@@ -111,6 +111,7 @@ class EmailPageState extends State<EmailPage> {
                     }
                     // Check the status of the user
                     var userStatus = res['data']['user']['status'];
+                    print('user status: $userStatus');
                     if (userStatus <= 1) {
                       // User has to set a password
                       return GoRouter.of(context).push(
