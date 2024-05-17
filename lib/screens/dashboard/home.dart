@@ -162,7 +162,7 @@ class HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                user!.name,
+                'user!.name',
                 style: displayNormalWhite,
               ),
             ],

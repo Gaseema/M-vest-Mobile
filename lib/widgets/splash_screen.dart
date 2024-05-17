@@ -28,7 +28,7 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget>
     } else {
       // Navigate to the pincode page
       if (context.mounted) {
-        context.go('/pincode');
+        context.go('/welcome');
       }
     }
   }

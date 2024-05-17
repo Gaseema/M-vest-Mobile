@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, avoid_print, use_build_context_synchronously
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';

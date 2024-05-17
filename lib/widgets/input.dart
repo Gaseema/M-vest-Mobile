@@ -53,6 +53,7 @@ class _InputWidgetState extends State<InputWidget> {
       obscureText: widget.obscureText == true ? obscure : false,
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: widget.inputTextColor,
+            fontSize: 14,
           ),
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
@@ -71,14 +72,13 @@ class _InputWidgetState extends State<InputWidget> {
             : null,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            // color: inputInactiveColor,
+          borderSide: const BorderSide(
             width: 1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: primaryColor,
             width: 2,
           ),
@@ -89,11 +89,27 @@ class _InputWidgetState extends State<InputWidget> {
             .bodyMedium!
             .copyWith(color: textGreyColor),
         contentPadding: const EdgeInsets.symmetric(
-          vertical: 25,
-          horizontal: 30,
+          vertical: 10,
+          horizontal: 20,
         ),
       ),
       onChanged: widget.onChanged,
+    );
+  }
+}
+
+class InputLabel extends StatelessWidget {
+  final String text;
+  const InputLabel({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+            fontSize: 10,
+            color: Colors.grey[360],
+          ),
     );
   }
 }

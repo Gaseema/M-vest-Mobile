@@ -104,13 +104,24 @@ class EmailPageState extends State<EmailPage> {
                       );
                     }
                     if (res['data']['user'] == null) {
-                      // TODO: Got to register new user
-                      print('should register user');
-                      return;
+                      return GoRouter.of(context).push(
+                        '/otp_verification',
+                        extra: userEmail,
+                      );
                     }
+                    // Check the status of the user
+                    var userStatus = res['data']['user']['status'];
+                    if (userStatus <= 1) {
+                      // User has to set a password
+                      return GoRouter.of(context).push(
+                        '/create_pin',
+                        extra: userEmail,
+                      );
+                    }
+                    // Take user to dashboard
                     GoRouter.of(context).push(
-                      '/password',
-                      extra: {'email': userEmail},
+                      '/verify_user_pin',
+                      extra: userEmail,
                     );
                   } catch (err) {
                     print(err);

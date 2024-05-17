@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invest/screens/authentication/login.dart';
-import 'package:invest/screens/authentication/otp_verification.dart';
+import 'package:invest/screens/authentication/new_user/verify_email.dart';
 import 'package:invest/utils/theme.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:invest/utils/constants.dart';
@@ -170,8 +170,8 @@ class _ForgotPasswordState extends State<ForgotPassword>
                         if (res['isSuccessful'] == true && validateForm()) {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: OTPVerification(
-                              otp: res['data']['otp'],
+                            screen: VerifyEmail(
+                              // otp: res['data']['otp'],
                               email: email.text,
                             ),
                             withNavBar: false,

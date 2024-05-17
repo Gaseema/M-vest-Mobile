@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:invest/screens/dashboard/dashboard.dart';
 import 'package:invest/screens/onboarding/welcome.dart';
-
+import 'package:invest/screens/authentication/new_user/register.dart';
+import 'package:invest/screens/authentication/new_user/verify_email.dart';
 import 'package:invest/utils/constants.dart';
 import 'package:invest/screens/dashboard/goals/new_goal/savings/savings_type.dart';
 import 'package:invest/screens/dashboard/goals/new_goal/savings/payment_plan.dart';
@@ -9,6 +10,7 @@ import 'package:invest/screens/dashboard/goals/new_goal/savings/timeline_plan.da
 import 'package:invest/screens/dashboard/goals/new_goal/savings/summary.dart';
 import 'package:invest/providers/user_provider.dart';
 import 'screens/authentication/existing_user/pin_code.dart';
+import 'screens/authentication/new_user/create_pin.dart';
 import 'package:invest/widgets/splash_screen.dart';
 import 'screens/authentication/email.dart';
 import 'screens/authentication/existing_user/password.dart';
@@ -62,9 +64,9 @@ class _MyAppState extends State<MyApp> {
             },
           ),
           GoRoute(
-            path: 'pincode',
+            path: 'verify_user_pin',
             builder: (BuildContext context, GoRouterState state) {
-              return const PinCodePage();
+              return PinCodePage(email: state.extra as String);
             },
           ),
           GoRoute(
@@ -101,6 +103,24 @@ class _MyAppState extends State<MyApp> {
             path: 'summary',
             builder: (BuildContext context, GoRouterState state) {
               return const Summary();
+            },
+          ),
+          GoRoute(
+            path: 'register',
+            builder: (BuildContext context, GoRouterState state) {
+              return RegisterUserPage(email: state.extra as String);
+            },
+          ),
+          GoRoute(
+            path: 'otp_verification',
+            builder: (BuildContext context, GoRouterState state) {
+              return VerifyEmail(email: state.extra as String);
+            },
+          ),
+          GoRoute(
+            path: 'create_pin',
+            builder: (BuildContext context, GoRouterState state) {
+              return CreatePin(email: state.extra as String);
             },
           ),
         ],

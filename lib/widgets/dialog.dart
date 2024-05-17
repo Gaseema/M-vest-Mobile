@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invest/utils/theme.dart';
 
 class CustomBottomSheet extends StatelessWidget {
   final Widget child;
@@ -50,6 +51,55 @@ void showCustomBottomSheet(BuildContext context, Widget content) {
     isScrollControlled: true,
     builder: (BuildContext context) {
       return CustomBottomSheet(child: content);
+    },
+  );
+}
+
+showFloatingBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    builder: (BuildContext context) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 50,
+        ), // Padding around the bottom sheet
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            color: primaryColor,
+            child: Padding(
+              padding:
+                  const EdgeInsets.all(16.0), // Padding inside the bottom sheet
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    'Remember your password',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Colors.white,
+                        ),
+                  ),
+                  SizedBox(height: 16.0),
+                  Text(
+                    "Remember your password. If you if you forget your password you'll have reset your password",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Colors.white,
+                        ),
+                  ),
+                  SizedBox(height: 16.0),
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text('Close'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
     },
   );
 }
