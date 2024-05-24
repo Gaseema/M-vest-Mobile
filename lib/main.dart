@@ -17,6 +17,7 @@ import 'screens/authentication/existing_user/password.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:invest/providers/transaction_provider.dart';
+import 'package:invest/providers/plan_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,6 +26,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<UserProvider>.value(value: UserProvider()),
+        ChangeNotifierProvider<PlanProvider>.value(value: PlanProvider()),
         ChangeNotifierProvider<UserTransactionsProvider>.value(
           value: UserTransactionsProvider(),
         ),

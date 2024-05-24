@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:invest/utils/constants.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,10 +15,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Wait for some time and then navigate to the home screen
-    Timer(Duration(seconds: 4), () {
+    myImage = Image.asset('assets/illustrations/welcome.jpg');
+    Timer(Duration(seconds: 4), () async {
+      await precacheImage(
+          const AssetImage('assets/illustrations/welcome.jpg'), context);
       Navigator.pushReplacementNamed(context, '/home');
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(myImage!.image, context);
   }
 
   @override

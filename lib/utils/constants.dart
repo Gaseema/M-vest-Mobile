@@ -9,6 +9,8 @@ List userPlans = [];
 
 num activePage = 0;
 
+Image? myImage;
+
 PersistentTabController bottomNavigationController =
     PersistentTabController(initialIndex: 0);
 
@@ -194,3 +196,10 @@ final List<Color> grediantColor3 = [
   redDarkColor,
   redDarkColor.withOpacity(0.3)
 ];
+
+BoxShadow customBoxShadow = BoxShadow(
+  color: Colors.grey.withOpacity(0.3),
+  spreadRadius: 0.9,
+  blurRadius: 5,
+  offset: const Offset(0, 1),
+);

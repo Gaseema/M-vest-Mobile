@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invest/utils/constants.dart';
 import 'package:invest/utils/theme.dart';
 import 'package:invest/widgets/appbar.dart';
 import 'package:invest/screens/dashboard/goals/new_goal/widgets/goal_type_card.dart';
@@ -65,7 +66,12 @@ class _NewGoalState extends State<NewGoal> {
                     ),
                     goalType: 'Investment',
                     onTap: (val) {
-                      // context.go('/choose_savings_type');
+                      showToast(
+                        context,
+                        'Error',
+                        'Service unavailable in your country',
+                        primaryColor,
+                      );
                     },
                   ),
                 ],

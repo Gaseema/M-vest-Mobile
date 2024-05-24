@@ -139,8 +139,7 @@ class CreatePinState extends State<CreatePin> {
                           return;
                         }
                         secondPinValue = codeValue; // Save the second pin value
-                        print('firstPinValue: $firstPinValue');
-                        print('secondPinValue: $secondPinValue');
+
                         // Check if pin match
                         if (firstPinValue != secondPinValue) {
                           pinError();

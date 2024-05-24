@@ -11,6 +11,7 @@ import 'package:invest/providers/transaction_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:invest/widgets/currency_converter.dart';
 import 'package:invest/utils/functions.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class HomeState extends State<Home> {
     });
   }
 
-  bool amountHidden = false;
+  bool amountHidden = true;
   final greeting = getGreeting();
   @override
   Widget build(BuildContext context) {
@@ -58,23 +59,40 @@ class HomeState extends State<Home> {
           Expanded(
             child: Row(children: [
               Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Profile()));
-                    },
-                    child: Image.asset(
-                      'assets/icons/user.png',
-                      width: SizeConfig.blockSizeHorizontal * 7,
-                    ),
-                  )),
-              Text(
-                '$greeting, ${user?.name}',
-                style: displayNormalBlack,
+                margin: const EdgeInsets.only(right: 10),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Profile()));
+                  },
+                  child: Image.asset(
+                    'assets/icons/user.png',
+                    width: SizeConfig.blockSizeHorizontal * 8,
+                  ),
+                ),
               ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '$greeting,',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(height: 1, fontSize: 12),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    '${user?.name}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(height: 1),
+                  ),
+                ],
+              )
             ]),
           ),
           GestureDetector(
@@ -90,7 +108,7 @@ class HomeState extends State<Home> {
               margin: const EdgeInsets.only(right: 10),
               child: Image.asset(
                 'assets/icons/bell.png',
-                width: SizeConfig.blockSizeHorizontal * 5,
+                width: SizeConfig.blockSizeHorizontal * 6,
               ),
             ),
           ),
@@ -100,7 +118,7 @@ class HomeState extends State<Home> {
     Widget balCard = Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.5),
+        color: primaryColor.withOpacity(0.3),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -112,8 +130,8 @@ class HomeState extends State<Home> {
               Container(
                 margin: const EdgeInsets.only(right: 10),
                 child: Image.asset(
-                  'assets/icons/logo.png',
-                  width: SizeConfig.blockSizeHorizontal * 5,
+                  'assets/icons/Mvest_M_app_icon.png',
+                  width: SizeConfig.blockSizeHorizontal * 10,
                 ),
               ),
               GestureDetector(
@@ -123,10 +141,10 @@ class HomeState extends State<Home> {
                   });
                 },
                 child: Image.asset(
-                  amountHidden == true
+                  amountHidden == false
                       ? 'assets/icons/eye_hide.png'
                       : 'assets/icons/eye_view.png',
-                  width: SizeConfig.blockSizeHorizontal * 4,
+                  width: SizeConfig.blockSizeHorizontal * 5,
                 ),
               ),
             ],
@@ -162,7 +180,7 @@ class HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'user!.name',
+                user!.name,
                 style: displayNormalWhite,
               ),
             ],
@@ -175,9 +193,26 @@ class HomeState extends State<Home> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'My Saving Plans',
-            style: displayNormalSlightlyBoldBlack,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'My Saving Plans',
+                style: displayNormalSlightlyBoldBlack,
+              ),
+              GestureDetector(
+                onTap: () {
+                  print('should view all');
+                },
+                child: Text(
+                  'View all',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 14),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 20),
           fetchingUserPlans == false
@@ -216,9 +251,13 @@ class HomeState extends State<Home> {
                   : Center(
                       child: Column(
                         children: [
-                          Image.asset(
-                            'assets/illustrations/thoughts.png',
-                            width: SizeConfig.blockSizeHorizontal * 40,
+                          SvgPicture.asset(
+                            'assets/svg/make_plan.svg',
+                            width: 20,
+                            colorFilter: ColorFilter.mode(
+                              primaryColor,
+                              BlendMode.srcIn,
+                            ),
                           ),
                           GestureDetector(
                             onTap: () {
@@ -234,7 +273,7 @@ class HomeState extends State<Home> {
                               padding:
                                   const EdgeInsets.fromLTRB(20, 10, 20, 10),
                               decoration: BoxDecoration(
-                                color: primaryDarkColor,
+                                color: primaryColor,
                                 borderRadius: BorderRadius.circular(7),
                               ),
                               child: Text(
@@ -308,6 +347,7 @@ class HomeState extends State<Home> {
           child: Column(
             children: [
               topAppBar,
+              const SizedBox(height: 20),
               Expanded(
                 child: ListView(
                   children: [

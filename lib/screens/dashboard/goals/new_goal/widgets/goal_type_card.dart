@@ -42,7 +42,7 @@ class GoalTypeCard extends StatelessWidget {
                   Expanded(
                     child: Text(
                       goalType == 'Savings'
-                          ? 'Build my savings'
+                          ? 'Grow my savings'
                           : 'Invest my money',
                       style: Theme.of(context)
                           .textTheme
