@@ -12,6 +12,26 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  Image? image1;
+
+  @override
+  void initState() {
+    super.initState();
+
+    image1 = Image.asset(
+      "assets/illustrations/welcome.jpg",
+      fit: BoxFit.fitHeight,
+      height: double.infinity,
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    precacheImage(image1!.image, context);
+  }
+
   @override
   Widget build(BuildContext context) {
     precacheImage(
@@ -130,7 +150,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     body: const {},
                     text: 'Continue with email',
                     onCompleted: (val) {
-                      context.go('/email');
+                      context.push('/email');
                     },
                   ),
                   const SizedBox(height: 50)

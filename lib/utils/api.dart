@@ -7,7 +7,7 @@ class ApiClient {
 
   ApiClient(String token) {
     _token = token;
-    _dio.options.baseUrl = 'http://192.168.1.10:8080';
+    _dio.options.baseUrl = 'http://192.168.1.16:8080';
   }
 
   Future<Response> get(String url,
@@ -38,7 +38,7 @@ class ApiClient {
       );
     } on DioException catch (e) {
       print('<<<<<<<<<<<<<<<<<<<POST ERRO1R>>>>>>>>>>>>>>>>>>>');
-      print(e.response?.data);
+      print(e.response);
       throw e.response?.data['error'];
     }
   }

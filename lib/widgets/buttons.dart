@@ -127,7 +127,7 @@ class _CustomButtonState extends State<CustomButton> {
                 );
               } catch (e) {
                 widget.onCompleted(
-                  {'isSuccessful': false, 'data': e},
+                  {'isSuccessful': false, 'error': e},
                 );
                 // Handle the error here
               } finally {

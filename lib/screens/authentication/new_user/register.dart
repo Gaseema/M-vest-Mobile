@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invest/utils/theme.dart';
 import 'package:invest/widgets/appbar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:invest/widgets/buttons.dart';
@@ -204,9 +205,29 @@ class RegisterUserPageState extends State<RegisterUserPage> {
                           print('<<<<<<<<<<<<<<email>>>>>>>>>>>>>>');
                           print(res);
                           if (res['isSuccessful'] == true) {
-                            return context.go('/create_pin');
+                            return context.push(
+                              '/create_pin',
+                              extra: widget.email,
+                            );
+                          } else {
+                            showToast(
+                              context,
+                              'Error!',
+                              res['error'] ?? 'Error creating account',
+                              redDarkColor,
+                            );
                           }
-                        } catch (err) {}
+                        } catch (err) {
+                          print(
+                              '<<<<<<<<<<<<<<< register user >>>>>>>>>>>>>>>');
+                          print(err);
+                          showToast(
+                            context,
+                            'Error!',
+                            'Error creating account',
+                            redDarkColor,
+                          );
+                        }
                       },
                     ),
                   ],

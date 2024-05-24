@@ -4,7 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:go_router/go_router.dart';
 
 class AnimatedTextWidget extends StatefulWidget {
-  const AnimatedTextWidget({super.key});
+  const AnimatedTextWidget({Key? key}) : super(key: key);
+
   @override
   State<AnimatedTextWidget> createState() => _AnimatedTextWidgetState();
 }
@@ -15,22 +16,9 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget>
   late Animation<Offset> _offsetAnimation;
   bool _isVisible = false;
 
-  void checkFirstInstall(BuildContext context) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool hasLoggedIn = prefs.getBool('hasLoggedIn') ?? true;
-
-    if (hasLoggedIn) {
-      await prefs.setBool('hasLoggedIn', false);
-      // Navigate to the welcome page
-      if (context.mounted) {
-        context.go('/welcome');
-      }
-    } else {
-      // Navigate to the pincode page
-      if (context.mounted) {
-        context.go('/welcome');
-      }
-    }
+  Future<void> _preloadImage() async {
+    final image = AssetImage('assets/illustrations/welcome.jpg');
+    await precacheImage(image, context);
   }
 
   @override
@@ -41,8 +29,8 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget>
       vsync: this,
     );
     _offsetAnimation = Tween<Offset>(
-      begin: const Offset(0.0, -1.0), // Start off-screen from the top
-      end: const Offset(0.0, 0.0), // End at the center
+      begin: const Offset(0.0, -1.0),
+      end: const Offset(0.0, 0.0),
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.easeInOut,
@@ -56,9 +44,21 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget>
       });
 
       Future.delayed(const Duration(milliseconds: 1500), () {
-        checkFirstInstall(context);
+        // Navigate after the animation is completed and the image is preloaded
+        if (mounted) {
+          context.go('/welcome');
+        }
       });
     });
+
+    // Preload the image
+    _preloadImage();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -67,9 +67,9 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget>
       backgroundColor: primaryColor,
       body: Center(
         child: AnimatedOpacity(
-          opacity: _isVisible ? 1.0 : 0.0, // Set opacity based on visibility
-          duration: const Duration(milliseconds: 1000), // Animation duration
-          curve: Curves.easeInOut, // Animation curve
+          opacity: _isVisible ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 1000),
+          curve: Curves.easeInOut,
           child: SlideTransition(
             position: _offsetAnimation,
             child: Image.asset(

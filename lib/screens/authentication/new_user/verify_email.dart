@@ -168,7 +168,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                           {'email': widget.email, 'otp': codeValue},
                         ).then((res) {
                           if (res['isSuccessful'] == true) {
-                            context.go('/register', extra: widget.email);
+                            context.push('/register', extra: widget.email);
                           } else {
                             pinError();
                           }

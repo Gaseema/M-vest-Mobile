@@ -6,6 +6,8 @@ import 'package:invest/utils/api.dart';
 import 'package:invest/widgets/keypad.dart';
 import 'package:invest/widgets/pin_code_field.dart';
 import 'package:go_router/go_router.dart';
+import 'package:invest/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 import 'dart:async';
 
 class PinCodePage extends StatefulWidget {
@@ -50,6 +52,7 @@ class PinCodePageState extends State<PinCodePage> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -111,9 +114,7 @@ class PinCodePageState extends State<PinCodePage> {
                       codeValue += value;
                       if (codeValue.length == 4) {
                         startProcessing();
-                        print('we got here');
-                        print(widget.email);
-                        print(codeValue);
+
                         // Login user
                         apiCall(
                           'POST',
@@ -122,6 +123,15 @@ class PinCodePageState extends State<PinCodePage> {
                         ).then((res) {
                           print(res);
                           if (res['isSuccessful'] == true) {
+                            userProvider.setUser(
+                              User(
+                                name: res['data']['user']['first_name'],
+                                email: res['data']['user']['email']
+                                    .replaceAll(' ', ''),
+                                phoneNo: res['data']['user']['phone_number'],
+                                token: res['data']['token'],
+                              ),
+                            );
                             context.go('/dashboard');
                           } else {
                             showToast(

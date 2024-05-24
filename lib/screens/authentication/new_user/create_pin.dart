@@ -6,6 +6,8 @@ import 'package:invest/utils/api.dart';
 import 'package:invest/widgets/pin_code_field.dart';
 import 'dart:async';
 import 'package:invest/utils/constants.dart';
+import 'package:invest/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class CreatePin extends StatefulWidget {
   final String email;
@@ -62,6 +64,7 @@ class CreatePinState extends State<CreatePin> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -156,13 +159,21 @@ class CreatePinState extends State<CreatePin> {
                           '/user/set_pin',
                           {'email': widget.email, 'pin': codeValue},
                         ).then((res) {
-                          print(res);
                           if (res['isSuccessful'] == true) {
+                            userProvider.setUser(
+                              User(
+                                name: res['data']['user']['first_name'],
+                                email: res['data']['user']['email']
+                                    .replaceAll(' ', ''),
+                                phoneNo: res['data']['user']['phone_number'],
+                                token: res['data']['token'],
+                              ),
+                            );
                             context.go('/dashboard');
                           } else {
                             pinError();
                           }
-                          stopProcessing();
+                          // stopProcessing();
                         });
                       }
                     }
