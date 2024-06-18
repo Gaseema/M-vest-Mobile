@@ -13,24 +13,19 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  Image? image1;
+  late Future<void> _loadImageFuture;
 
   @override
   void initState() {
     super.initState();
-
-    image1 = Image.asset(
-      "assets/illustrations/welcome.jpg",
-      fit: BoxFit.fitHeight,
-      height: double.infinity,
-    );
+    _loadImageFuture = _loadImage();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    precacheImage(image1!.image, context);
+  Future<void> _loadImage() async {
+    await precacheImage(
+      AssetImage('assets/illustrations/welcome.jpg'),
+      context,
+    );
   }
 
   @override
@@ -38,8 +33,26 @@ class _WelcomePageState extends State<WelcomePage> {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.white,
       ),
     );
+
+    return FutureBuilder<void>(
+      future: _loadImageFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return _buildContent(context);
+        } else {
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: PopScope(

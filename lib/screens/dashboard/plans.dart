@@ -9,6 +9,7 @@ import 'package:invest/utils/functions.dart';
 import 'package:provider/provider.dart';
 import 'package:invest/providers/user_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Plans extends StatefulWidget {
   const Plans({Key? key}) : super(key: key);
@@ -34,6 +35,51 @@ class PlansState extends State<Plans> {
 
   @override
   Widget build(BuildContext context) {
+    Widget featuredGoals = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Featured goals",
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+        ),
+        const SizedBox(height: 20),
+        GridView.count(
+          shrinkWrap: true,
+          crossAxisCount: 3,
+          crossAxisSpacing: 10.0,
+          mainAxisSpacing: 10.0,
+          childAspectRatio: 0.7,
+          children: const [
+            GradientImageContainer(
+              imageUrl: 'assets/goals/emergency.avif',
+              text: 'Emergency',
+              gradientOpacity: 0.7,
+            ),
+            GradientImageContainer(
+              imageUrl: 'assets/goals/business.png',
+              text: 'Business',
+              gradientOpacity: 0.7,
+            ),
+            GradientImageContainer(
+              imageUrl: 'assets/goals/land.avif',
+              text: 'Travel',
+              gradientOpacity: 0.7,
+            ),
+            GradientImageContainer(
+              imageUrl: 'assets/goals/insurance.png',
+              text: 'Chama',
+              gradientOpacity: 0.7,
+            ),
+            GradientImageContainer(
+              imageUrl: 'assets/goals/other.png',
+              text: 'Other',
+              gradientOpacity: 0.7,
+            ),
+          ],
+        ),
+      ],
+    );
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -45,9 +91,8 @@ class PlansState extends State<Plans> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(width: 30),
                     Text(
-                      'Plans',
+                      'Goals',
                       style: displayNormalBiggerSlightlyBoldBlack,
                     ),
                     GestureDetector(
@@ -101,38 +146,35 @@ class PlansState extends State<Plans> {
                               );
                             },
                           )
-                        : Center(
-                            child: Column(
-                              children: [
-                                Image.asset(
-                                  'assets/illustrations/thoughts.png',
-                                  width: SizeConfig.blockSizeHorizontal * 40,
+                        : Column(
+                            children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                  vertical: 10,
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    PersistentNavBarNavigator.pushNewScreen(
-                                      context,
-                                      screen: const NewGoal(),
-                                      withNavBar: false,
-                                      pageTransitionAnimation:
-                                          PageTransitionAnimation.cupertino,
-                                    );
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 10, 20, 10),
-                                    decoration: BoxDecoration(
-                                      color: primaryDarkColor,
-                                      borderRadius: BorderRadius.circular(7),
-                                    ),
-                                    child: Text(
-                                      'Create a plan',
-                                      style: displayNormalWhite,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
+                                decoration: BoxDecoration(
+                                  color: primaryColor,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  'Unlock your dreams by saving today—watch your money grow with our unbeatable interest rates!',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        color: Colors.white.withOpacity(0.8),
+                                      ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              featuredGoals,
+                            ],
                           )
                     : const Center(
                         // padding: const EdgeInsets.all(20),
@@ -147,6 +189,73 @@ class PlansState extends State<Plans> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class GradientImageContainer extends StatelessWidget {
+  final String imageUrl;
+  final String text;
+  final double gradientOpacity;
+
+  const GradientImageContainer({
+    Key? key,
+    required this.imageUrl,
+    required this.text,
+    this.gradientOpacity = 0.5,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        // Image
+        SizedBox(
+          height: 300, // Set the desired height here
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              imageUrl,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: 300,
+            ),
+          ),
+        ),
+
+        // Gradient overlay
+        Positioned.fill(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.transparent, // Transparent at the top
+                  Colors.black.withOpacity(
+                      gradientOpacity), // Black with opacity at the bottom
+                ],
+              ),
+            ),
+          ),
+        ),
+
+        // Text
+        Positioned(
+          bottom: 10,
+          left: 20,
+          right: 20,
+          child: Text(
+            text,
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  color: Colors.white,
+                  fontSize: 10,
+                ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
     );
   }
 }

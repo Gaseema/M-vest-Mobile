@@ -69,3 +69,15 @@ fetchPlans(context) async {
     return {'isSuccessful': false, 'error': 'Error fetching plans'};
   }
 }
+
+fetchTransactions(context) async {
+  try {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final token = userProvider.user?.token ?? '';
+    ApiClient apiClient = ApiClient(token);
+    var response = await apiClient.post('/transaction/fetch/user_transactions');
+    return {'isSuccessful': true, 'data': response.data['transactions']};
+  } catch (e) {
+    return {'isSuccessful': false, 'error': 'Error fetching transactions'};
+  }
+}

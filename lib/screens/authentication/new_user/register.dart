@@ -230,6 +230,7 @@ class RegisterUserPageState extends State<RegisterUserPage> {
                         }
                       },
                     ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),

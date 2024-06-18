@@ -1,16 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:invest/screens/dashboard/goals/existing_goals/edit_goal.dart';
-import 'package:invest/screens/dashboard/transactions/transact.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/utils/widgets.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:invest/imports/imports.dart';
 
-import '../../../providers/user_provider.dart';
-import '../../../widgets/currency_converter.dart';
-
-class PlanDetails extends StatefulWidget {
+class GoalDetails extends StatefulWidget {
   final int? id;
   final String? type;
   final String? category;
@@ -26,7 +16,7 @@ class PlanDetails extends StatefulWidget {
   final bool? locked;
   final List? membersList;
 
-  const PlanDetails({
+  const GoalDetails({
     Key? key,
     this.category,
     this.id,
@@ -45,10 +35,10 @@ class PlanDetails extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  PlanDetailsState createState() => PlanDetailsState();
+  GoalDetailsState createState() => GoalDetailsState();
 }
 
-class PlanDetailsState extends State<PlanDetails> {
+class GoalDetailsState extends State<GoalDetails> {
   List transactionList = [];
   bool loadingTransactions = false;
 
@@ -243,124 +233,7 @@ class PlanDetailsState extends State<PlanDetails> {
         ],
       ),
     );
-    Widget description = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Description',
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: Colors.black,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        const SizedBox(height: 10),
-        Container(
-          margin: const EdgeInsets.only(left: 3, right: 3),
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [customBoxShadow],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 10),
-              Text(
-                '${widget.planDescription}',
-                style: displayNormalBlack,
-              ),
-              const SizedBox(height: 20),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Total Amount',
-                          style: displayNormalBoldBlack,
-                        ),
-                        Text(CurrencyConverter()
-                            .convert(widget.target.toString()))
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Timeframe',
-                          style: displayNormalBoldBlack,
-                        ),
-                        Text(
-                            '${formatDate(widget.createdAt!, true)} - ${formatDate(widget.maturityDate!, true)}'),
-                      ],
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-        )
-      ],
-    );
-    Widget progressBar = Container(
-      margin: const EdgeInsets.only(top: 20, left: 3, right: 3),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [customBoxShadow],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Progress',
-                style: displayNormalBoldBlack,
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(10, 3, 10, 3),
-                decoration: BoxDecoration(
-                  color: primaryColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  '${widget.progress}%',
-                  style: displaySmallWhite,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          ProgressBar(progress: widget.progress),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                //'${widget.planBalance}',
-                CurrencyConverter().convert(widget.planBalance.toString()),
-                style: displaySmallerLightGrey,
-              ),
-              Text(
-                //'${widget.target}',
-                ' ${CurrencyConverter().convert(widget.target.toString())}',
-                style: displaySmallerLightGrey,
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+
     Widget membersListWidget = Container(
       margin: const EdgeInsets.only(top: 30),
       child: Column(
@@ -522,10 +395,19 @@ class PlanDetailsState extends State<PlanDetails> {
                         ),
                       ],
                     ),
-                    progressBar,
+                    Progress(
+                      progress: widget.progress!,
+                      planBalance: widget.planBalance!,
+                      target: widget.target,
+                    ),
                     transactButtons,
                     const SizedBox(height: 20),
-                    description,
+                    GoalPerformance(
+                      planDescription: widget.planDescription!,
+                      createdAt: widget.createdAt!,
+                      target: widget.target!,
+                      maturityDate: widget.maturityDate!,
+                    ),
                     widget.membersList!.isEmpty
                         ? Container()
                         : membersListWidget,

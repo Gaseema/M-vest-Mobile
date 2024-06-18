@@ -23,6 +23,15 @@ class MyTheme {
   );
 }
 
+TextStyle spacedTitleTextStyle(BuildContext context) {
+  return Theme.of(context).textTheme.bodyMedium!.copyWith(
+        color: Colors.grey[500],
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 1,
+      );
+}
+
 TextStyle displaySmallThinWhite = GoogleFonts.poppins(
   fontSize: 12,
   fontWeight: FontWeight.w300,

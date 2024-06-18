@@ -14,6 +14,7 @@ class EmailPage extends StatefulWidget {
 }
 
 class EmailPageState extends State<EmailPage> {
+  late FocusNode _firstInputFocusNode;
   String userEmail = '';
 
   // Form Validation
@@ -42,6 +43,13 @@ class EmailPageState extends State<EmailPage> {
   void initState() {
     super.initState();
     formValidationChecker();
+    _firstInputFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _firstInputFocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -49,7 +57,7 @@ class EmailPageState extends State<EmailPage> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             children: [
               CustomAppBar(
@@ -79,6 +87,7 @@ class EmailPageState extends State<EmailPage> {
                         });
                         formValidationChecker();
                       },
+                      focusNode: _firstInputFocusNode,
                     ),
                   ],
                 )),

@@ -201,5 +201,5 @@ BoxShadow customBoxShadow = BoxShadow(
   color: Colors.grey.withOpacity(0.3),
   spreadRadius: 0.9,
   blurRadius: 5,
-  offset: const Offset(0, 1),
+  offset: const Offset(0, 2),
 );

@@ -143,21 +143,21 @@ class _MyAppState extends State<MyApp> {
           textTheme: TextTheme(
             //Body Small
             bodySmall: GoogleFonts.montserrat(
-              fontSize: 13,
+              fontSize: 10,
               fontWeight: FontWeight.w600,
               color: Colors.black,
             ),
 
             //Body Medium
             bodyMedium: GoogleFonts.montserrat(
-              fontSize: 14,
+              fontSize: 12,
               color: Colors.black,
               fontWeight: FontWeight.w500,
             ),
 
             //Body Large
             bodyLarge: GoogleFonts.aBeeZee(
-              fontSize: 19,
+              fontSize: 16,
               fontWeight: FontWeight.w800,
               color: Colors.white,
             ),

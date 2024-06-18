@@ -4,6 +4,7 @@ import 'package:invest/screens/dashboard/goals/plan_details.dart';
 import 'package:invest/utils/theme.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:invest/widgets/currency_converter.dart';
+import 'package:invest/screens/dashboard/goals/existing_goals/goal_details/goal_details_screen.dart';
 
 class TransactionCard extends StatelessWidget {
   final String? type;
@@ -127,7 +128,7 @@ class PlanCard extends StatelessWidget {
       onTap: () {
         PersistentNavBarNavigator.pushNewScreen(
           context,
-          screen: PlanDetails(
+          screen: GoalDetails(
               type: type,
               id: id,
               category: category,

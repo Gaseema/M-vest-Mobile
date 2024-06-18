@@ -11,6 +11,7 @@ class InputWidget extends StatefulWidget {
   final TextInputType keyboardType;
   final Color inputTextColor;
   final String? initialValue;
+  final FocusNode? focusNode;
 
   const InputWidget({
     Key? key,
@@ -23,6 +24,7 @@ class InputWidget extends StatefulWidget {
     this.inputTextColor = Colors.black,
     required this.onChanged,
     this.initialValue,
+    this.focusNode,
   }) : super(key: key);
 
   @override
@@ -32,22 +34,28 @@ class InputWidget extends StatefulWidget {
 class _InputWidgetState extends State<InputWidget> {
   bool obscure = true;
   TextEditingController? controller;
+  FocusNode? _focusNode;
 
   @override
   void initState() {
     super.initState();
     controller = TextEditingController(text: widget.initialValue);
+    _focusNode = widget.focusNode ?? FocusNode();
   }
 
   @override
   void dispose() {
     controller?.dispose();
+    if (widget.focusNode == null) {
+      _focusNode!.dispose();
+    }
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      focusNode: _focusNode,
       enabled: widget.enabled,
       controller: controller,
       obscureText: widget.obscureText == true ? obscure : false,

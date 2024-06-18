@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:invest/utils/theme.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:invest/utils/constants.dart';
-import 'package:invest/screens/dashboard/home.dart';
+import 'package:invest/screens/dashboard/home/home.dart';
 import 'package:invest/screens/dashboard/plans.dart';
 import 'package:invest/screens/dashboard/transactions.dart';
 import 'package:invest/screens/dashboard/profile.dart';
 import 'package:invest/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({
@@ -39,31 +41,28 @@ class DashboardState extends State<Dashboard> {
   }
 
   iconBarStyle(String page) {
+    print(page == 'Home');
     return PersistentBottomNavBarItem(
-      icon: Image.asset(
-        page == 'Home'
-            ? activePage == 0
-                ? 'assets/icons/home.png'
-                : 'assets/icons/home.png'
-            : page == 'Plans'
-                ? activePage == 1
-                    ? 'assets/icons/clipboard.png'
-                    : 'assets/icons/clipboard.png'
-                : page == 'Transactions'
-                    ? activePage == 2
-                        ? 'assets/icons/transaction.png'
-                        : 'assets/icons/transaction.png'
-                    : activePage == 3
-                        ? 'assets/icons/profile.png'
-                        : 'assets/icons/profile.png',
-        width: SizeConfig.blockSizeHorizontal * 5,
+      icon: SvgPicture.asset(
+        'assets/svg/${page.toLowerCase()}.svg',
+        width: 20,
+        colorFilter: ColorFilter.mode(
+          activePage ==
+                  [
+                    'Home',
+                    'Plans',
+                    'Transactions',
+                    'Profile',
+                  ].indexOf(page)
+              ? primaryColor
+              : Colors.grey,
+          BlendMode.srcIn,
+        ),
       ),
       title: page,
-      activeColorPrimary: primaryDarkColor,
-
+      activeColorPrimary: primaryColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
-      activeColorSecondary: primaryDarkColor,
-      // textStyle: smallTextBlueBold(),
+      activeColorSecondary: Colors.black,
     );
   }
 
@@ -106,6 +105,7 @@ class DashboardState extends State<Dashboard> {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.white,
       ),
     );
     return Scaffold(
@@ -135,7 +135,7 @@ class DashboardState extends State<Dashboard> {
           curve: Curves.ease,
           duration: Duration(milliseconds: 200),
         ),
-        navBarStyle: NavBarStyle.style1,
+        navBarStyle: NavBarStyle.style9,
         onItemSelected: (value) {
           setState(() {
             activePage = value;
