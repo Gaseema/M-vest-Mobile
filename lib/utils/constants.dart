@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:overlay_support/overlay_support.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:dio/dio.dart';
-import 'package:intl/intl.dart';
-import 'dart:io';
+import 'package:invest/imports/imports.dart';
 
 List userPlans = [];
 
@@ -78,16 +73,18 @@ class OverLayNotification extends StatelessWidget {
   final String title;
   final Duration duration;
 
-  const OverLayNotification(
-      {Key? key, required this.title, required this.duration})
-      : super(key: key);
+  const OverLayNotification({
+    super.key,
+    required this.title,
+    required this.duration,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Material(
         child: Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           color: Colors.blue,
           child: Text(
             title,

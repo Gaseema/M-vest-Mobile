@@ -1,25 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:invest/screens/dashboard/dashboard.dart';
-import 'package:invest/screens/onboarding/welcome.dart';
-import 'package:invest/screens/authentication/new_user/register.dart';
-import 'package:invest/screens/authentication/new_user/verify_email.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/screens/dashboard/goals/new_goal/savings/savings_type.dart';
-import 'package:invest/screens/dashboard/goals/new_goal/savings/payment_plan.dart';
-import 'package:invest/screens/dashboard/goals/new_goal/savings/timeline_plan.dart';
-import 'package:invest/screens/dashboard/goals/new_goal/savings/summary.dart';
-import 'package:invest/providers/user_provider.dart';
-import 'screens/authentication/existing_user/pin_code.dart';
-import 'screens/authentication/new_user/create_pin.dart';
-import 'package:invest/widgets/splash_screen.dart';
-import 'screens/authentication/email.dart';
-import 'screens/authentication/existing_user/password.dart';
-import 'package:overlay_support/overlay_support.dart';
-import 'package:provider/provider.dart';
-import 'package:invest/providers/transaction_provider.dart';
-import 'package:invest/providers/plan_provider.dart';
-import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:invest/imports/imports.dart';
 
 void main() {
   runApp(
@@ -150,7 +129,7 @@ class _MyAppState extends State<MyApp> {
 
             //Body Medium
             bodyMedium: GoogleFonts.montserrat(
-              fontSize: 12,
+              fontSize: 14,
               color: Colors.black,
               fontWeight: FontWeight.w500,
             ),

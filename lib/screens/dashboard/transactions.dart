@@ -1,10 +1,4 @@
-// ignore_for_file: avoid_printr
-import 'package:flutter/material.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/utils/widgets.dart';
-import 'package:provider/provider.dart';
-import 'package:invest/providers/transaction_provider.dart';
+import 'package:invest/imports/imports.dart';
 
 class Transactions extends StatefulWidget {
   const Transactions({Key? key}) : super(key: key);

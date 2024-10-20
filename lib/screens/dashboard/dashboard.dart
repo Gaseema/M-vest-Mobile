@@ -1,16 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/screens/dashboard/home/home.dart';
-import 'package:invest/screens/dashboard/plans.dart';
-import 'package:invest/screens/dashboard/transactions.dart';
-import 'package:invest/screens/dashboard/profile.dart';
-import 'package:invest/providers/user_provider.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:invest/imports/imports.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({
@@ -114,27 +102,26 @@ class DashboardState extends State<Dashboard> {
         controller: bottomNavigationController,
         screens: _buildScreens(),
         items: _navBarsItems(),
-        confineInSafeArea: true,
+        // confineInSafeArea: true,
         backgroundColor: Colors.white,
         handleAndroidBackButtonPress: true,
         resizeToAvoidBottomInset: true,
         stateManagement: true,
-        hideNavigationBarWhenKeyboardShows: true,
+        hideNavigationBarWhenKeyboardAppears: true,
         decoration: NavBarDecoration(
           borderRadius: BorderRadius.circular(0.0),
           colorBehindNavBar: Colors.white,
         ),
-        popAllScreensOnTapOfSelectedTab: true,
-        popActionScreens: PopActionScreensType.all,
-        itemAnimationProperties: const ItemAnimationProperties(
-          duration: Duration(milliseconds: 200),
-          curve: Curves.ease,
-        ),
-        screenTransitionAnimation: const ScreenTransitionAnimation(
-          animateTabTransition: true,
-          curve: Curves.ease,
-          duration: Duration(milliseconds: 200),
-        ),
+        // popActionScreens: PopActionScreensType.all,
+        // itemAnimationProperties: const ItemAnimationProperties(
+        //   duration: Duration(milliseconds: 200),
+        //   curve: Curves.ease,
+        // ),
+        // screenTransitionAnimation: const ScreenTransitionAnimation(
+        //   animateTabTransition: true,
+        //   curve: Curves.ease,
+        //   duration: Duration(milliseconds: 200),
+        // ),
         navBarStyle: NavBarStyle.style9,
         onItemSelected: (value) {
           setState(() {

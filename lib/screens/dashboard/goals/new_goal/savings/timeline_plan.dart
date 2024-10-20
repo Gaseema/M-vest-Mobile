@@ -1,3 +1,5 @@
+import 'package:invest/imports/imports.dart';
+
 import 'package:flutter/material.dart';
 import 'package:invest/utils/theme.dart';
 import 'package:invest/widgets/buttons.dart';
@@ -32,22 +34,27 @@ class TimelinePlanState extends State<TimelinePlan> {
           runSpacing: 10,
           children: [
             Budge(
+              active: false,
               text: '3 months',
               onTap: (data) => {},
             ),
             Budge(
+              active: false,
               text: '6 months',
               onTap: (data) => {},
             ),
             Budge(
+              active: false,
               text: '9 months',
               onTap: (data) => {},
             ),
             Budge(
+              active: false,
               text: '1 year',
               onTap: (data) => {},
             ),
             Budge(
+              active: false,
               text: 'Let me choose',
               onTap: (data) => {},
             ),
@@ -119,7 +126,7 @@ class TimelinePlanState extends State<TimelinePlan> {
                   children: [
                     timelineSetting,
                     const SizedBox(height: 50),
-                    estimatedValue,
+                    // estimatedValue,
                   ],
                 ),
               ),

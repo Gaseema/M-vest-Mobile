@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:go_router/go_router.dart';
+import 'package:invest/imports/imports.dart';
 
 class AnimatedTextWidget extends StatefulWidget {
   const AnimatedTextWidget({Key? key}) : super(key: key);

@@ -1,5 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
+import 'package:invest/imports/imports.dart';
+
 class UserGoals extends StatefulWidget {
   const UserGoals({super.key});
 
@@ -87,28 +89,28 @@ class _UserGoalsState extends State<UserGoals> {
                           'assets/svg/make_plan.svg',
                           width: 200,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            PersistentNavBarNavigator.pushNewScreen(
-                              context,
-                              screen: const NewGoal(),
-                              withNavBar: false,
-                              pageTransitionAnimation:
-                                  PageTransitionAnimation.cupertino,
-                            );
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                            decoration: BoxDecoration(
-                              color: primaryColor,
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                            child: Text(
-                              'Create a goal',
-                              style: displayNormalWhite,
-                            ),
-                          ),
-                        )
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     PersistentNavBarNavigator.pushNewScreen(
+                        //       context,
+                        //       screen: const NewGoal(),
+                        //       withNavBar: false,
+                        //       pageTransitionAnimation:
+                        //           PageTransitionAnimation.cupertino,
+                        //     );
+                        //   },
+                        //   child: Container(
+                        //     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        //     decoration: BoxDecoration(
+                        //       color: primaryColor,
+                        //       borderRadius: BorderRadius.circular(7),
+                        //     ),
+                        //     child: Text(
+                        //       'Create a goal',
+                        //       style: displayNormalWhite,
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
                   )

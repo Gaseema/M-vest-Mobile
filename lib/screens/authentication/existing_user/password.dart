@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/widgets/appbar.dart';
-import 'package:invest/widgets/buttons.dart';
-import 'package:invest/widgets/input.dart';
-import 'package:invest/providers/user_provider.dart';
-import 'package:provider/provider.dart';
-import 'package:invest/screens/dashboard/dashboard.dart';
+import 'package:invest/imports/imports.dart';
 
 class PasswordPage extends StatefulWidget {
   final Map user;

@@ -1,16 +1,4 @@
-// ignore_for_file: avoid_print
-
-import 'dart:typed_data';
-
-import 'package:flutter/material.dart';
-import 'package:invest/screens/dashboard/goals/contacts_list.dart';
-import 'package:invest/screens/dashboard/goals/success.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/widgets/buttons.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/widgets/currency_converter.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:invest/imports/imports.dart';
 
 class EditPlan extends StatefulWidget {
   final String? initialGoalName;

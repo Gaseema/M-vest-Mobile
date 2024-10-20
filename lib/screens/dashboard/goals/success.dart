@@ -1,10 +1,12 @@
+import 'package:invest/imports/imports.dart';
+
 // ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations
 import 'package:flutter/material.dart';
 import 'package:invest/screens/dashboard/dashboard.dart';
 import 'package:invest/utils/constants.dart';
 
 import '../../../utils/theme.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../../widgets/currency_converter.dart';
 

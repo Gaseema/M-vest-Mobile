@@ -1,15 +1,4 @@
-// ignore_for_file: avoid_print
-
-import 'package:flutter/material.dart';
-import 'package:invest/screens/dashboard/goals/new_goal/new_goal.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/utils/widgets.dart';
-import 'package:invest/utils/functions.dart';
-import 'package:provider/provider.dart';
-import 'package:invest/providers/user_provider.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:invest/imports/imports.dart';
 
 class Plans extends StatefulWidget {
   const Plans({Key? key}) : super(key: key);
@@ -51,23 +40,8 @@ class PlansState extends State<Plans> {
           childAspectRatio: 0.7,
           children: const [
             GradientImageContainer(
-              imageUrl: 'assets/goals/emergency.avif',
-              text: 'Emergency',
-              gradientOpacity: 0.7,
-            ),
-            GradientImageContainer(
               imageUrl: 'assets/goals/business.png',
               text: 'Business',
-              gradientOpacity: 0.7,
-            ),
-            GradientImageContainer(
-              imageUrl: 'assets/goals/land.avif',
-              text: 'Travel',
-              gradientOpacity: 0.7,
-            ),
-            GradientImageContainer(
-              imageUrl: 'assets/goals/insurance.png',
-              text: 'Chama',
               gradientOpacity: 0.7,
             ),
             GradientImageContainer(
@@ -95,21 +69,21 @@ class PlansState extends State<Plans> {
                       'Goals',
                       style: displayNormalBiggerSlightlyBoldBlack,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        PersistentNavBarNavigator.pushNewScreen(
-                          context,
-                          screen: const NewGoal(),
-                          withNavBar: false,
-                          pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
-                        );
-                      },
-                      child: Image.asset(
-                        'assets/icons/more.png',
-                        width: 25,
-                      ),
-                    )
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     PersistentNavBarNavigator.pushNewScreen(
+                    //       context,
+                    //       screen: const NewGoal(),
+                    //       withNavBar: false,
+                    //       pageTransitionAnimation:
+                    //           PageTransitionAnimation.cupertino,
+                    //     );
+                    //   },
+                    //   child: Image.asset(
+                    //     'assets/icons/more.png',
+                    //     width: 25,
+                    //   ),
+                    // )
                   ],
                 ),
               ),

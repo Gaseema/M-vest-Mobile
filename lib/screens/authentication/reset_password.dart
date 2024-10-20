@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:invest/screens/authentication/reset_success.dart';
-
-import '../../utils/constants.dart';
-import '../../utils/theme.dart';
-import '../../utils/validation.dart';
-import 'package:invest/widgets/buttons.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:invest/imports/imports.dart';
 
 class ResetPassword extends StatefulWidget {
   final String? email;

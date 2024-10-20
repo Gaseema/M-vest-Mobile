@@ -1,3 +1,4 @@
+import 'package:invest/imports/imports.dart';
 import 'package:flutter/material.dart';
 import 'package:invest/widgets/payment_method.dart';
 import 'package:invest/widgets/buttons.dart';
@@ -47,27 +48,42 @@ class SummaryState extends State<Summary> {
                       label: 'Amount',
                       value: 'KES 10,000',
                     ),
-                    const Divider(),
+                    Divider(
+                      height: 1,
+                      color: Colors.black.withOpacity(0.2),
+                    ),
                     const LabeledRow(
                       label: 'Interest rate',
                       value: '10% per annum',
                     ),
-                    const Divider(),
+                    Divider(
+                      height: 1,
+                      color: Colors.black.withOpacity(0.2),
+                    ),
                     const LabeledRow(
                       label: 'Maturity Date',
                       value: 'KES 10,000',
                     ),
-                    const Divider(),
+                    Divider(
+                      height: 1,
+                      color: Colors.black.withOpacity(0.2),
+                    ),
                     const LabeledRow(
                       label: 'Automation',
                       value: '28th of every month',
                     ),
-                    const Divider(),
+                    Divider(
+                      height: 1,
+                      color: Colors.black.withOpacity(0.2),
+                    ),
                     const LabeledRow(
                       label: 'Estimated Future Amount',
                       value: 'KES 50,000',
                     ),
-                    const Divider(),
+                    Divider(
+                      height: 1,
+                      color: Colors.black.withOpacity(0.2),
+                    ),
                     const SizedBox(height: 50),
                   ],
                 ),
@@ -129,20 +145,6 @@ class LabeledRow extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class Divider extends StatelessWidget {
-  const Divider({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 1,
-      color: Colors.black.withOpacity(0.2),
     );
   }
 }

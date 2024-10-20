@@ -1,11 +1,4 @@
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:dio/dio.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:invest/providers/user_provider.dart';
-import 'package:invest/utils/api.dart';
+import 'package:invest/imports/imports.dart';
 
 class ButtonUtils {
   static Widget ElevatedButton({
@@ -170,11 +163,13 @@ class _CustomButtonState extends State<CustomButton> {
 }
 
 class Budge extends StatelessWidget {
+  final bool active;
   final String text;
   final Function(dynamic) onTap;
 
   const Budge({
     super.key,
+    required this.active,
     required this.text,
     required this.onTap,
   });
@@ -188,13 +183,14 @@ class Budge extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
-          color: const Color.fromRGBO(231, 231, 239, 1),
+          color: active ? primaryColor : const Color.fromRGBO(231, 231, 239, 1),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
           text,
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 fontWeight: FontWeight.w300,
+                color: active ? Colors.white : Colors.black,
               ),
         ),
       ),

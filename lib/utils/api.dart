@@ -1,5 +1,4 @@
-import 'package:dio/dio.dart';
-import 'dart:io';
+import 'package:invest/imports/imports.dart';
 
 class ApiClient {
   final Dio _dio = Dio();
@@ -7,8 +6,8 @@ class ApiClient {
 
   ApiClient(String token) {
     _token = token;
-    // _dio.options.baseUrl = 'http://3.111.211.42:8090';
-    _dio.options.baseUrl = 'http://192.168.100.20:8090';
+    // _dio.options.baseUrl = 'https://api.mvest.africa';
+    _dio.options.baseUrl = 'http://192.168.100.249:8090';
   }
 
   Future<Response> get(String url,

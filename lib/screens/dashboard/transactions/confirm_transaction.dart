@@ -1,9 +1,11 @@
+import 'package:invest/imports/imports.dart';
+
 import 'package:flutter/material.dart';
 import 'package:invest/utils/theme.dart';
 import 'package:invest/utils/constants.dart';
 import 'package:invest/screens/dashboard/transactions/transaction_status.dart';
 import 'package:invest/widgets/buttons.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../../widgets/currency_converter.dart';
 

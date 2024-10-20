@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:invest/widgets/pin_code_field.dart';
-import 'package:invest/widgets/appbar.dart';
-import 'package:go_router/go_router.dart';
-import 'dart:async';
-import 'package:invest/widgets/keypad.dart';
-import 'package:invest/utils/api.dart';
+import 'package:invest/imports/imports.dart';
 
 class VerifyEmail extends StatefulWidget {
   final String email;

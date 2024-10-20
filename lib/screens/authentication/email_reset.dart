@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:invest/screens/authentication/existing_user/forgot_password.dart';
-import 'package:toggle_switch/toggle_switch.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-
-import '../../utils/constants.dart';
+import 'package:invest/imports/imports.dart';
 
 class EmailReset extends StatelessWidget {
   EmailReset({super.key});

@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:invest/utils/theme.dart';
+import 'package:invest/imports/imports.dart';
 
 class CustomBottomSheet extends StatelessWidget {
   final Widget child;
 
-  const CustomBottomSheet({Key? key, required this.child}) : super(key: key);
+  const CustomBottomSheet({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

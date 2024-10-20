@@ -1,8 +1,4 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:flutter/services.dart';
-import 'package:invest/utils/theme.dart';
+import 'package:invest/imports/imports.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -1,10 +1,4 @@
-// ignore_for_file: avoid_print
-
-import 'package:flutter/material.dart';
-import 'package:invest/screens/authentication/login.dart';
-
-import '../../utils/constants.dart';
-import '../../utils/theme.dart';
+import 'package:invest/imports/imports.dart';
 
 class ResetSuccess extends StatefulWidget {
   const ResetSuccess({super.key});

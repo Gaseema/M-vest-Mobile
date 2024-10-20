@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'constants.dart';
+import 'package:invest/imports/imports.dart';
 
 const Color primaryColor = Color.fromRGBO(0, 82, 255, 1);
 const Color darkHeaderColor = Color.fromRGBO(8, 37, 82, 1);

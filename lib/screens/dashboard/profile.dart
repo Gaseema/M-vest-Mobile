@@ -1,12 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/screens/authentication/login.dart';
-import 'package:provider/provider.dart';
-import 'package:invest/providers/user_provider.dart';
+import 'package:invest/imports/imports.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  const Profile({super.key});
 
   @override
   ProfileState createState() => ProfileState();
@@ -229,7 +224,7 @@ class ProfileState extends State<Profile> {
             children: [
               profileSection,
               userInfo,
-              accountSettings,
+              // accountSettings,
             ],
           ),
         ),

@@ -1,3 +1,5 @@
+import 'package:invest/imports/imports.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:invest/screens/dashboard/goals/existing_goals/edit_goal.dart';
@@ -5,7 +7,7 @@ import 'package:invest/screens/dashboard/transactions/transact.dart';
 import 'package:invest/utils/constants.dart';
 import 'package:invest/utils/theme.dart';
 import 'package:invest/utils/widgets.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../../providers/user_provider.dart';
 import '../../../widgets/currency_converter.dart';
@@ -526,9 +528,6 @@ class PlanDetailsState extends State<PlanDetails> {
                     transactButtons,
                     const SizedBox(height: 20),
                     description,
-                    widget.membersList!.isEmpty
-                        ? Container()
-                        : membersListWidget,
                     transactions,
                   ],
                 ),

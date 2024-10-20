@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/widgets/buttons.dart';
+import 'package:invest/imports/imports.dart';
 
 class PaymentMethodWidget extends StatefulWidget {
   final Function(dynamic) onComplete;

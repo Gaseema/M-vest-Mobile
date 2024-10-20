@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/widgets/appbar.dart';
-import 'package:go_router/go_router.dart';
-import 'package:invest/widgets/buttons.dart';
-import 'package:invest/widgets/input.dart';
-import 'package:invest/utils/constants.dart';
+import 'package:invest/imports/imports.dart';
 
 class RegisterUserPage extends StatefulWidget {
   final String email;

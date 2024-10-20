@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:invest/utils/theme.dart';
+import 'package:invest/imports/imports.dart';
 
 class PinCodeField extends StatelessWidget {
   final bool filled;

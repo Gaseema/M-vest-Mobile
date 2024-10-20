@@ -1,3 +1,5 @@
+import 'package:invest/imports/imports.dart';
+
 import 'package:invest/screens/dashboard/profile.dart';
 import 'dart:ui' as ui;
 import 'package:invest/providers/transaction_provider.dart';

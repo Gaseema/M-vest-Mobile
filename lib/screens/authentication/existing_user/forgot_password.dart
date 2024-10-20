@@ -1,12 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:invest/screens/authentication/login.dart';
-import 'package:invest/screens/authentication/new_user/verify_email.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/widgets/buttons.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import '../../../utils/validation.dart';
+import 'package:invest/imports/imports.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);

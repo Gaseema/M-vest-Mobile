@@ -1,9 +1,13 @@
+import 'package:invest/imports/imports.dart';
+
 import 'package:flutter/material.dart';
 import 'package:invest/utils/theme.dart';
 import 'package:invest/widgets/buttons.dart';
 import 'package:invest/widgets/appbar.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:invest/widgets/dialog.dart';
+import 'package:invest/widgets/keypad.dart';
 
 class PaymentPlan extends StatefulWidget {
   const PaymentPlan({super.key});
@@ -13,6 +17,23 @@ class PaymentPlan extends StatefulWidget {
 }
 
 class PaymentPlanState extends State<PaymentPlan> {
+  int selectedStartingAmount = -1;
+  int selectedPlanFrequency = -1;
+  final List _startingAmount = [
+    'KES 5,000',
+    'KES 10,000',
+    'KES 25,000',
+    'KES 50,000',
+    'KES 100,000',
+    'Different Amount',
+  ];
+  final List _planFrequency = [
+    'Daily',
+    'Weekly',
+    'Monthly',
+    'Just this once',
+    'Custom plan',
+  ];
   @override
   Widget build(BuildContext context) {
     Widget amount2start = Column(
@@ -31,30 +52,22 @@ class PaymentPlanState extends State<PaymentPlan> {
           spacing: 10.0,
           runSpacing: 10,
           children: [
-            Budge(
-              text: 'KES 5,000',
-              onTap: (data) => {},
-            ),
-            Budge(
-              text: 'KES 10,000',
-              onTap: (data) => {},
-            ),
-            Budge(
-              text: 'KES 25,000',
-              onTap: (data) => {},
-            ),
-            Budge(
-              text: 'KES 50,000',
-              onTap: (data) => {},
-            ),
-            Budge(
-              text: 'KES 100,000',
-              onTap: (data) => {},
-            ),
-            Budge(
-              text: 'Different Amount',
-              onTap: (data) => {},
-            ),
+            ..._startingAmount.asMap().entries.map((entry) {
+              int index = entry.key;
+              String amount = entry.value;
+              return Budge(
+                active: selectedStartingAmount == index,
+                text: amount,
+                onTap: (data) {
+                  if (_startingAmount[index] == 'Different Amount') {
+                    showCustomBottomSheet(
+                      context,
+                      EnterAmountBottomWidget(),
+                    );
+                  }
+                },
+              );
+            }),
           ],
         ),
       ],
@@ -75,26 +88,19 @@ class PaymentPlanState extends State<PaymentPlan> {
           spacing: 10.0,
           runSpacing: 10,
           children: [
-            Budge(
-              text: 'Daily',
-              onTap: (data) => {},
-            ),
-            Budge(
-              text: 'Weekly',
-              onTap: (data) => {},
-            ),
-            Budge(
-              text: 'Monthly',
-              onTap: (data) => {},
-            ),
-            Budge(
-              text: 'Just this once',
-              onTap: (data) => {},
-            ),
-            Budge(
-              text: 'Custom plan',
-              onTap: (data) => {},
-            ),
+            ..._planFrequency.asMap().entries.map((entry) {
+              int index = entry.key;
+              String amount = entry.value;
+              return Budge(
+                active: selectedPlanFrequency == index,
+                text: amount,
+                onTap: (data) {
+                  setState(() {
+                    selectedPlanFrequency = index;
+                  });
+                },
+              );
+            }),
           ],
         ),
       ],
@@ -149,6 +155,65 @@ class PaymentPlanState extends State<PaymentPlan> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class EnterAmountBottomWidget extends StatefulWidget {
+  const EnterAmountBottomWidget({super.key});
+
+  @override
+  State<EnterAmountBottomWidget> createState() =>
+      _EnterAmountBottomWidgetState();
+}
+
+class _EnterAmountBottomWidgetState extends State<EnterAmountBottomWidget> {
+  String amount = '';
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Enter Amount',
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+        const SizedBox(height: 10),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: primaryColor.withOpacity(.2),
+              width: 2,
+            ),
+          ),
+          child: Text(
+            amount.isEmpty ? 'Enter amount' : amount,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
+        Keypad(
+          actionButton: null,
+          callback: (value) {
+            if (amount == '' && value == '0') {
+              return;
+            }
+            if (value == '<') {
+              if (amount == '') {
+                return;
+              }
+              return setState(() {
+                amount = amount.substring(0, amount.length - 1);
+              });
+            }
+            setState(() {
+              amount = amount + value;
+            });
+          },
+        ),
+      ],
     );
   }
 }

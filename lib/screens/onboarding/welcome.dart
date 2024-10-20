@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/widgets/buttons.dart';
-import 'package:go_router/go_router.dart';
-import 'package:flutter/services.dart';
-import 'dart:async';
+import 'package:invest/imports/imports.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -14,11 +9,17 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   late Future<void> _loadImageFuture;
+  double widthFactor = 0.9;
 
   @override
   void initState() {
     super.initState();
     _loadImageFuture = _loadImage();
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        widthFactor = 0.7; // Shrink to 70%
+      });
+    });
   }
 
   Future<void> _loadImage() async {
@@ -96,12 +97,18 @@ class _WelcomePageState extends State<WelcomePage> {
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Image.asset(
-                        'assets/icons/mvest_primary.png',
-                        width: 400,
-                      ),
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      children: [
+                        AnimatedContainer(
+                          width:
+                              MediaQuery.of(context).size.width * widthFactor,
+                          duration: const Duration(seconds: 4),
+                          child: Image.asset(
+                            'assets/icons/mvest_primary.png',
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -143,16 +150,16 @@ class _WelcomePageState extends State<WelcomePage> {
                         ),
                   ),
                   const SizedBox(height: 50),
-                  CustomButton(
-                    url: null,
-                    method: '',
-                    body: const {},
-                    filled: false,
-                    text: 'Continue with Google',
-                    onCompleted: (val) {
-                      print('gmail');
-                    },
-                  ),
+                  // CustomButton(
+                  //   url: null,
+                  //   method: '',
+                  //   body: const {},
+                  //   filled: false,
+                  //   text: 'Continue with Google',
+                  //   onCompleted: (val) {
+                  //     print('gmail');
+                  //   },
+                  // ),
                   const SizedBox(height: 20),
                   CustomButton(
                     url: null,

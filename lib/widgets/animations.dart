@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:invest/imports/imports.dart';
 
 ///******************************************************
 // AnimatedCheckSuccess

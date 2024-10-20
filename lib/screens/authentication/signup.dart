@@ -1,17 +1,4 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-
-import '../../providers/user_provider.dart';
-import '../../utils/validation.dart';
-import '../../widgets/buttons.dart';
-import '../../utils/theme.dart';
-import '../../utils/constants.dart';
-import '../authentication/login.dart';
-import '../dashboard/dashboard.dart';
-import 'package:provider/provider.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:invest/imports/imports.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);

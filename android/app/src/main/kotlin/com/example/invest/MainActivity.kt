@@ -1,4 +1,4 @@
-package com.example.invest
+package app.mvest
 
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity

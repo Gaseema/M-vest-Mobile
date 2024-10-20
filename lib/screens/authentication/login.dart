@@ -1,17 +1,4 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
-import 'package:invest/screens/authentication/existing_user/forgot_password.dart';
-import 'package:invest/screens/authentication/signup.dart';
-
-import '../../utils/constants.dart';
-import '../../utils/theme.dart';
-import '../../utils/validation.dart';
-import '../dashboard/dashboard.dart';
-import 'package:invest/widgets/buttons.dart';
-import 'package:invest/providers/user_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:invest/imports/imports.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
