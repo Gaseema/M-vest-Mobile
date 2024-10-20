@@ -1,7 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return isValid;
   }
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  // final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   void _signInWithGoogle() async {
     // try {
@@ -58,8 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
     //     // final String imageUrl = googleUser.photoUrl ?? '';
 
     //     // Perform your desired actions with the user details
-    //     print('Username: $username');
-    //     print('Email: $email');
+    //     logger.i('Username: $username');
+    //     logger.i('Email: $email');
     //     // Retrieve user information from provider
     //     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
     //   }
     // } catch (error) {
     //   // Handle sign-up error
-    //   print('Google sign-up error: $error');
+    //   logger.i('Google sign-up error: $error');
     // }
   }
 
@@ -119,23 +119,23 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Text(
                   'Welcome back,',
                   style: displayNormalBolderDarkBlueHeading,
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   'Login to your account',
                   style: displayNormalBolderBlack,
                 ),
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
                 SizedBox(
                   height: 48,
                   child: TextFormField(
@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       labelText: 'Email Address or Phone',
                       labelStyle: displayNormalGrey1,
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.grey,
                           width: 1.0,
                         ),
@@ -165,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.grey,
                           width: 1.0,
                         ),
@@ -177,9 +177,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (emailError.isNotEmpty)
                   Text(
                     emailError,
-                    style: TextStyle(color: Colors.red),
+                    style: const TextStyle(color: Colors.red),
                   ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   height: 48,
                   child: TextFormField(
@@ -192,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     obscureText: _obscureText,
                     decoration: InputDecoration(
-                      errorBorder: OutlineInputBorder(
+                      errorBorder: const OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.red,
                         ),
@@ -212,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       labelText: 'Password',
                       labelStyle: displayNormalGrey1,
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.grey,
                           width: 1.0,
                         ),
@@ -226,7 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.grey,
                           width: 1.0,
                         ),
@@ -238,9 +238,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (passwordError.isNotEmpty)
                   Text(
                     passwordError,
-                    style: TextStyle(color: Colors.red),
+                    style: const TextStyle(color: Colors.red),
                   ),
-                SizedBox(height: 42.15),
+                const SizedBox(height: 42.15),
                 CustomButton(
                   url: '/user/login',
                   method: 'POST',
@@ -280,7 +280,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   },
                 ),
-                SizedBox(height: 11.33),
+                const SizedBox(height: 11.33),
                 Center(
                   child: TextButton(
                     child: Text(
@@ -291,13 +291,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ForgotPassword(),
+                          builder: (context) => const ForgotPassword(),
                         ),
                       );
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 22.67,
                 ),
                 const Row(
@@ -312,7 +312,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Divider(color: Colors.grey)), // Horizontal line
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 SizedBox(
@@ -326,40 +326,41 @@ class _LoginScreenState extends State<LoginScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      side: BorderSide(color: Colors.black), // Add border color
+                      side: const BorderSide(
+                          color: Colors.black), // Add border color
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(right: 20),
+                          margin: const EdgeInsets.only(right: 20),
                           height: 30,
                           child: Image.asset('assets/icons/google.png'),
                         ),
-                        Text('Sign in with Google'),
+                        const Text('Sign in with Google'),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 61.84),
+                const SizedBox(height: 61.84),
                 Center(
                   child: RichText(
                     text: TextSpan(
                       children: [
-                        TextSpan(
+                        const TextSpan(
                           text: 'Do not have an account yet? ',
                           style: TextStyle(color: Colors.black),
                         ),
                         TextSpan(
                           text: 'Create now ',
-                          style: TextStyle(color: Colors.blue),
+                          style: const TextStyle(color: Colors.blue),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              print('Create now tapped');
+                              logger.i('Create now tapped');
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => SignUp(),
+                                  builder: (context) => const SignUp(),
                                 ),
                               );
                             },

@@ -1,13 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:flutter/material.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/utils/constants.dart';
 import 'package:invest/screens/dashboard/transactions/transaction_status.dart';
-import 'package:invest/widgets/buttons.dart';
-import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
-import '../../../widgets/currency_converter.dart';
 
 class ConfirmTransaction extends StatefulWidget {
   final String? transactionType;
@@ -15,12 +9,12 @@ class ConfirmTransaction extends StatefulWidget {
   final int? walletID;
   final String? phoneNo;
   const ConfirmTransaction({
-    Key? key,
+    super.key,
     this.transactionType,
     this.transactionAmount,
     this.walletID,
     this.phoneNo,
-  }) : super(key: key);
+  });
 
   @override
   ConfirmTransactionState createState() => ConfirmTransactionState();

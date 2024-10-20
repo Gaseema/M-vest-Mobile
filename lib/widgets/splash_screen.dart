@@ -1,7 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
 class AnimatedTextWidget extends StatefulWidget {
-  const AnimatedTextWidget({Key? key}) : super(key: key);
+  const AnimatedTextWidget({super.key});
 
   @override
   State<AnimatedTextWidget> createState() => _AnimatedTextWidgetState();
@@ -14,7 +14,7 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget>
   bool _isVisible = false;
 
   Future<void> _preloadImage() async {
-    final image = AssetImage('assets/illustrations/welcome.jpg');
+    const image = AssetImage('assets/illustrations/welcome.jpg');
     await precacheImage(image, context);
   }
 

@@ -128,67 +128,67 @@ class ProfileState extends State<Profile> {
         ],
       ),
     );
-    Widget accountSettings = Container(
-      margin: const EdgeInsets.only(top: 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Account',
-            style: displayNormalSlightlyBoldBlack,
-          ),
-          const SizedBox(height: 20),
-          Container(
-            padding: const EdgeInsets.all(10),
-            width: SizeConfig.blockSizeHorizontal * 100,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(7),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  spreadRadius: 0.5,
-                  blurRadius: 1,
-                  offset: const Offset(0, 1),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Logout',
-                      style: displaySmallThinBlack,
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            activePage = 0;
-                          });
-                          Navigator.of(
-                            context,
-                            rootNavigator: true,
-                          ).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
-                            ),
-                          );
-                        },
-                        child: const Text('Logout'),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+    // Widget accountSettings = Container(
+    //   margin: const EdgeInsets.only(top: 30),
+    //   child: Column(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: [
+    //       Text(
+    //         'Account',
+    //         style: displayNormalSlightlyBoldBlack,
+    //       ),
+    //       const SizedBox(height: 20),
+    //       Container(
+    //         padding: const EdgeInsets.all(10),
+    //         width: SizeConfig.blockSizeHorizontal * 100,
+    //         decoration: BoxDecoration(
+    //           color: Colors.white,
+    //           borderRadius: BorderRadius.circular(7),
+    //           boxShadow: [
+    //             BoxShadow(
+    //               color: Colors.grey.withOpacity(0.3),
+    //               spreadRadius: 0.5,
+    //               blurRadius: 1,
+    //               offset: const Offset(0, 1),
+    //             ),
+    //           ],
+    //         ),
+    //         child: Column(
+    //           crossAxisAlignment: CrossAxisAlignment.start,
+    //           children: [
+    //             Column(
+    //               crossAxisAlignment: CrossAxisAlignment.start,
+    //               children: [
+    //                 Text(
+    //                   'Logout',
+    //                   style: displaySmallThinBlack,
+    //                 ),
+    //                 Center(
+    //                   child: ElevatedButton(
+    //                     onPressed: () {
+    //                       setState(() {
+    //                         activePage = 0;
+    //                       });
+    //                       Navigator.of(
+    //                         context,
+    //                         rootNavigator: true,
+    //                       ).pushReplacement(
+    //                         MaterialPageRoute(
+    //                           builder: (context) => const LoginScreen(),
+    //                         ),
+    //                       );
+    //                     },
+    //                     child: const Text('Logout'),
+    //                   ),
+    //                 ),
+    //               ],
+    //             ),
+    //           ],
+    //         ),
+    //       )
+    //     ],
+    //   ),
+    // );
     Widget profileSection = Stack(
       children: [
         Container(

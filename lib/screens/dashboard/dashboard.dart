@@ -2,8 +2,8 @@ import 'package:invest/imports/imports.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   DashboardState createState() => DashboardState();
@@ -29,7 +29,7 @@ class DashboardState extends State<Dashboard> {
   }
 
   iconBarStyle(String page) {
-    print(page == 'Home');
+    logger.i(page == 'Home');
     return PersistentBottomNavBarItem(
       icon: SvgPicture.asset(
         'assets/svg/${page.toLowerCase()}.svg',
@@ -56,9 +56,9 @@ class DashboardState extends State<Dashboard> {
 
   _fetchTransactions(BuildContext context) async {
     // Retrieve user information from provider
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    // final userProvider = Provider.of<UserProvider>(context, listen: false);
 
-    final token = userProvider.user?.token;
+    // final token = userProvider.user?.token;
 
     // final postData = {};
     // final apiClient = ApiClient();
@@ -77,8 +77,8 @@ class DashboardState extends State<Dashboard> {
     //   userTransactionsProvider.updateUserTransactions(response['transactions']);
     // }).catchError((error) {
     //   // Handle the error
-    //   // print('error');
-    //   // print(error);
+    //   // logger.i('error');
+    //   // logger.i(error);
     // });
   }
 

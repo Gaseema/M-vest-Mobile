@@ -13,7 +13,7 @@ class InputWidget extends StatefulWidget {
   final FocusNode? focusNode;
 
   const InputWidget({
-    Key? key,
+    super.key,
     this.hintText,
     this.obscureText,
     this.enabled = true,
@@ -24,10 +24,10 @@ class InputWidget extends StatefulWidget {
     required this.onChanged,
     this.initialValue,
     this.focusNode,
-  }) : super(key: key);
+  });
 
   @override
-  _InputWidgetState createState() => _InputWidgetState();
+  State<InputWidget> createState() => _InputWidgetState();
 }
 
 class _InputWidgetState extends State<InputWidget> {

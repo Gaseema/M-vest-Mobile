@@ -1,7 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
 class WelcomePage extends StatefulWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  const WelcomePage({super.key});
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();
@@ -24,7 +24,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   Future<void> _loadImage() async {
     await precacheImage(
-      AssetImage('assets/illustrations/welcome.jpg'),
+      const AssetImage('assets/illustrations/welcome.jpg'),
       context,
     );
   }
@@ -44,7 +44,7 @@ class _WelcomePageState extends State<WelcomePage> {
         if (snapshot.connectionState == ConnectionState.done) {
           return _buildContent(context);
         } else {
-          return Scaffold(
+          return const Scaffold(
             backgroundColor: Colors.white,
             body: Center(child: CircularProgressIndicator()),
           );
@@ -57,8 +57,9 @@ class _WelcomePageState extends State<WelcomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: PopScope(
-        onPopInvoked: (intent) async {
-          print('add a dialog to');
+        canPop: false,
+        onPopInvokedWithResult: (bool didPop, Object? result) async {
+          return;
         },
         child: Column(
           children: [
@@ -157,7 +158,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   //   filled: false,
                   //   text: 'Continue with Google',
                   //   onCompleted: (val) {
-                  //     print('gmail');
+                  //     logger.i('gmail');
                   //   },
                   // ),
                   const SizedBox(height: 20),

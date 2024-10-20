@@ -2,7 +2,7 @@ import 'package:invest/imports/imports.dart';
 
 class PinCodePage extends StatefulWidget {
   final String email;
-  const PinCodePage({Key? key, required this.email}) : super(key: key);
+  const PinCodePage({super.key, required this.email});
 
   @override
   State<PinCodePage> createState() => PinCodePageState();
@@ -111,7 +111,7 @@ class PinCodePageState extends State<PinCodePage> {
                           '/user/login',
                           {'email': widget.email, 'password': codeValue},
                         ).then((res) {
-                          print(res);
+                          logger.i(res);
                           if (res['isSuccessful'] == true) {
                             userProvider.setUser(
                               User(

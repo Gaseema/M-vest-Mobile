@@ -6,11 +6,11 @@ class PinCodeField extends StatelessWidget {
   final bool processing;
 
   const PinCodeField({
-    Key? key,
+    super.key,
     required this.filled,
     required this.hasError,
     required this.processing,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

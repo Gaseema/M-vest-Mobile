@@ -215,8 +215,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                     'confirmPassword': confirmPassword.text,
                   },
                   onCompleted: (res) {
-                    // print('res');
-                    // print(res);
+                    // logger.i('res');
+                    // logger.i(res);
                     if (res['isSuccessful'] == true) {
                       PersistentNavBarNavigator.pushNewScreen(
                         context,

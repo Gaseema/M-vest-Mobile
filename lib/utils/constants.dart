@@ -1,5 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
+var logger = Logger();
+
 List userPlans = [];
 
 num activePage = 0;
@@ -88,7 +90,7 @@ class OverLayNotification extends StatelessWidget {
           color: Colors.blue,
           child: Text(
             title,
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
       ),
@@ -121,12 +123,12 @@ class MessageNotification extends StatelessWidget {
   final Color? color;
 
   const MessageNotification({
-    Key? key,
+    super.key,
     required this.onReply,
     required this.message,
     this.color = Colors.green,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

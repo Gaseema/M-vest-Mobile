@@ -5,12 +5,12 @@ class Keypad extends StatelessWidget {
   final Widget? actionButton;
   final ValueSetter<dynamic>? callback;
 
-  Keypad({this.actionButton, this.callback});
+  const Keypad({super.key, this.actionButton, this.callback});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical! * 3),
+      margin: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical * 3),
       child: Column(
         children: [
           Row(
@@ -123,7 +123,7 @@ class Keypad extends StatelessWidget {
               )
             : content is Icon
                 ? content
-                : SizedBox(),
+                : const SizedBox(),
       ),
     );
   }

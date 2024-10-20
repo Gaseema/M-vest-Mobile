@@ -1,6 +1,8 @@
 /////////////////////////////////////////////////////////////////
 /// PACKAGES
 /////////////////////////////////////////////////////////////////
+library;
+
 export 'package:flutter/material.dart';
 export 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 export 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -15,7 +17,7 @@ export 'package:google_fonts/google_fonts.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:local_auth/local_auth.dart';
 export 'package:go_router/go_router.dart';
-
+export 'package:logger/logger.dart';
 export 'package:provider/provider.dart';
 export 'package:flutter/gestures.dart';
 export 'package:flutter/services.dart';

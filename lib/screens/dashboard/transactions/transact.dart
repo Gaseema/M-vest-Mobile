@@ -1,18 +1,9 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:invest/providers/user_provider.dart';
 
-import 'package:invest/utils/theme.dart';
-import 'package:invest/widgets/keypad.dart';
-import 'package:invest/utils/constants.dart';
 import 'package:invest/screens/dashboard/transactions/confirm_transaction.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:invest/widgets/buttons.dart';
-import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
-import '../../../widgets/currency_converter.dart';
 
 class MakeTransaction extends StatefulWidget {
   final String? transactionType;
@@ -21,13 +12,13 @@ class MakeTransaction extends StatefulWidget {
   final num? planBalance;
   final String? phoneNo;
   const MakeTransaction({
-    Key? key,
+    super.key,
     this.transactionType,
     this.walletID,
     this.category,
     this.planBalance,
     this.phoneNo,
-  }) : super(key: key);
+  });
 
   @override
   MakeTransactionState createState() => MakeTransactionState();

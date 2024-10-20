@@ -1,14 +1,6 @@
 import 'package:invest/imports/imports.dart';
 
 // ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations
-import 'package:flutter/material.dart';
-import 'package:invest/screens/dashboard/dashboard.dart';
-import 'package:invest/utils/constants.dart';
-
-import '../../../utils/theme.dart';
-import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-
-import '../../../widgets/currency_converter.dart';
 
 // import 'home_button.dart';
 
@@ -24,7 +16,7 @@ class Success extends StatefulWidget {
   final String? screen;
   final List? membersList;
   const Success(
-      {Key? key,
+      {super.key,
       required this.category,
       this.description,
       this.goalName,
@@ -34,8 +26,7 @@ class Success extends StatefulWidget {
       this.frequency,
       this.planId,
       this.screen,
-      required this.membersList})
-      : super(key: key);
+      required this.membersList});
 
   @override
   State<Success> createState() => _SuccessState();
@@ -53,9 +44,10 @@ class _SuccessState extends State<Success> {
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
 
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        return;
       },
       child: Scaffold(
         body: Padding(

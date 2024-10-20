@@ -17,7 +17,7 @@ class GoalDetails extends StatefulWidget {
   final List? membersList;
 
   const GoalDetails({
-    Key? key,
+    super.key,
     this.category,
     this.id,
     this.locked,
@@ -32,7 +32,7 @@ class GoalDetails extends StatefulWidget {
     this.walletId,
     this.frequency,
     this.membersList,
-  }) : super(key: key);
+  });
 
   @override
   GoalDetailsState createState() => GoalDetailsState();
@@ -43,15 +43,15 @@ class GoalDetailsState extends State<GoalDetails> {
   bool loadingTransactions = false;
 
   _fetchTransactionsById(BuildContext context) async {
-    setState(() {
-      loadingTransactions = true;
-    });
-    // Retrieve user information from provider
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    // setState(() {
+    //   loadingTransactions = true;
+    // });
+    // // Retrieve user information from provider
+    // final userProvider = Provider.of<UserProvider>(context, listen: false);
 
-    final token = userProvider.user?.token;
+    // final token = userProvider.user?.token;
 
-    final postData = {'wallet_id': widget.walletId};
+    // final postData = {'wallet_id': widget.walletId};
     // final apiClient = ApiClient();
     // final headers = {
     //   'Authorization': 'Bearer $token',
@@ -63,8 +63,8 @@ class GoalDetailsState extends State<GoalDetails> {
     //     .then((response) {
     //   setState(() {
     //     transactionList = response['transactions'];
-    //     // print('The response.....................................');
-    //     // print(response);
+    //     // logger.i('The response.....................................');
+    //     // logger.i(response);
     //   });
     // }).catchError((error) {});
     // setState(() {

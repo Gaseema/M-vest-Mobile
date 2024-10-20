@@ -1,12 +1,5 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:flutter/material.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/widgets/buttons.dart';
-import 'package:invest/widgets/appbar.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
-
 class TimelinePlan extends StatefulWidget {
   const TimelinePlan({super.key});
 
@@ -63,48 +56,48 @@ class TimelinePlanState extends State<TimelinePlan> {
       ],
     );
 
-    Widget estimatedValue = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Estimated Future Amount',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.black.withOpacity(0.5),
-                fontSize: 14,
-              ),
-        ),
-        Text(
-          'KES 50,000',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: const Color.fromRGBO(68, 187, 76, 1),
-                fontSize: 30,
-              ),
-        ),
-        const SizedBox(height: 20),
-        Text(
-          'Interest Rate',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.black.withOpacity(0.5),
-                fontSize: 14,
-              ),
-        ),
-        Text(
-          '11% p.a.',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: const Color.fromRGBO(68, 187, 76, 1),
-                fontSize: 30,
-              ),
-        ),
-        const SizedBox(height: 20),
-        Text(
-          'This estimate assumes you have KES 10,000 monthly, 3 times between today and your maturity date, July 04, 2024.',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.black.withOpacity(0.5),
-                fontSize: 14,
-              ),
-        )
-      ],
-    );
+    // Widget estimatedValue = Column(
+    //   crossAxisAlignment: CrossAxisAlignment.start,
+    //   children: [
+    //     Text(
+    //       'Estimated Future Amount',
+    //       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+    //             color: Colors.black.withOpacity(0.5),
+    //             fontSize: 14,
+    //           ),
+    //     ),
+    //     Text(
+    //       'KES 50,000',
+    //       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+    //             color: const Color.fromRGBO(68, 187, 76, 1),
+    //             fontSize: 30,
+    //           ),
+    //     ),
+    //     const SizedBox(height: 20),
+    //     Text(
+    //       'Interest Rate',
+    //       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+    //             color: Colors.black.withOpacity(0.5),
+    //             fontSize: 14,
+    //           ),
+    //     ),
+    //     Text(
+    //       '11% p.a.',
+    //       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+    //             color: const Color.fromRGBO(68, 187, 76, 1),
+    //             fontSize: 30,
+    //           ),
+    //     ),
+    //     const SizedBox(height: 20),
+    //     Text(
+    //       'This estimate assumes you have KES 10,000 monthly, 3 times between today and your maturity date, July 04, 2024.',
+    //       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+    //             color: Colors.black.withOpacity(0.5),
+    //             fontSize: 14,
+    //           ),
+    //     )
+    //   ],
+    // );
 
     return Scaffold(
       body: SafeArea(

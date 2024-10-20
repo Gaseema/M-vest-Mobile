@@ -12,7 +12,7 @@ class EditPlan extends StatefulWidget {
   final List? initialmembersList;
   // EditPlan({Key? key, required String initialGoalName}) : super(key: key);
   const EditPlan({
-    Key? key,
+    super.key,
     this.initialGoalName,
     this.initialGoalDescription,
     this.initialTargetAmount,
@@ -22,7 +22,7 @@ class EditPlan extends StatefulWidget {
     this.initialFrequency,
     this.planId,
     this.initialmembersList,
-  }) : super(key: key);
+  });
 
   @override
   State<EditPlan> createState() => _EditPlanState();
@@ -787,7 +787,7 @@ class _EditPlanState extends State<EditPlan> {
                             validateFields();
                           });
                           if (res['isSuccessful'] == true && validateFields()) {
-                            //print('Target Amount: ${targetAmount.text}');
+                            //logger.i('Target Amount: ${targetAmount.text}');
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -944,8 +944,8 @@ class _EditPlanState extends State<EditPlan> {
       };
       membersList.add(memberMap);
     }
-    print('these are the members i have selected');
-    print(membersList);
+    logger.i('these are the members i have selected');
+    logger.i(membersList);
     return membersList;
   }
 }

@@ -1,7 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+  const SignUp({super.key});
 
   @override
   State<SignUp> createState() => SignUpState();
@@ -83,14 +83,14 @@ class SignUpState extends State<SignUp> {
         // final String imageUrl = googleUser.photoUrl ?? '';
 
         // Perform your desired actions with the user details
-        // print('Username: $username');
-        // print('Email: $email');
+        // logger.i('Username: $username');
+        // logger.i('Email: $email');
 
         _openModalSheet(username, email);
       }
     } catch (error) {
       // Handle sign-up error
-      // print('Google sign-up error: $error');
+      // logger.i('Google sign-up error: $error');
     }
   }
 
@@ -538,7 +538,7 @@ class SignUpState extends State<SignUp> {
                   text: 'Submit',
                   body: const {},
                   onCompleted: (res) async {
-                    // print(res);
+                    // logger.i(res);
                     // final apiClient = ApiClient();
                     // final postData = {
                     //   'user_name': username,
@@ -577,8 +577,8 @@ class SignUpState extends State<SignUp> {
                     //   );
                     // }).catchError((error) {
                     //   // Handle the error
-                    //   print('error');
-                    //   print(error);
+                    //   logger.i('error');
+                    //   logger.i(error);
                     // });
                   },
                 ),

@@ -1,13 +1,6 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:flutter/material.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/widgets/buttons.dart';
-import 'package:invest/widgets/appbar.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:invest/widgets/dialog.dart';
-import 'package:invest/widgets/keypad.dart';
 
 class PaymentPlan extends StatefulWidget {
   const PaymentPlan({super.key});
@@ -62,7 +55,7 @@ class PaymentPlanState extends State<PaymentPlan> {
                   if (_startingAmount[index] == 'Different Amount') {
                     showCustomBottomSheet(
                       context,
-                      EnterAmountBottomWidget(),
+                      const EnterAmountBottomWidget(),
                     );
                   }
                 },

@@ -105,8 +105,10 @@ class PasswordPageState extends State<PasswordPage> {
                       ),
                     );
                     context.push('/dashboard');
-                    print(res);
-                  } catch (err) {}
+                    logger.i(res);
+                  } catch (err) {
+                    logger.e(err);
+                  }
                 },
               ),
             ],

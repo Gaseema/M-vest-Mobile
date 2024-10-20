@@ -1,7 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
 class ButtonUtils {
-  static Widget ElevatedButton({
+  static Widget buildElevatedButton({
     required Function() onPressed,
     required Widget child,
   }) {
@@ -18,9 +18,9 @@ class ButtonUtils {
     return TextButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered)) {
+        overlayColor: WidgetStateProperty.resolveWith<Color>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.hovered)) {
               return Colors.transparent; // Set the color to transparent
             }
             return Colors
@@ -58,7 +58,7 @@ class CustomButton extends StatefulWidget {
   });
 
   @override
-  _CustomButtonState createState() => _CustomButtonState();
+  State<CustomButton> createState() => _CustomButtonState();
 }
 
 class _CustomButtonState extends State<CustomButton> {

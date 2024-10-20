@@ -4,19 +4,25 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  welcomePageIllustration(context) {
+    Timer(const Duration(seconds: 4), () async {
+      await precacheImage(
+        const AssetImage('assets/illustrations/welcome.jpg'),
+        context,
+      );
+      Navigator.pushReplacementNamed(context, '/home');
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     myImage = Image.asset('assets/illustrations/welcome.jpg');
-    Timer(Duration(seconds: 4), () async {
-      await precacheImage(
-          const AssetImage('assets/illustrations/welcome.jpg'), context);
-      Navigator.pushReplacementNamed(context, '/home');
-    });
+    welcomePageIllustration(context);
   }
 
   @override
@@ -34,10 +40,10 @@ class _SplashScreenState extends State<SplashScreen> {
     );
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromRGBO(36, 77, 97, 1.0),
+      backgroundColor: const Color.fromRGBO(36, 77, 97, 1.0),
       body: Stack(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(60),
             child: Center(
               child: Image(

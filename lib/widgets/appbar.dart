@@ -7,12 +7,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Brightness statusBarBrightness;
 
   const CustomAppBar({
-    Key? key,
+    super.key,
     required this.title,
     this.actions = const [],
     this.leadingOnTap,
     this.statusBarBrightness = Brightness.light,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

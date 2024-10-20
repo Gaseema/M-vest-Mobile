@@ -1,17 +1,5 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:invest/screens/dashboard/goals/existing_goals/edit_goal.dart';
-import 'package:invest/screens/dashboard/transactions/transact.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/utils/widgets.dart';
-import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-
-import '../../../providers/user_provider.dart';
-import '../../../widgets/currency_converter.dart';
-
 class PlanDetails extends StatefulWidget {
   final int? id;
   final String? type;
@@ -29,7 +17,7 @@ class PlanDetails extends StatefulWidget {
   final List? membersList;
 
   const PlanDetails({
-    Key? key,
+    super.key,
     this.category,
     this.id,
     this.locked,
@@ -44,7 +32,7 @@ class PlanDetails extends StatefulWidget {
     this.walletId,
     this.frequency,
     this.membersList,
-  }) : super(key: key);
+  });
 
   @override
   PlanDetailsState createState() => PlanDetailsState();
@@ -55,15 +43,15 @@ class PlanDetailsState extends State<PlanDetails> {
   bool loadingTransactions = false;
 
   _fetchTransactionsById(BuildContext context) async {
-    setState(() {
-      loadingTransactions = true;
-    });
-    // Retrieve user information from provider
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    // setState(() {
+    //   loadingTransactions = true;
+    // });
+    // // Retrieve user information from provider
+    // final userProvider = Provider.of<UserProvider>(context, listen: false);
 
-    final token = userProvider.user?.token;
+    // final token = userProvider.user?.token;
 
-    final postData = {'wallet_id': widget.walletId};
+    // final postData = {'wallet_id': widget.walletId};
     // final apiClient = ApiClient();
     // final headers = {
     //   'Authorization': 'Bearer $token',
@@ -75,8 +63,8 @@ class PlanDetailsState extends State<PlanDetails> {
     //     .then((response) {
     //   setState(() {
     //     transactionList = response['transactions'];
-    //     // print('The response.....................................');
-    //     // print(response);
+    //     // logger.i('The response.....................................');
+    //     // logger.i(response);
     //   });
     // }).catchError((error) {});
     // setState(() {
@@ -363,34 +351,34 @@ class PlanDetailsState extends State<PlanDetails> {
         ],
       ),
     );
-    Widget membersListWidget = Container(
-      margin: const EdgeInsets.only(top: 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            child: Text(
-              'Members',
-              style: displayNormalSlightlyBoldBlack,
-            ),
-          ),
-          widget.membersList != []
-              ? ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: widget.membersList?.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final oneMember = widget.membersList?[index];
-                    return Text('${oneMember['name']}');
-                  },
-                )
-              : const Center(
-                  child: Text('no members'),
-                )
-        ],
-      ),
-    );
+    // Widget membersListWidget = Container(
+    //   margin: const EdgeInsets.only(top: 30),
+    //   child: Column(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: [
+    //       Container(
+    //         margin: const EdgeInsets.only(bottom: 10),
+    //         child: Text(
+    //           'Members',
+    //           style: displayNormalSlightlyBoldBlack,
+    //         ),
+    //       ),
+    //       widget.membersList != []
+    //           ? ListView.builder(
+    //               physics: const NeverScrollableScrollPhysics(),
+    //               shrinkWrap: true,
+    //               itemCount: widget.membersList?.length,
+    //               itemBuilder: (BuildContext context, int index) {
+    //                 final oneMember = widget.membersList?[index];
+    //                 return Text('${oneMember['name']}');
+    //               },
+    //             )
+    //           : const Center(
+    //               child: Text('no members'),
+    //             )
+    //     ],
+    //   ),
+    // );
     Widget transactions = Container(
       margin: const EdgeInsets.only(top: 30),
       child: Column(

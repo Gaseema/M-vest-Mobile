@@ -1,9 +1,4 @@
 import 'package:invest/imports/imports.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:invest/widgets/appbar.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:invest/screens/dashboard/goals/new_goal/widgets/savings_type_card.dart';
 
 class SavingsType extends StatefulWidget {

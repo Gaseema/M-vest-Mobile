@@ -94,10 +94,10 @@ class EmailPageState extends State<EmailPage> {
                 method: 'POST',
                 body: {'email': userEmail},
                 onCompleted: (res) {
-                  print('<<<<<<<<<<<<<<email>>>>>>>>>>>>>>');
-                  print(res);
+                  logger.i('<<<<<<<<<<<<<<email>>>>>>>>>>>>>>');
+                  logger.i(res);
                   try {
-                    print(res['data']['user']);
+                    logger.i(res['data']['user']);
                     if (res['isSuccessful'] == false) {
                       return showToast(
                         context,
@@ -114,7 +114,7 @@ class EmailPageState extends State<EmailPage> {
                     }
                     // Check the status of the user
                     var userStatus = res['data']['user']['status'];
-                    print('user status: $userStatus');
+                    logger.i('user status: $userStatus');
                     if (userStatus <= 1) {
                       // User has to set a password
                       return GoRouter.of(context).push(
@@ -128,7 +128,7 @@ class EmailPageState extends State<EmailPage> {
                       extra: userEmail,
                     );
                   } catch (err) {
-                    print(err);
+                    logger.i(err);
                     return showToast(
                       context,
                       'Error!!!',

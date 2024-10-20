@@ -5,10 +5,10 @@ import 'package:invest/imports/imports.dart';
 ///******************************************************
 
 class AnimatedCheckSuccess extends StatefulWidget {
-  const AnimatedCheckSuccess({Key? key}) : super(key: key);
+  const AnimatedCheckSuccess({super.key});
 
   @override
-  _AnimatedCheckSuccessState createState() => _AnimatedCheckSuccessState();
+  State<AnimatedCheckSuccess> createState() => _AnimatedCheckSuccessState();
 }
 
 class _AnimatedCheckSuccessState extends State<AnimatedCheckSuccess>
@@ -70,10 +70,10 @@ class _AnimatedCheckSuccessState extends State<AnimatedCheckSuccess>
 ///******************************************************
 
 class AnimatedCheckFailed extends StatefulWidget {
-  const AnimatedCheckFailed({Key? key}) : super(key: key);
+  const AnimatedCheckFailed({super.key});
 
   @override
-  _AnimatedCheckFailedState createState() => _AnimatedCheckFailedState();
+  State<AnimatedCheckFailed> createState() => _AnimatedCheckFailedState();
 }
 
 class _AnimatedCheckFailedState extends State<AnimatedCheckFailed>
@@ -141,10 +141,10 @@ class StaggeredDotsWave extends StatefulWidget {
   final Color color;
 
   const StaggeredDotsWave({
-    Key? key,
+    super.key,
     required this.size,
     required this.color,
-  }) : super(key: key);
+  });
 
   @override
   State<StaggeredDotsWave> createState() => _StaggeredDotsWaveState();
@@ -254,7 +254,7 @@ class DotContainer extends StatelessWidget {
   final AnimationController controller;
 
   const DotContainer({
-    Key? key,
+    super.key,
     required this.offsetInterval,
     required this.size,
     required this.color,
@@ -263,7 +263,7 @@ class DotContainer extends StatelessWidget {
     required this.reverseHeightInterval,
     required this.maxHeight,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,15 +1,9 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:flutter/material.dart';
-import 'package:invest/utils/constants.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/widgets/appbar.dart';
 import 'package:invest/screens/dashboard/goals/new_goal/widgets/goal_type_card.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 
 class NewGoal extends StatefulWidget {
-  const NewGoal({Key? key}) : super(key: key);
+  const NewGoal({super.key});
 
   @override
   State<NewGoal> createState() => _NewGoalState();
@@ -56,7 +50,7 @@ class _NewGoalState extends State<NewGoal> {
                     ),
                     goalType: 'Savings',
                     onTap: (val) {
-                      print('tapped');
+                      logger.i('tapped');
                       context.push('/choose_savings_type');
                     },
                   ),
@@ -834,13 +828,13 @@ class _NewGoalState extends State<NewGoal> {
 //                           setState(() {
 //                             validateFields();
 //                           });
-//                           print(
+//                           logger.i(
 //                               'I want to see how the list of members appears--------------------------------------');
-//                           print(getMembersList());
+//                           logger.i(getMembersList());
 //                           if (res['isSuccessful'] == true && validateFields()) {
-//                             print(
+//                             logger.i(
 //                                 'This is my response when creating a plan  ++++++++++++++++++++++++++');
-//                             print(res);
+//                             logger.i(res);
 //                             Navigator.push(
 //                               context,
 //                               MaterialPageRoute(
@@ -861,8 +855,8 @@ class _NewGoalState extends State<NewGoal> {
 //                                 ),
 //                               ),
 //                             );
-//                             // print('+++++++++++++++++++++++++');
-//                             // print(selectedFrequency);
+//                             // logger.i('+++++++++++++++++++++++++');
+//                             // logger.i(selectedFrequency);
 //                           } else {
 //                             // showToast(
 //                             //   context,

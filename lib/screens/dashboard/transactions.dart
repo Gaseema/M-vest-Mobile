@@ -1,7 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
 class Transactions extends StatefulWidget {
-  const Transactions({Key? key}) : super(key: key);
+  const Transactions({super.key});
 
   @override
   TransactionsState createState() => TransactionsState();

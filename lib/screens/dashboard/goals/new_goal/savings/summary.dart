@@ -1,11 +1,6 @@
 import 'package:invest/imports/imports.dart';
-import 'package:flutter/material.dart';
 import 'package:invest/widgets/payment_method.dart';
-import 'package:invest/widgets/buttons.dart';
 import 'package:invest/widgets/dialog.dart';
-import 'package:invest/widgets/appbar.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 
 class Summary extends StatefulWidget {
   const Summary({super.key});
@@ -120,10 +115,10 @@ class LabeledRow extends StatelessWidget {
   final String value;
 
   const LabeledRow({
-    Key? key,
+    super.key,
     required this.label,
     required this.value,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

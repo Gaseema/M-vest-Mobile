@@ -1,7 +1,5 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:flutter/material.dart';
-import 'package:invest/utils/theme.dart';
 
 class SavingsTypeCard extends StatelessWidget {
   final Widget icon;

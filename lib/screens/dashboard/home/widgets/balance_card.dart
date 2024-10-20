@@ -1,6 +1,5 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:invest/imports/imports.dart';
 import 'dart:ui' as ui;
 
 class BalanceCard extends StatefulWidget {

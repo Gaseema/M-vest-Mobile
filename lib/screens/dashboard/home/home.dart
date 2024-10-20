@@ -1,14 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:invest/screens/dashboard/profile.dart';
-import 'dart:ui' as ui;
-import 'package:invest/providers/transaction_provider.dart';
-import 'package:invest/utils/functions.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:invest/imports/imports.dart';
-
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   HomeState createState() => HomeState();
@@ -37,14 +30,14 @@ class HomeState extends State<Home> {
   final greeting = getGreeting();
   @override
   Widget build(BuildContext context) {
-    // User Provider
+    // // User Provider
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
 
-    // Transaction Provider
-    final userTransactionsProvider =
-        Provider.of<UserTransactionsProvider>(context);
-    final userTransactions = userTransactionsProvider.userTransactions;
+    // // Transaction Provider
+    // final userTransactionsProvider =
+    //     Provider.of<UserTransactionsProvider>(context);
+    // final userTransactions = userTransactionsProvider.userTransactions;
 
     Widget topAppBar = Container(
       margin: const EdgeInsets.only(bottom: 20),

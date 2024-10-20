@@ -1,59 +1,55 @@
 import 'package:invest/imports/imports.dart';
 
 class EmailReset extends StatelessWidget {
-  EmailReset({super.key});
-
   final int maxLength = 9;
-  final TextEditingController _controller = TextEditingController();
-  // String phoneNumber;
-  String initialCountry = 'KE';
-  PhoneNumber number = PhoneNumber(isoCode: 'KE');
-  String _textValue = '';
+  final String _textValue = '';
+  const EmailReset({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
 
-              Text(
+              const Text(
                 'Forgot Password,',
               ),
 
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
 
-              Text(
+              const Text(
                 'Choose how you want to reset your password',
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               // Here, default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
 
               ToggleSwitch(
                 initialLabelIndex: 0,
                 minWidth: 150,
-                activeBgColor: [(Color.fromARGB(36, 77, 97, 1))],
+                activeBgColor: const [(Color.fromARGB(36, 77, 97, 1))],
                 totalSwitches: 2,
-                labels: [
+                labels: const [
                   'Phone',
                   'Email',
                 ],
                 onToggle: (index) {
-                  print('switched to: $index');
+                  logger.i('switched to: $index');
                   if (index == 0) {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ForgotPassword()));
+                            builder: (context) => const ForgotPassword()));
                   }
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               TextFormField(
@@ -63,7 +59,7 @@ class EmailReset extends StatelessWidget {
                   labelText: 'Email Address', // Set the desired label text
 
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.grey, // Set the desired border color
                       width: 1.0, // Set the desired border width
                     ),
@@ -81,7 +77,7 @@ class EmailReset extends StatelessWidget {
                         8.0), // Set the desired border radius for enabled state
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors
                           .grey, // Set the desired border color for focused state
                       width:
@@ -100,7 +96,7 @@ class EmailReset extends StatelessWidget {
               ),
               // Other
 
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
 
@@ -119,7 +115,7 @@ class EmailReset extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Continue',
                   ),
                 ),

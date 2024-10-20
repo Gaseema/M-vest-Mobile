@@ -1,15 +1,6 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:flutter/material.dart';
-import 'package:invest/screens/dashboard/dashboard.dart';
-import 'package:invest/utils/theme.dart';
-import 'package:invest/utils/constants.dart';
 import 'package:invest/widgets/animations.dart';
-import 'package:provider/provider.dart';
-import 'package:invest/providers/user_provider.dart';
-import 'package:invest/widgets/buttons.dart';
-import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-import 'dart:async';
 
 class TransactionStatus extends StatefulWidget {
   final String? transactionType;
@@ -17,12 +8,12 @@ class TransactionStatus extends StatefulWidget {
   final Map? transactionData;
   final num? amount;
   const TransactionStatus({
-    Key? key,
+    super.key,
     this.transactionType,
     this.transactionAmount,
     this.transactionData,
     this.amount,
-  }) : super(key: key);
+  });
 
   @override
   TransactionStatusState createState() => TransactionStatusState();
@@ -35,16 +26,16 @@ class TransactionStatusState extends State<TransactionStatus> {
   bool transactionIsIncomplete = false;
 
   fetchTransactionStatus() async {
-    var userTransactionData = widget.transactionData;
+    // var userTransactionData = widget.transactionData;
     // Retrieve user information from provider
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-    final token = userProvider.user?.token;
-    final postData = {
-      "transaction_reference_number": userTransactionData?['reference_number'],
-      "request_id": userTransactionData?['request_id'],
-      "account_number": userTransactionData?['account_number'],
-      "amount": widget.transactionAmount,
-    };
+    // final userProvider = Provider.of<UserProvider>(context, listen: false);
+    // final token = userProvider.user?.token;
+    // final postData = {
+    //   "transaction_reference_number": userTransactionData?['reference_number'],
+    //   "request_id": userTransactionData?['request_id'],
+    //   "account_number": userTransactionData?['account_number'],
+    //   "amount": widget.transactionAmount,
+    // };
     // final apiClient = ApiClient();
     // final headers = {
     //   'Authorization': 'Bearer $token',
@@ -57,13 +48,13 @@ class TransactionStatusState extends State<TransactionStatus> {
     //     postData,
     //     headers: headers,
     //   );
-    //   //  print(response);
+    //   //  logger.i(response);
 
     //   return response;
     // } catch (error) {
     //   // Handle the error
-    //   // print('error');
-    //   // print(error);
+    //   // logger.i('error');
+    //   // logger.i(error);
     //   return null;
     // }
   }
@@ -169,9 +160,10 @@ class TransactionStatusState extends State<TransactionStatus> {
                 : transactionCompleteInfo,
       ],
     );
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        return;
       },
       child: Scaffold(
         body: SafeArea(

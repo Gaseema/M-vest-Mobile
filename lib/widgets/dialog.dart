@@ -81,17 +81,17 @@ showFloatingBottomSheet(BuildContext context) {
                           color: Colors.white,
                         ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   Text(
                     "Remember your password. If you if you forget your password you'll have reset your password",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Colors.white,
                         ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   ElevatedButton(
                     onPressed: () => Navigator.pop(context),
-                    child: Text('Close'),
+                    child: const Text('Close'),
                   ),
                 ],
               ),

@@ -1,7 +1,5 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:invest/imports/imports.dart';
-
 class UserGoals extends StatefulWidget {
   const UserGoals({super.key});
 
@@ -36,7 +34,7 @@ class _UserGoalsState extends State<UserGoals> {
             ),
             GestureDetector(
               onTap: () {
-                print('should view all');
+                logger.i('should view all');
               },
               child: Text(
                 'View all',
@@ -61,7 +59,7 @@ class _UserGoalsState extends State<UserGoals> {
                         final percentageDifference =
                             calculateCurrentAmountPercentage(
                                 walletBalance, plan['target_amount']);
-                        print(membersList);
+                        logger.i(membersList);
                         return PlanCard(
                           id: plan['id'],
                           type: plan['type'],

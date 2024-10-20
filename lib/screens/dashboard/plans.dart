@@ -1,7 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
 class Plans extends StatefulWidget {
-  const Plans({Key? key}) : super(key: key);
+  const Plans({super.key});
 
   @override
   PlansState createState() => PlansState();
@@ -173,11 +173,11 @@ class GradientImageContainer extends StatelessWidget {
   final double gradientOpacity;
 
   const GradientImageContainer({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.text,
     this.gradientOpacity = 0.5,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

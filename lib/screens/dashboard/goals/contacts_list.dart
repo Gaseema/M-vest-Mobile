@@ -1,20 +1,12 @@
 import 'package:invest/imports/imports.dart';
 
-import 'dart:typed_data';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
-
-import '../../../utils/theme.dart';
-
 class ContactList extends StatefulWidget {
   final List<Contact> selectedContacts;
 
-  const ContactList({Key? key, required this.selectedContacts})
-      : super(key: key);
+  const ContactList({super.key, required this.selectedContacts});
 
   @override
-  _ContactListState createState() => _ContactListState();
+  State<ContactList> createState() => _ContactListState();
 }
 
 class _ContactListState extends State<ContactList> {
@@ -40,7 +32,7 @@ class _ContactListState extends State<ContactList> {
         withProperties: true,
         withPhoto: true,
       );
-      // print(contacts);
+      // logger.i(contacts);
       setState(() {
         isLoading = false;
       });
