@@ -63,8 +63,8 @@ class GoalDetailsState extends State<GoalDetails> {
     //     .then((response) {
     //   setState(() {
     //     transactionList = response['transactions'];
-    //     // logger.i('The response.....................................');
-    //     // logger.i(response);
+    //     // logger('The response.....................................');
+    //     // logger(response);
     //   });
     // }).catchError((error) {});
     // setState(() {

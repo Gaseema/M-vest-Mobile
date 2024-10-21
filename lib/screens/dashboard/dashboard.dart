@@ -29,7 +29,7 @@ class DashboardState extends State<Dashboard> {
   }
 
   iconBarStyle(String page) {
-    logger.i(page == 'Home');
+    logger(page == 'Home');
     return PersistentBottomNavBarItem(
       icon: SvgPicture.asset(
         'assets/svg/${page.toLowerCase()}.svg',
@@ -77,8 +77,8 @@ class DashboardState extends State<Dashboard> {
     //   userTransactionsProvider.updateUserTransactions(response['transactions']);
     // }).catchError((error) {
     //   // Handle the error
-    //   // logger.i('error');
-    //   // logger.i(error);
+    //   // logger('error');
+    //   // logger(error);
     // });
   }
 

@@ -127,40 +127,16 @@ class _WelcomePageState extends State<WelcomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Put your',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontSize: 42,
-                          color: darkHeaderColor,
-                          height: 1,
-                        ),
-                  ),
-                  Text(
-                    'money to work',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontSize: 42,
-                          color: darkHeaderColor,
-                          height: 1,
-                        ),
+                  CustomText(
+                    text: 'Put your \nmoney to work',
+                    style: displayLargeTextDarkBlue(context),
                   ),
                   const SizedBox(height: 20),
-                  Text(
-                    'Invest, save and grow wealth.',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: darkHeaderColor,
-                        ),
+                  CustomText(
+                    text: 'Invest, save and grow wealth.',
+                    style: displayMediumTextDarkBlue(context),
                   ),
                   const SizedBox(height: 50),
-                  // CustomButton(
-                  //   url: null,
-                  //   method: '',
-                  //   body: const {},
-                  //   filled: false,
-                  //   text: 'Continue with Google',
-                  //   onCompleted: (val) {
-                  //     logger.i('gmail');
-                  //   },
-                  // ),
                   const SizedBox(height: 20),
                   CustomButton(
                     url: null,

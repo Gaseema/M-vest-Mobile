@@ -1,6 +1,8 @@
 import 'package:invest/imports/imports.dart';
 
-var logger = Logger();
+logger(text) {
+  return print(text);
+}
 
 List userPlans = [];
 

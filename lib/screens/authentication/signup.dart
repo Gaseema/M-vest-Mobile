@@ -83,14 +83,14 @@ class SignUpState extends State<SignUp> {
         // final String imageUrl = googleUser.photoUrl ?? '';
 
         // Perform your desired actions with the user details
-        // logger.i('Username: $username');
-        // logger.i('Email: $email');
+        // logger('Username: $username');
+        // logger('Email: $email');
 
         _openModalSheet(username, email);
       }
     } catch (error) {
       // Handle sign-up error
-      // logger.i('Google sign-up error: $error');
+      // logger('Google sign-up error: $error');
     }
   }
 
@@ -538,7 +538,7 @@ class SignUpState extends State<SignUp> {
                   text: 'Submit',
                   body: const {},
                   onCompleted: (res) async {
-                    // logger.i(res);
+                    // logger(res);
                     // final apiClient = ApiClient();
                     // final postData = {
                     //   'user_name': username,
@@ -577,8 +577,8 @@ class SignUpState extends State<SignUp> {
                     //   );
                     // }).catchError((error) {
                     //   // Handle the error
-                    //   logger.i('error');
-                    //   logger.i(error);
+                    //   logger('error');
+                    //   logger(error);
                     // });
                   },
                 ),

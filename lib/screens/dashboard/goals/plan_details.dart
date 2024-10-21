@@ -63,8 +63,8 @@ class PlanDetailsState extends State<PlanDetails> {
     //     .then((response) {
     //   setState(() {
     //     transactionList = response['transactions'];
-    //     // logger.i('The response.....................................');
-    //     // logger.i(response);
+    //     // logger('The response.....................................');
+    //     // logger(response);
     //   });
     // }).catchError((error) {});
     // setState(() {

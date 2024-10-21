@@ -17,7 +17,6 @@ export 'package:google_fonts/google_fonts.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:local_auth/local_auth.dart';
 export 'package:go_router/go_router.dart';
-export 'package:logger/logger.dart';
 export 'package:provider/provider.dart';
 export 'package:flutter/gestures.dart';
 export 'package:flutter/services.dart';
@@ -32,6 +31,7 @@ export 'dart:io';
 export 'package:invest/providers/transaction_provider.dart';
 export 'package:invest/providers/plan_provider.dart';
 export 'package:invest/providers/user_provider.dart';
+export 'package:invest/providers/app_providers.dart';
 
 // Authentication
 export 'package:invest/screens/authentication/existing_user/forgot_password.dart';
@@ -89,6 +89,9 @@ export 'package:invest/utils/widgets.dart';
 export 'package:invest/utils/helpers.dart';
 export 'package:invest/utils/theme.dart';
 export 'package:invest/utils/api.dart';
+
+// Router
+export 'package:invest/router/app_router.dart';
 
 // Global Widgets
 export 'package:invest/widgets/currency_converter.dart';

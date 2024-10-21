@@ -40,7 +40,7 @@ class EmailReset extends StatelessWidget {
                   'Email',
                 ],
                 onToggle: (index) {
-                  logger.i('switched to: $index');
+                  logger('switched to: $index');
                   if (index == 0) {
                     Navigator.push(
                         context,

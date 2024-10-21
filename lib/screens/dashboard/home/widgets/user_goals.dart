@@ -34,7 +34,7 @@ class _UserGoalsState extends State<UserGoals> {
             ),
             GestureDetector(
               onTap: () {
-                logger.i('should view all');
+                logger('should view all');
               },
               child: Text(
                 'View all',
@@ -59,7 +59,7 @@ class _UserGoalsState extends State<UserGoals> {
                         final percentageDifference =
                             calculateCurrentAmountPercentage(
                                 walletBalance, plan['target_amount']);
-                        logger.i(membersList);
+                        logger(membersList);
                         return PlanCard(
                           id: plan['id'],
                           type: plan['type'],

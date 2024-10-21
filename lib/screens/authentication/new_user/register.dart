@@ -196,8 +196,8 @@ class RegisterUserPageState extends State<RegisterUserPage> {
                       },
                       onCompleted: (res) {
                         try {
-                          logger.i('<<<<<<<<<<<<<<email>>>>>>>>>>>>>>');
-                          logger.i(res);
+                          logger('<<<<<<<<<<<<<<email>>>>>>>>>>>>>>');
+                          logger(res);
                           if (res['isSuccessful'] == true) {
                             return context.push(
                               '/create_pin',
@@ -212,9 +212,9 @@ class RegisterUserPageState extends State<RegisterUserPage> {
                             );
                           }
                         } catch (err) {
-                          logger.i(
+                          logger(
                               '<<<<<<<<<<<<<<< register user >>>>>>>>>>>>>>>');
-                          logger.i(err);
+                          logger(err);
                           showToast(
                             context,
                             'Error!',

@@ -32,7 +32,7 @@ class _ContactListState extends State<ContactList> {
         withProperties: true,
         withPhoto: true,
       );
-      // logger.i(contacts);
+      // logger(contacts);
       setState(() {
         isLoading = false;
       });

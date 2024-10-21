@@ -18,6 +18,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
   List<bool> processingStates = List.filled(4, false);
   String codeValue = '';
   bool pincodeError = false;
+  String pincodeErrorMessage = '';
   late Timer timer;
 
   void startProcessing() {
@@ -46,12 +47,6 @@ class _VerifyEmailState extends State<VerifyEmail> {
     stopProcessing();
   }
 
-  @override
-  void initState() {
-    super.initState();
-    startCountdown();
-  }
-
   void startCountdown() {
     _countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
@@ -70,6 +65,12 @@ class _VerifyEmailState extends State<VerifyEmail> {
     final minutesStr = minutes.toString().padLeft(2, '0');
     final secondsStr = remainingSeconds.toString().padLeft(2, '0');
     return '$minutesStr:$secondsStr';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startCountdown();
   }
 
   @override
@@ -95,19 +96,28 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 },
                 statusBarBrightness: Brightness.light,
               ),
-              const SizedBox(height: 50),
-              Text(
-                "Verify Email.",
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Colors.black,
-                      fontSize: 30,
-                    ),
+              Expanded(child: Container()),
+              CustomText(
+                text: "Verify Email.",
+                style: displayLargeTextNormal(context),
               ),
-              Text(
-                "We have sent an OTP request to your email address ${widget.email}",
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.black,
-                    ),
+              CustomRichText(
+                textSpans: [
+                  TextSpan(
+                    text:
+                        "Hey there! We've sent an OTP request to your email address ",
+                    style: displayMediumTextNormal(context),
+                  ),
+                  TextSpan(
+                    text: '${widget.email}. ',
+                    style: displayMediumTextPrimaryBlue(context),
+                  ),
+                  TextSpan(
+                    text:
+                        "If you don't see it, be sure to check your spam folder—just in case!",
+                    style: displayMediumTextNormal(context),
+                  ),
+                ],
               ),
               Expanded(child: Container()),
               Center(
@@ -128,48 +138,64 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 ),
               ),
               const SizedBox(height: 20),
-              Text(
-                pincodeError ? 'Oops! Wrong OTP code' : '',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(color: Colors.red),
+              CustomText(
+                text: pincodeError
+                    ? pincodeErrorMessage.isNotEmpty
+                        ? pincodeErrorMessage
+                        : 'Oops! Error verifying OTP code'
+                    : '',
+                style: displayMediumTextRed(context),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
-              Center(
-                child: Text(
-                  'Resend: ${formatTime(_secondsRemaining)}',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+              GestureDetector(
+                onTap: () {
+                  if (_secondsRemaining == 0) {
+                    return;
+                  }
+                  startCountdown();
+                },
+                child: CustomText(
+                  text: _secondsRemaining == 0
+                      ? 'Resend'
+                      : 'Resend: ${formatTime(_secondsRemaining)}',
+                  style: displayMediumTextNormal(context),
+                  textAlign: TextAlign.center,
                 ),
               ),
               const SizedBox(height: 20),
               Keypad(
                 callback: (value) {
-                  setState(() {
-                    if (value == '<' && codeValue.isNotEmpty) {
-                      codeValue = codeValue.substring(0, codeValue.length - 1);
-                      pincodeError = false;
-                      stopProcessing();
-                    } else if (codeValue.length < 4 && value != '.') {
-                      if (value == '<') return;
-                      codeValue += value;
-                      if (codeValue.length == 4) {
-                        startProcessing();
-                        apiCall(
-                          'POST',
-                          '/user/verify/email_otp',
-                          {'email': widget.email, 'otp': codeValue},
-                        ).then((res) {
-                          if (res['isSuccessful'] == true) {
-                            context.push('/register', extra: widget.email);
-                          } else {
-                            pinError();
-                          }
-                        });
+                  setState(
+                    () {
+                      if (value == '<' && codeValue.isNotEmpty) {
+                        codeValue =
+                            codeValue.substring(0, codeValue.length - 1);
+                        pincodeError = false;
+                        stopProcessing();
+                      } else if (codeValue.length < 4 && value != '.') {
+                        if (value == '<') return;
+                        codeValue += value;
+                        if (codeValue.length == 4) {
+                          startProcessing();
+                          apiCall(
+                            'POST',
+                            '/user/verify/email_otp',
+                            {'email': widget.email, 'otp': codeValue},
+                          ).then((res) {
+                            if (res['isSuccessful'] == true) {
+                              context.push('/register', extra: widget.email);
+                            } else {
+                              logger('<<<<<<<<<<verify email>>>>>>>>>>');
+                              logger(res['error']);
+                              pincodeErrorMessage = res['error'];
+                              pinError();
+                            }
+                          });
+                        }
                       }
-                    }
-                  });
+                    },
+                  );
                 },
               ),
             ],

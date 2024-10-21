@@ -787,7 +787,7 @@ class _EditPlanState extends State<EditPlan> {
                             validateFields();
                           });
                           if (res['isSuccessful'] == true && validateFields()) {
-                            //logger.i('Target Amount: ${targetAmount.text}');
+                            //logger('Target Amount: ${targetAmount.text}');
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -944,8 +944,8 @@ class _EditPlanState extends State<EditPlan> {
       };
       membersList.add(memberMap);
     }
-    logger.i('these are the members i have selected');
-    logger.i(membersList);
+    logger('these are the members i have selected');
+    logger(membersList);
     return membersList;
   }
 }

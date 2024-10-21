@@ -2,7 +2,7 @@ import 'package:invest/imports/imports.dart';
 
 class CurrencyConverter {
   String convert(String num) {
-    logger.i(num); // Log the input number
+    logger(num); // Log the input number
     double num2 = double.parse(num); // Parse the string into a double
     String output = "";
 

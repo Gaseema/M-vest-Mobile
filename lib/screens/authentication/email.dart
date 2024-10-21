@@ -50,43 +50,48 @@ class EmailPageState extends State<EmailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
-            children: [
-              CustomAppBar(
-                title: '',
-                actions: const [],
-                leadingOnTap: () {
-                  context.pop();
-                },
-                statusBarBrightness: Brightness.light,
-              ),
-              Expanded(
+        child: Column(
+          children: [
+            CustomAppBar(
+              title: '',
+              actions: const [],
+              leadingOnTap: () {
+                context.pop();
+              },
+              statusBarBrightness: Brightness.light,
+            ),
+            Expanded(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Center(
-                    child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Continue with email',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 20),
-                    InputWidget(
-                      hintText: 'doe@example.com',
-                      keyboardType: TextInputType.emailAddress,
-                      onChanged: (value) {
-                        setState(() {
-                          userEmail = value;
-                        });
-                        formValidationChecker();
-                      },
-                      focusNode: _firstInputFocusNode,
-                    ),
-                  ],
-                )),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CustomText(
+                        text: 'Continue with email',
+                        style: displayMediumTextNormal(context),
+                      ),
+                      const SizedBox(height: 20),
+                      InputWidget(
+                        hintText: 'doe@example.com',
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: (value) {
+                          setState(() {
+                            userEmail = value;
+                          });
+                          formValidationChecker();
+                        },
+                        focusNode: _firstInputFocusNode,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              CustomButton(
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: CustomButton(
                 formValid: isFormValid,
                 validationMessage: formValidationError,
                 text: 'Continue',
@@ -94,10 +99,10 @@ class EmailPageState extends State<EmailPage> {
                 method: 'POST',
                 body: {'email': userEmail},
                 onCompleted: (res) {
-                  logger.i('<<<<<<<<<<<<<<email>>>>>>>>>>>>>>');
-                  logger.i(res);
+                  logger('<<<<<<<<<<<<<<email>>>>>>>>>>>>>>');
+                  logger(res);
                   try {
-                    logger.i(res['data']['user']);
+                    logger(res['data']['user']);
                     if (res['isSuccessful'] == false) {
                       return showToast(
                         context,
@@ -114,7 +119,7 @@ class EmailPageState extends State<EmailPage> {
                     }
                     // Check the status of the user
                     var userStatus = res['data']['user']['status'];
-                    logger.i('user status: $userStatus');
+                    logger('user status: $userStatus');
                     if (userStatus <= 1) {
                       // User has to set a password
                       return GoRouter.of(context).push(
@@ -128,7 +133,7 @@ class EmailPageState extends State<EmailPage> {
                       extra: userEmail,
                     );
                   } catch (err) {
-                    logger.i(err);
+                    logger(err);
                     return showToast(
                       context,
                       'Error!!!',
@@ -138,8 +143,8 @@ class EmailPageState extends State<EmailPage> {
                   }
                 },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

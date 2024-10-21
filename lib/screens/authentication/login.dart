@@ -58,8 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
     //     // final String imageUrl = googleUser.photoUrl ?? '';
 
     //     // Perform your desired actions with the user details
-    //     logger.i('Username: $username');
-    //     logger.i('Email: $email');
+    //     logger('Username: $username');
+    //     logger('Email: $email');
     //     // Retrieve user information from provider
     //     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
     //   }
     // } catch (error) {
     //   // Handle sign-up error
-    //   logger.i('Google sign-up error: $error');
+    //   logger('Google sign-up error: $error');
     // }
   }
 
@@ -356,7 +356,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: const TextStyle(color: Colors.blue),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              logger.i('Create now tapped');
+                              logger('Create now tapped');
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

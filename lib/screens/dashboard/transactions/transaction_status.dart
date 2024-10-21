@@ -48,13 +48,13 @@ class TransactionStatusState extends State<TransactionStatus> {
     //     postData,
     //     headers: headers,
     //   );
-    //   //  logger.i(response);
+    //   //  logger(response);
 
     //   return response;
     // } catch (error) {
     //   // Handle the error
-    //   // logger.i('error');
-    //   // logger.i(error);
+    //   // logger('error');
+    //   // logger(error);
     //   return null;
     // }
   }

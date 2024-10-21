@@ -111,7 +111,7 @@ class PinCodePageState extends State<PinCodePage> {
                           '/user/login',
                           {'email': widget.email, 'password': codeValue},
                         ).then((res) {
-                          logger.i(res);
+                          logger(res);
                           if (res['isSuccessful'] == true) {
                             userProvider.setUser(
                               User(

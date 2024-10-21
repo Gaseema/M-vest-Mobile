@@ -50,7 +50,7 @@ class _NewGoalState extends State<NewGoal> {
                     ),
                     goalType: 'Savings',
                     onTap: (val) {
-                      logger.i('tapped');
+                      logger('tapped');
                       context.push('/choose_savings_type');
                     },
                   ),
@@ -828,13 +828,13 @@ class _NewGoalState extends State<NewGoal> {
 //                           setState(() {
 //                             validateFields();
 //                           });
-//                           logger.i(
+//                           logger(
 //                               'I want to see how the list of members appears--------------------------------------');
-//                           logger.i(getMembersList());
+//                           logger(getMembersList());
 //                           if (res['isSuccessful'] == true && validateFields()) {
-//                             logger.i(
+//                             logger(
 //                                 'This is my response when creating a plan  ++++++++++++++++++++++++++');
-//                             logger.i(res);
+//                             logger(res);
 //                             Navigator.push(
 //                               context,
 //                               MaterialPageRoute(
@@ -855,8 +855,8 @@ class _NewGoalState extends State<NewGoal> {
 //                                 ),
 //                               ),
 //                             );
-//                             // logger.i('+++++++++++++++++++++++++');
-//                             // logger.i(selectedFrequency);
+//                             // logger('+++++++++++++++++++++++++');
+//                             // logger(selectedFrequency);
 //                           } else {
 //                             // showToast(
 //                             //   context,

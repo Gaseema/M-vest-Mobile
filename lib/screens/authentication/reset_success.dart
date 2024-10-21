@@ -42,7 +42,7 @@ class _ResetSuccessState extends State<ResetSuccess> {
                 GestureDetector(
                   onTap: () {
                     // Handle the click event here
-                    logger.i('Text clicked');
+                    logger('Text clicked');
                     Navigator.push(
                         context,
                         MaterialPageRoute(

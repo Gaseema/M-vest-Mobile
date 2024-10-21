@@ -43,7 +43,7 @@ Future<Map<String, dynamic>> handleBiometricAuthentication() async {
       return {'isSuccessful': false, 'error': 'Authentication failed'};
     }
   } on PlatformException catch (e) {
-    logger.i('Biometric authentication error: $e');
+    logger('Biometric authentication error: $e');
     return {
       'isSuccessful': false,
       'error': 'Biometric authentication error: $e'

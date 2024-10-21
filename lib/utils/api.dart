@@ -7,12 +7,12 @@ class ApiClient {
   ApiClient(String token) {
     _token = token;
     // _dio.options.baseUrl = 'https://api.mvest.africa';
-    _dio.options.baseUrl = 'http://192.168.100.249:8090';
+    _dio.options.baseUrl = 'http://192.168.100.247:8090';
   }
 
   Future<Response> get(String url,
       {Map<String, dynamic>? queryParameters}) async {
-    logger.i('GET Request: $url');
+    logger('GET Request: $url');
     try {
       return await _dio.get(
         url,
@@ -20,15 +20,15 @@ class ApiClient {
         options: Options(headers: {'Authorization': 'Bearer ${_token ?? ''}'}),
       );
     } on DioException catch (e) {
-      logger.i('<<<<<<<<<<<<<<<<<<<GET ERROR>>>>>>>>>>>>>>>>>>>');
-      logger.i(e.response);
+      logger('<<<<<<<<<<<<<<<<<<<GET ERROR>>>>>>>>>>>>>>>>>>>');
+      logger(e.response);
       throw e.response!;
     }
   }
 
   Future<Response> post(String url, {Map<String, dynamic>? body}) async {
-    logger.i('POST Request: $url');
-    logger.i('POST body: $body');
+    logger('POST Request: $url');
+    logger('POST body: $body');
 
     try {
       return await _dio.post(
@@ -37,8 +37,8 @@ class ApiClient {
         options: Options(headers: {'Authorization': 'Bearer ${_token ?? ''}'}),
       );
     } on DioException catch (e) {
-      logger.i('<<<<<<<<<<<<<<<<<<<POST ERRO1R>>>>>>>>>>>>>>>>>>>');
-      logger.i(e.response);
+      logger('<<<<<<<<<<<<<<<<<<<POST ERRO1R>>>>>>>>>>>>>>>>>>>');
+      logger(e.response);
       throw e.response?.data['error'];
     }
   }
@@ -47,7 +47,7 @@ class ApiClient {
     String url, {
     Map<String, File?>? files,
   }) async {
-    logger.i('UPLOAD Request: $url');
+    logger('UPLOAD Request: $url');
     try {
       FormData formData = FormData.fromMap({});
 
@@ -66,15 +66,15 @@ class ApiClient {
         options: Options(headers: {'Authorization': 'Bearer ${_token ?? ''}'}),
       );
     } on DioException catch (e) {
-      logger.i('<<<<<<<<<<<<<<<<<<<Upload ERROR>>>>>>>>>>>>>>>>>>>');
-      logger.i(e.response?.data);
+      logger('<<<<<<<<<<<<<<<<<<<Upload ERROR>>>>>>>>>>>>>>>>>>>');
+      logger(e.response?.data);
       throw e.response?.data['error'];
     }
   }
 }
 
 apiCall(String method, String url, Map<String, dynamic> body) async {
-  logger.i('This was called');
+  logger('This was called');
   late ApiClient apiClient = ApiClient('');
 
   try {
@@ -97,7 +97,7 @@ apiCall(String method, String url, Map<String, dynamic> body) async {
     }
     return {'isSuccessful': true, 'data': response.data};
   } catch (e) {
-    logger.i('apiCall Error: $e');
+    logger('apiCall Error: $e');
     return {'isSuccessful': false, 'error': e};
   }
 }
