@@ -1,7 +1,5 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:invest/widgets/dialog.dart';
-
 class PaymentPlan extends StatefulWidget {
   const PaymentPlan({super.key});
 

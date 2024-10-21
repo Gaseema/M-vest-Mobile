@@ -1,8 +1,8 @@
 import 'package:invest/imports/imports.dart';
 
 class PinCodePage extends StatefulWidget {
-  final String email;
-  const PinCodePage({super.key, required this.email});
+  final Map user;
+  const PinCodePage({super.key, required this.user});
 
   @override
   State<PinCodePage> createState() => PinCodePageState();
@@ -109,12 +109,12 @@ class PinCodePageState extends State<PinCodePage> {
                         apiCall(
                           'POST',
                           '/user/login',
-                          {'email': widget.email, 'password': codeValue},
+                          {'user_id': widget.user['id'], 'password': codeValue},
                         ).then((res) {
-                          logger(res);
                           if (res['isSuccessful'] == true) {
+                            logger('f<<<<<<<<<<<ailing here>>>>>>>>>>>');
+                            logger(res);
                             updateUserProvider(userProvider, res['data']);
-
                             context.go('/dashboard');
                           } else {
                             showToast(

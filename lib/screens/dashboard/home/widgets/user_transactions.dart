@@ -14,16 +14,16 @@ class _UserTransactionsState extends State<UserTransactions> {
   @override
   void initState() {
     super.initState();
-    fetchTransactions(context).then((res) {
-      setState(() {
-        final userTransactionsProvider = Provider.of<UserTransactionsProvider>(
-          context,
-          listen: false,
-        );
-        userTransactionsProvider.updateUserTransactions(res['data']);
-        fetchingUserTransactions = false;
-      });
-    });
+    // fetchTransactions(context).then((res) {
+    //   setState(() {
+    //     final userTransactionsProvider = Provider.of<UserTransactionsProvider>(
+    //       context,
+    //       listen: false,
+    //     );
+    //     userTransactionsProvider.updateUserTransactions(res['data']);
+    //     fetchingUserTransactions = false;
+    //   });
+    // });
   }
 
   @override

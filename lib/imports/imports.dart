@@ -35,7 +35,6 @@ export 'package:invest/providers/app_providers.dart';
 
 // Authentication
 export 'package:invest/screens/authentication/existing_user/forgot_password.dart';
-export 'package:invest/screens/authentication/existing_user/password.dart';
 export 'package:invest/screens/authentication/existing_user/pin_code.dart';
 export 'package:invest/screens/authentication/new_user/verify_email.dart';
 export 'package:invest/screens/authentication/new_user/register.dart';
@@ -56,10 +55,10 @@ export 'package:invest/screens/dashboard/profile.dart';
 export 'package:invest/screens/onboarding/welcome.dart';
 
 // Dashboard - Goals
-export 'package:invest/screens/dashboard/goals/plan_details.dart';
 export 'package:invest/screens/dashboard/goals/existing_goals/goal_details/widgets/performance_summary.dart';
 export 'package:invest/screens/dashboard/goals/existing_goals/goal_details/goal_details_screen.dart';
 export 'package:invest/screens/dashboard/goals/existing_goals/goal_details/widgets/progress.dart';
+export 'package:invest/screens/dashboard/goals/new_goal/widgets/goal_type_card.dart';
 export 'package:invest/screens/dashboard/goals/new_goal/savings/timeline_plan.dart';
 export 'package:invest/screens/dashboard/goals/new_goal/savings/savings_type.dart';
 export 'package:invest/screens/dashboard/goals/new_goal/savings/payment_plan.dart';
@@ -67,6 +66,7 @@ export 'package:invest/screens/dashboard/goals/existing_goals/edit_goal.dart';
 export 'package:invest/screens/dashboard/goals/new_goal/savings/summary.dart';
 export 'package:invest/screens/dashboard/goals/new_goal/new_goal.dart';
 export 'package:invest/screens/dashboard/goals/contacts_list.dart';
+export 'package:invest/screens/dashboard/goals/plan_details.dart';
 export 'package:invest/screens/dashboard/goals/success.dart';
 
 // Dashboard - Home
@@ -93,9 +93,11 @@ export 'package:invest/router/app_router.dart';
 
 // Global Widgets
 export 'package:invest/widgets/currency_converter.dart';
+export 'package:invest/widgets/payment_method.dart';
 export 'package:invest/widgets/pin_code_field.dart';
 export 'package:invest/widgets/splash_screen.dart';
 export 'package:invest/widgets/buttons.dart';
 export 'package:invest/widgets/appbar.dart';
 export 'package:invest/widgets/keypad.dart';
+export 'package:invest/widgets/dialog.dart';
 export 'package:invest/widgets/input.dart';

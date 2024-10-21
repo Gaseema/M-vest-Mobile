@@ -1,7 +1,5 @@
 import 'package:invest/imports/imports.dart';
 
-import 'package:invest/screens/dashboard/goals/new_goal/widgets/goal_type_card.dart';
-
 class NewGoal extends StatefulWidget {
   const NewGoal({super.key});
 
@@ -74,7 +72,12 @@ class _NewGoalState extends State<NewGoal> {
               ),
               const SizedBox(height: 50),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  showCustomBottomSheet(
+                    context,
+                    const WhyPeopleLoveMvest(),
+                  );
+                },
                 child: Text(
                   'Why People Love M-vest',
                   style: Theme.of(context)

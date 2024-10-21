@@ -55,7 +55,6 @@ class CreatePinState extends State<CreatePin> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Container(

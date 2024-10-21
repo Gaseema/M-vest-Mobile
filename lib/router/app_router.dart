@@ -22,13 +22,7 @@ class AppRouter {
           GoRoute(
             path: 'verify_user_pin',
             builder: (BuildContext context, GoRouterState state) {
-              return PinCodePage(email: state.extra as String);
-            },
-          ),
-          GoRoute(
-            path: 'password',
-            builder: (BuildContext context, GoRouterState state) {
-              return PasswordPage(user: state.extra as Map);
+              return PinCodePage(user: state.extra as Map);
             },
           ),
           GoRoute(

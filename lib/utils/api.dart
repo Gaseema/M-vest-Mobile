@@ -95,7 +95,7 @@ apiCall(String method, String url, Map<String, dynamic> body) async {
         files: body['files'],
       );
     }
-    return {'isSuccessful': true, 'user': response.data['user']};
+    return {'isSuccessful': true, 'data': response.data};
   } catch (e) {
     logger('apiCall Error: $e');
     return {'isSuccessful': false, 'error': e};

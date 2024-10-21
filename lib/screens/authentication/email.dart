@@ -100,8 +100,6 @@ class EmailPageState extends State<EmailPage> {
                 method: 'POST',
                 body: {'email': userEmail},
                 onCompleted: (res) {
-                  logger('<<<<<<<<<<<email checker>>>>>>>>>>>');
-                  logger(res);
                   try {
                     logger(res['data']['user']);
                     if (res['isSuccessful'] == false) {
@@ -128,18 +126,23 @@ class EmailPageState extends State<EmailPage> {
                         '/register_user_data',
                         extra: res['data']['user'],
                       );
-                    } else if (userData['status'] == 2) {
-                      updateUserProvider(userProvider, res['data']);
+                    }
+
+                    // User has been saved and need to save user info to the user provider
+                    updateUserProvider(userProvider, res['data']);
+                    if (userData['status'] == 2) {
                       return GoRouter.of(context).push(
                         '/create_pin',
                         extra: res['data']['user'],
                       );
                     }
-                    // // Take user to dashboard
-                    // GoRouter.of(context).push(
-                    //   '/verify_user_pin',
-                    //   extra: userEmail,
-                    // );
+                    logger('<<<<<<<<<<userData>>>>>>>>>>');
+                    logger(userData);
+                    // Take user to dashboard
+                    GoRouter.of(context).push(
+                      '/verify_user_pin',
+                      extra: userData,
+                    );
                   } catch (err) {
                     logger(err);
                     return showToast(

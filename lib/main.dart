@@ -1,7 +1,18 @@
 import 'package:invest/imports/imports.dart';
 
 void main() {
-  runApp(const AppProviders(child: MyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserProvider>.value(value: UserProvider()),
+        ChangeNotifierProvider<PlanProvider>.value(value: PlanProvider()),
+        ChangeNotifierProvider<UserTransactionsProvider>.value(
+          value: UserTransactionsProvider(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {

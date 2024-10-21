@@ -30,7 +30,7 @@ class HomeState extends State<Home> {
   final greeting = getGreeting();
   @override
   Widget build(BuildContext context) {
-    // // User Provider
+    // User Provider
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
 
@@ -114,7 +114,7 @@ class HomeState extends State<Home> {
                 child: ListView(
                   children: [
                     BalanceCard(
-                      userName: user!.firstName,
+                      userName: user?.firstName ?? '',
                       balance: userTotalBalance.toString(),
                     ),
                     const SizedBox(height: 30),
