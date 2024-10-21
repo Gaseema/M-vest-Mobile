@@ -73,10 +73,10 @@ class _ForgotPasswordState extends State<ForgotPassword>
             color: primaryDarkColor,
           ),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => const LoginScreen()),
+            // );
           },
         ),
       ),

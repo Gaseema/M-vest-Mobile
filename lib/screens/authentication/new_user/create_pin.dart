@@ -1,8 +1,8 @@
 import 'package:invest/imports/imports.dart';
 
 class CreatePin extends StatefulWidget {
-  final String email;
-  const CreatePin({super.key, required this.email});
+  final Map user;
+  const CreatePin({super.key, required this.user});
 
   @override
   State<CreatePin> createState() => CreatePinState();
@@ -112,6 +112,7 @@ class CreatePinState extends State<CreatePin> {
                     if (value == '.') {
                       enterConfirmationPin = false;
                       codeValue = '';
+                      pincodeError = false;
                       stopProcessing();
                     }
                     if (value == '<' && codeValue.isNotEmpty) {
@@ -147,23 +148,14 @@ class CreatePinState extends State<CreatePin> {
                         apiCall(
                           'POST',
                           '/user/set_pin',
-                          {'email': widget.email, 'pin': codeValue},
+                          {'user_id': widget.user['id'], 'pin': codeValue},
                         ).then((res) {
                           if (res['isSuccessful'] == true) {
-                            userProvider.setUser(
-                              User(
-                                name: res['data']['user']['first_name'],
-                                email: res['data']['user']['email']
-                                    .replaceAll(' ', ''),
-                                phoneNo: res['data']['user']['phone_number'],
-                                token: res['data']['token'],
-                              ),
-                            );
                             context.go('/dashboard');
                           } else {
                             pinError();
                           }
-                          // stopProcessing();
+                          stopProcessing();
                         });
                       }
                     }

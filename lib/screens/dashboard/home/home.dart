@@ -72,7 +72,7 @@ class HomeState extends State<Home> {
                   ),
                   const SizedBox(height: 3),
                   Text(
-                    '${user?.name}',
+                    '${user?.firstName}',
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium!
@@ -114,7 +114,7 @@ class HomeState extends State<Home> {
                 child: ListView(
                   children: [
                     BalanceCard(
-                      userName: user!.name,
+                      userName: user!.firstName,
                       balance: userTotalBalance.toString(),
                     ),
                     const SizedBox(height: 30),

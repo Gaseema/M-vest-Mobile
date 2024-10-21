@@ -1,10 +1,10 @@
 import 'package:invest/imports/imports.dart';
 
 class RegisterUserPage extends StatefulWidget {
-  final String email;
+  final Map user;
   const RegisterUserPage({
     super.key,
-    required this.email,
+    required this.user,
   });
   @override
   State<RegisterUserPage> createState() => RegisterUserPageState();
@@ -57,6 +57,7 @@ class RegisterUserPageState extends State<RegisterUserPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -92,14 +93,14 @@ class RegisterUserPageState extends State<RegisterUserPage> {
                       text: TextSpan(
                         children: <TextSpan>[
                           TextSpan(
-                            text: 'Let your ',
+                            text: 'Turn your ',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
                                 .copyWith(fontSize: 16),
                           ),
                           TextSpan(
-                            text: 'savings ',
+                            text: 'investments ',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
@@ -107,9 +108,9 @@ class RegisterUserPageState extends State<RegisterUserPage> {
                                   fontWeight: FontWeight.w900,
                                   fontSize: 18,
                                 ),
-                          ), // Add a space between words
+                          ),
                           TextSpan(
-                            text: 'build wealth, the ',
+                            text: 'into lasting wealth, the ',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
@@ -190,18 +191,19 @@ class RegisterUserPageState extends State<RegisterUserPage> {
                       body: {
                         'first_name': firstName,
                         'last_name': lastName,
-                        'email': widget.email,
+                        'email': widget.user['email'] ?? '',
                         'phone_number': phoneNo,
                         'id_number': idNo,
+                        'user_id': widget.user['id']
                       },
                       onCompleted: (res) {
+                        logger(res['data']);
                         try {
-                          logger('<<<<<<<<<<<<<<email>>>>>>>>>>>>>>');
-                          logger(res);
                           if (res['isSuccessful'] == true) {
+                            updateUserProvider(userProvider, res['data']);
                             return context.push(
                               '/create_pin',
-                              extra: widget.email,
+                              extra: res['data']['user'],
                             );
                           } else {
                             showToast(

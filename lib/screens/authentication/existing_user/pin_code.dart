@@ -113,15 +113,8 @@ class PinCodePageState extends State<PinCodePage> {
                         ).then((res) {
                           logger(res);
                           if (res['isSuccessful'] == true) {
-                            userProvider.setUser(
-                              User(
-                                name: res['data']['user']['first_name'],
-                                email: res['data']['user']['email']
-                                    .replaceAll(' ', ''),
-                                phoneNo: res['data']['user']['phone_number'],
-                                token: res['data']['token'],
-                              ),
-                            );
+                            updateUserProvider(userProvider, res['data']);
+
                             context.go('/dashboard');
                           } else {
                             showToast(

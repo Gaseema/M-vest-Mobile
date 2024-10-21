@@ -41,8 +41,6 @@ export 'package:invest/screens/authentication/new_user/verify_email.dart';
 export 'package:invest/screens/authentication/new_user/register.dart';
 export 'package:invest/screens/authentication/new_user/create_pin.dart';
 export 'package:invest/screens/authentication/reset_success.dart';
-export 'package:invest/screens/authentication/signup.dart';
-export 'package:invest/screens/authentication/login.dart';
 export 'package:invest/screens/authentication/email.dart';
 
 //Dashboard

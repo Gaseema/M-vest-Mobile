@@ -43,10 +43,10 @@ class _ResetSuccessState extends State<ResetSuccess> {
                   onTap: () {
                     // Handle the click event here
                     logger('Text clicked');
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => const LoginScreen())));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: ((context) => const LoginScreen())));
                   },
                   child: const Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

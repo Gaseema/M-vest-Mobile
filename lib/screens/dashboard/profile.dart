@@ -31,7 +31,7 @@ class ProfileState extends State<Profile> {
             ),
           ),
           const SizedBox(height: 20),
-          Text(user!.name, style: displayNormalWhite),
+          Text(user!.firstName, style: displayNormalWhite),
           const SizedBox(height: 10),
           Text(user.email, style: displaySmallWhite),
         ],
@@ -73,7 +73,7 @@ class ProfileState extends State<Profile> {
                       style: displaySmallThinBlack,
                     ),
                     Text(
-                      user.name,
+                      user.firstName,
                       style: displayNormalBoldBlack,
                     ),
                   ],

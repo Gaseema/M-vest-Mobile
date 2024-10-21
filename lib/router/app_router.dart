@@ -62,9 +62,9 @@ class AppRouter {
             },
           ),
           GoRoute(
-            path: 'register',
+            path: 'register_user_data',
             builder: (BuildContext context, GoRouterState state) {
-              return RegisterUserPage(email: state.extra as String);
+              return RegisterUserPage(user: state.extra as Map);
             },
           ),
           GoRoute(
@@ -76,7 +76,7 @@ class AppRouter {
           GoRoute(
             path: 'create_pin',
             builder: (BuildContext context, GoRouterState state) {
-              return CreatePin(email: state.extra as String);
+              return CreatePin(user: state.extra as Map);
             },
           ),
         ],

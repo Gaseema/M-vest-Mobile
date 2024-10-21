@@ -48,6 +48,7 @@ class EmailPageState extends State<EmailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -90,7 +91,7 @@ class EmailPageState extends State<EmailPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: CustomButton(
                 formValid: isFormValid,
                 validationMessage: formValidationError,
@@ -99,7 +100,7 @@ class EmailPageState extends State<EmailPage> {
                 method: 'POST',
                 body: {'email': userEmail},
                 onCompleted: (res) {
-                  logger('<<<<<<<<<<<<<<email>>>>>>>>>>>>>>');
+                  logger('<<<<<<<<<<<email checker>>>>>>>>>>>');
                   logger(res);
                   try {
                     logger(res['data']['user']);
@@ -112,26 +113,33 @@ class EmailPageState extends State<EmailPage> {
                       );
                     }
                     if (res['data']['user'] == null) {
+                      // Email verification page
                       return GoRouter.of(context).push(
                         '/otp_verification',
                         extra: userEmail,
                       );
                     }
+
                     // Check the status of the user
-                    var userStatus = res['data']['user']['status'];
-                    logger('user status: $userStatus');
-                    if (userStatus <= 1) {
+                    var userData = res['data']['user'];
+                    if (userData['status'] == 1) {
                       // User has to set a password
                       return GoRouter.of(context).push(
+                        '/register_user_data',
+                        extra: res['data']['user'],
+                      );
+                    } else if (userData['status'] == 2) {
+                      updateUserProvider(userProvider, res['data']);
+                      return GoRouter.of(context).push(
                         '/create_pin',
-                        extra: userEmail,
+                        extra: res['data']['user'],
                       );
                     }
-                    // Take user to dashboard
-                    GoRouter.of(context).push(
-                      '/verify_user_pin',
-                      extra: userEmail,
-                    );
+                    // // Take user to dashboard
+                    // GoRouter.of(context).push(
+                    //   '/verify_user_pin',
+                    //   extra: userEmail,
+                    // );
                   } catch (err) {
                     logger(err);
                     return showToast(

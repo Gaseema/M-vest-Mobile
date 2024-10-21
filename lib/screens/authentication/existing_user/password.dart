@@ -96,14 +96,8 @@ class PasswordPageState extends State<PasswordPage> {
                         Colors.red,
                       );
                     }
-                    userProvider.setUser(
-                      User(
-                        name: res['data']['user']['user_name'],
-                        email: res['data']['user']['email'].replaceAll(' ', ''),
-                        phoneNo: res['data']['user']['phone_number'],
-                        token: res['data']['token'],
-                      ),
-                    );
+                    updateUserProvider(userProvider, res['data']);
+
                     context.push('/dashboard');
                     logger(res);
                   } catch (err) {

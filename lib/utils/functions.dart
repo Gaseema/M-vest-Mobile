@@ -75,3 +75,19 @@ fetchTransactions(context) async {
     return {'isSuccessful': false, 'error': 'Error fetching transactions'};
   }
 }
+
+resendEmailVerification(context, email) async {
+  try {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final token = userProvider.user?.token ?? '';
+    ApiClient apiClient = ApiClient(token);
+    var response = await apiClient.post(
+      '/otp/new-user-resend-verification-email',
+      body: {'email': email},
+    );
+    logger('success: resendEmailVerification');
+    return {'isSuccessful': true, 'data': response.data};
+  } catch (e) {
+    return {'isSuccessful': false, 'error': 'Error resending OTP code'};
+  }
+}

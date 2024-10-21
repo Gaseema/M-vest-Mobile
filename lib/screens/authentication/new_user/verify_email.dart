@@ -47,6 +47,21 @@ class _VerifyEmailState extends State<VerifyEmail> {
     stopProcessing();
   }
 
+  void restartCountdown() {
+    // Cancel any previous timers if running
+    if (_countdownTimer.isActive) {
+      _countdownTimer.cancel();
+    }
+    // Reset the countdown time
+    setState(() {
+      _secondsRemaining = countdownSeconds;
+      codeValue = '';
+      pincodeError = false;
+      stopProcessing();
+    });
+    startCountdown();
+  }
+
   void startCountdown() {
     _countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
@@ -150,10 +165,38 @@ class _VerifyEmailState extends State<VerifyEmail> {
               const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
-                  if (_secondsRemaining == 0) {
-                    return;
+                  try {
+                    if (_secondsRemaining == 0) {
+                      resendEmailVerification(context, widget.email)
+                          .then((res) {
+                        logger(' res: resendEmailVerification');
+                        logger(res);
+                        if (res['isSuccessful'] == true) {
+                          restartCountdown();
+                          showToast(
+                            context,
+                            'Success',
+                            'Verification OTP sent successfully',
+                            primaryColor,
+                          );
+                        } else {
+                          showToast(
+                            context,
+                            'Error!!!',
+                            res['error'],
+                            Colors.red,
+                          );
+                        }
+                      });
+                    }
+                  } catch (err) {
+                    showToast(
+                      context,
+                      'Error!!!',
+                      'Error sending OTP code',
+                      Colors.red,
+                    );
                   }
-                  startCountdown();
                 },
                 child: CustomText(
                   text: _secondsRemaining == 0
@@ -183,8 +226,10 @@ class _VerifyEmailState extends State<VerifyEmail> {
                             '/user/verify/email_otp',
                             {'email': widget.email, 'otp': codeValue},
                           ).then((res) {
+                            logger('<<<<<<<<user saved>>>>>>>>');
+                            logger(res);
                             if (res['isSuccessful'] == true) {
-                              context.push('/register', extra: widget.email);
+                              context.push('/register', extra: res['user']);
                             } else {
                               logger('<<<<<<<<<<verify email>>>>>>>>>>');
                               logger(res['error']);
