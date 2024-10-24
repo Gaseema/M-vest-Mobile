@@ -419,41 +419,37 @@ class WhyPeopleLoveMvest extends StatelessWidget {
   const WhyPeopleLoveMvest({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Why People Love Mvest'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            _buildSection(
-              context,
-              'Personalized Investment Plans',
-              'Mvest takes the stress out of managing finances by offering tailored investment options based on your financial goals. Whether you’re growing wealth, saving for a purchase, or planning for retirement, Mvest provides flexible plans that fit your needs.',
-            ),
-            _buildSection(
-              context,
-              'Smart, Simple, and Safe',
-              'With an intuitive interface and AI-powered insights, Mvest makes investing easy and enjoyable. Users love how Mvest simplifies complex processes, guiding them step by step, even if they’re new to investing.',
-            ),
-            _buildSection(
-              context,
-              'Real Results, Faster',
-              'Mvest users are seeing real progress faster than expected. With strategies focused on growth, many reach their financial goals quicker while feeling secure about their investments.',
-            ),
-            _buildSection(
-              context,
-              'Transparency and Trust',
-              'Mvest offers complete transparency. Users always know where their money is, how it’s growing, and what’s happening in real-time. Built on trust, Mvest ensures your funds are in safe hands.',
-            ),
-            _buildSection(
-              context,
-              'Financial Empowerment',
-              'Beyond investing, Mvest empowers users with tools and insights for informed financial decisions. The educational content, tips, and analytics help users grow not only their wealth but also their financial knowledge.',
-            ),
-          ],
-        ),
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.7,
+      padding: const EdgeInsets.all(16.0),
+      child: ListView(
+        children: [
+          _buildSection(
+            context,
+            'Personalized Investment Plans',
+            'Mvest takes the stress out of managing finances by offering tailored investment options based on your financial goals. Whether you’re growing wealth, saving for a purchase, or planning for retirement, Mvest provides flexible plans that fit your needs.',
+          ),
+          _buildSection(
+            context,
+            'Smart, Simple, and Safe',
+            'With an intuitive interface and AI-powered insights, Mvest makes investing easy and enjoyable. Users love how Mvest simplifies complex processes, guiding them step by step, even if they’re new to investing.',
+          ),
+          _buildSection(
+            context,
+            'Real Results, Faster',
+            'Mvest users are seeing real progress faster than expected. With strategies focused on growth, many reach their financial goals quicker while feeling secure about their investments.',
+          ),
+          _buildSection(
+            context,
+            'Transparency and Trust',
+            'Mvest offers complete transparency. Users always know where their money is, how it’s growing, and what’s happening in real-time. Built on trust, Mvest ensures your funds are in safe hands.',
+          ),
+          _buildSection(
+            context,
+            'Financial Empowerment',
+            'Beyond investing, Mvest empowers users with tools and insights for informed financial decisions. The educational content, tips, and analytics help users grow not only their wealth but also their financial knowledge.',
+          ),
+        ],
       ),
     );
   }
@@ -464,12 +460,11 @@ class WhyPeopleLoveMvest extends StatelessWidget {
       children: [
         Text(
           title,
+          style: displayMediumBoldTextDarkBlue(context),
         ),
-        SizedBox(height: 8),
-        Text(
-          content,
-        ),
-        SizedBox(height: 16),
+        const SizedBox(height: 8),
+        Text(content, style: displayMediumTextDarkBlue(context)),
+        const SizedBox(height: 16),
       ],
     );
   }

@@ -1,13 +1,46 @@
 import 'package:invest/imports/imports.dart';
 
 class TimelinePlan extends StatefulWidget {
-  const TimelinePlan({super.key});
+  final Map paymentPlan;
+  const TimelinePlan({super.key, required this.paymentPlan});
 
   @override
   State<TimelinePlan> createState() => TimelinePlanState();
 }
 
 class TimelinePlanState extends State<TimelinePlan> {
+  String planEndDate = '';
+  _updateTimelinePicked(String timePicked) {
+    setState(() {
+      planEndDate = timePicked;
+    });
+    formValidationChecker();
+  }
+
+// Form Validation
+  bool isFormValid = false;
+  String formValidationError = 'Select plan timeline';
+
+  formValidationChecker() {
+    if (planEndDate == '') {
+      setState(() {
+        isFormValid = false;
+        formValidationError = 'Select plan timeline';
+      });
+    } else {
+      setState(() {
+        isFormValid = true;
+        formValidationError = '';
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    formValidationChecker();
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget timelineSetting = Column(
@@ -22,82 +55,9 @@ class TimelinePlanState extends State<TimelinePlan> {
               .copyWith(fontWeight: FontWeight.w700, color: primaryColor),
         ),
         const SizedBox(height: 40),
-        Wrap(
-          spacing: 10.0,
-          runSpacing: 10,
-          children: [
-            Budge(
-              active: false,
-              text: '3 months',
-              onTap: (data) => {},
-            ),
-            Budge(
-              active: false,
-              text: '6 months',
-              onTap: (data) => {},
-            ),
-            Budge(
-              active: false,
-              text: '9 months',
-              onTap: (data) => {},
-            ),
-            Budge(
-              active: false,
-              text: '1 year',
-              onTap: (data) => {},
-            ),
-            Budge(
-              active: false,
-              text: 'Let me choose',
-              onTap: (data) => {},
-            ),
-          ],
-        ),
+        SelectTimelineWidget(onTimelineSelected: _updateTimelinePicked),
       ],
     );
-
-    // Widget estimatedValue = Column(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: [
-    //     Text(
-    //       'Estimated Future Amount',
-    //       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-    //             color: Colors.black.withOpacity(0.5),
-    //             fontSize: 14,
-    //           ),
-    //     ),
-    //     Text(
-    //       'KES 50,000',
-    //       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-    //             color: const Color.fromRGBO(68, 187, 76, 1),
-    //             fontSize: 30,
-    //           ),
-    //     ),
-    //     const SizedBox(height: 20),
-    //     Text(
-    //       'Interest Rate',
-    //       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-    //             color: Colors.black.withOpacity(0.5),
-    //             fontSize: 14,
-    //           ),
-    //     ),
-    //     Text(
-    //       '11% p.a.',
-    //       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-    //             color: const Color.fromRGBO(68, 187, 76, 1),
-    //             fontSize: 30,
-    //           ),
-    //     ),
-    //     const SizedBox(height: 20),
-    //     Text(
-    //       'This estimate assumes you have KES 10,000 monthly, 3 times between today and your maturity date, July 04, 2024.',
-    //       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-    //             color: Colors.black.withOpacity(0.5),
-    //             fontSize: 14,
-    //           ),
-    //     )
-    //   ],
-    // );
 
     return Scaffold(
       body: SafeArea(
@@ -128,12 +88,18 @@ class TimelinePlanState extends State<TimelinePlan> {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: CustomButton(
+                  formValid: isFormValid,
+                  validationMessage: formValidationError,
                   text: 'Continue',
                   url: null,
                   method: 'POST',
                   body: const {},
                   onCompleted: (res) {
-                    context.push('/summary');
+                    context.push('/summary', extra: {
+                      'amount': widget.paymentPlan['amount'],
+                      'frequency': widget.paymentPlan['frequency'],
+                      'timeline': planEndDate,
+                    });
                   },
                 ),
               ),

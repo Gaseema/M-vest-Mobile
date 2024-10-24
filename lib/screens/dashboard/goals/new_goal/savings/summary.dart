@@ -1,15 +1,52 @@
 import 'package:invest/imports/imports.dart';
-import 'package:invest/widgets/payment_method.dart';
-import 'package:invest/widgets/dialog.dart';
 
 class Summary extends StatefulWidget {
-  const Summary({super.key});
+  final Map goalDetails;
+  const Summary({super.key, required this.goalDetails});
 
   @override
   State<Summary> createState() => SummaryState();
 }
 
 class SummaryState extends State<Summary> {
+  String? estimatedFutureAmount;
+  calculateFinalValue(
+    num amount,
+    num minInterestRate,
+    num maxInterestRate,
+    String endDate,
+  ) {
+    DateTime parsedEndDate = DateFormat('yyyy-MMM-dd').parse(endDate);
+    DateTime now = DateTime.now();
+
+    // Calculate the number of months between the current date and the end date
+    int months =
+        ((parsedEndDate.year - now.year) * 12 + parsedEndDate.month - now.month)
+            .toInt();
+
+    // Convert annual interest rate to monthly
+    double minMonthlyRate = minInterestRate / 12 / 100;
+    double maxMonthlyRate = maxInterestRate / 12 / 100;
+
+    // Calculate the final values
+    double finalValueMin = amount * (1 + minMonthlyRate * months);
+    double finalValueMax = amount * (1 + maxMonthlyRate * months);
+
+    return ("KES ${formatNumberWithCommas(finalValueMin)} - ${formatNumberWithCommas(finalValueMax)}");
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Calculate the estimated future amount when the widget initializes
+    estimatedFutureAmount = calculateFinalValue(
+      widget.goalDetails['amount'],
+      13,
+      15,
+      widget.goalDetails['timeline'],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +76,10 @@ class SummaryState extends State<Summary> {
                           ),
                     ),
                     const SizedBox(height: 40),
-                    const LabeledRow(
+                    LabeledRow(
                       label: 'Amount',
-                      value: 'KES 10,000',
+                      value: CurrencyConverter()
+                          .convert(widget.goalDetails['amount'].toString()),
                     ),
                     Divider(
                       height: 1,
@@ -49,31 +87,23 @@ class SummaryState extends State<Summary> {
                     ),
                     const LabeledRow(
                       label: 'Interest rate',
-                      value: '10% per annum',
+                      value: '13 - 15% per annum',
                     ),
                     Divider(
                       height: 1,
                       color: Colors.black.withOpacity(0.2),
                     ),
-                    const LabeledRow(
+                    LabeledRow(
                       label: 'Maturity Date',
-                      value: 'KES 10,000',
+                      value: widget.goalDetails['timeline'],
                     ),
                     Divider(
                       height: 1,
                       color: Colors.black.withOpacity(0.2),
                     ),
-                    const LabeledRow(
-                      label: 'Automation',
-                      value: '28th of every month',
-                    ),
-                    Divider(
-                      height: 1,
-                      color: Colors.black.withOpacity(0.2),
-                    ),
-                    const LabeledRow(
+                    LabeledRow(
                       label: 'Estimated Future Amount',
-                      value: 'KES 50,000',
+                      value: estimatedFutureAmount ?? '',
                     ),
                     Divider(
                       height: 1,
@@ -127,16 +157,21 @@ class LabeledRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontSize: 16, color: const Color.fromRGBO(95, 101, 117, 1)),
+          Expanded(
+            child: Text(
+              label,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontSize: 12, color: const Color.fromRGBO(95, 101, 117, 1)),
+            ),
           ),
-          Text(
-            value,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontSize: 16,
-                ),
+          Expanded(
+            child: Text(
+              value,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 12,
+                  ),
+              textAlign: TextAlign.right,
+            ),
           ),
         ],
       ),

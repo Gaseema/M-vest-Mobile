@@ -46,13 +46,13 @@ class AppRouter {
           GoRoute(
             path: 'timeline_plan',
             builder: (BuildContext context, GoRouterState state) {
-              return const TimelinePlan();
+              return TimelinePlan(paymentPlan: state.extra as Map);
             },
           ),
           GoRoute(
             path: 'summary',
             builder: (BuildContext context, GoRouterState state) {
-              return const Summary();
+              return Summary(goalDetails: state.extra as Map);
             },
           ),
           GoRoute(

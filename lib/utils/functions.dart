@@ -91,3 +91,8 @@ resendEmailVerification(context, email) async {
     return {'isSuccessful': false, 'error': 'Error resending OTP code'};
   }
 }
+
+String formatNumberWithCommas(num number) {
+  final formatter = NumberFormat('#,##0'); // Format for integers
+  return formatter.format(number);
+}

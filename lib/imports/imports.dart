@@ -93,8 +93,11 @@ export 'package:invest/router/app_router.dart';
 
 // Global Widgets
 export 'package:invest/widgets/currency_converter.dart';
+export 'package:invest/widgets/choose_frequency.dart';
+export 'package:invest/widgets/choose_timeline.dart';
 export 'package:invest/widgets/payment_method.dart';
 export 'package:invest/widgets/pin_code_field.dart';
+export 'package:invest/widgets/choose_amount.dart';
 export 'package:invest/widgets/splash_screen.dart';
 export 'package:invest/widgets/buttons.dart';
 export 'package:invest/widgets/appbar.dart';

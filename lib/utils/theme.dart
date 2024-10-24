@@ -156,13 +156,19 @@ displayLargeTextNormal(context) =>
 
 // Medium Size
 displayMediumTextDarkBlue(context) =>
-    Theme.of(context).textTheme.bodyMedium?.copyWith(
-          color: darkHeaderColor,
-        );
+    Theme.of(context).textTheme.bodyMedium?.copyWith(color: darkHeaderColor);
+
+displayMediumBoldTextDarkBlue(context) => Theme.of(context)
+    .textTheme
+    .bodyMedium
+    ?.copyWith(color: darkHeaderColor, fontWeight: FontWeight.w700);
+
 displayMediumTextNormal(context) =>
     Theme.of(context).textTheme.bodyMedium?.copyWith();
+
 displayMediumTextPrimaryBlue(context) =>
     Theme.of(context).textTheme.bodyMedium?.copyWith(color: primaryColor);
+
 displayMediumTextRed(context) =>
     Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.red);
 

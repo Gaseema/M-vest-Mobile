@@ -51,25 +51,25 @@ class SavingsTypeState extends State<SavingsType> {
                       ),
                       title: 'Save for rainy days (Emergency, short term)',
                       text:
-                          'Do you want a plan where you have free access to your funds for rainy days?',
+                          'Do you want a plan where you have free access to your funds for rainy days? \nNote: Funds will be locked for a minimum of 1 month',
                       color: const Color.fromRGBO(244, 244, 255, 1),
                       onTap: (val) {
                         context.push('/payment_plan');
                       },
                     ),
                     const SizedBox(height: 20),
-                    SavingsTypeCard(
-                      icon: SizedBox(
-                        width: 50,
-                        child: Image.asset('assets/icons/group.png'),
-                      ),
-                      title: 'Save in a group (Chama)',
-                      text: 'Do you want to save with friends and family?',
-                      color: const Color.fromRGBO(255, 246, 238, 1),
-                      onTap: (val) {
-                        context.push('/payment_plan');
-                      },
-                    ),
+                    // SavingsTypeCard(
+                    //   icon: SizedBox(
+                    //     width: 50,
+                    //     child: Image.asset('assets/icons/group.png'),
+                    //   ),
+                    //   title: 'Save in a group (Chama)',
+                    //   text: 'Do you want to save with friends and family?',
+                    //   color: const Color.fromRGBO(255, 246, 238, 1),
+                    //   onTap: (val) {
+                    //     context.push('/payment_plan');
+                    //   },
+                    // ),
                     const SizedBox(height: 50),
                   ],
                 ),
