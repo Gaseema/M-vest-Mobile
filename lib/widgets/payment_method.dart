@@ -15,7 +15,7 @@ class _PaymentMethodWidgetState extends State<PaymentMethodWidget> {
       children: [
         const SizedBox(height: 20),
         Text(
-          'First Plan',
+          'Amount',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 fontWeight: FontWeight.w100,
                 color: Colors.black.withOpacity(0.5),
@@ -51,12 +51,19 @@ class _PaymentMethodWidgetState extends State<PaymentMethodWidget> {
         ),
         const SizedBox(height: 50),
         CustomButton(
-          text: 'Done',
-          url: null,
+          text: 'Process Payment',
+          url: '/payment/mpesa/stkpush',
           method: 'POST',
-          body: const {},
+          body: const {
+            'amount': '1',
+            'phoneNumber': '254721882694',
+            'accountReference': 'context',
+            'description': 'context',
+          },
           onCompleted: (val) {
-            Navigator.pop(context);
+            logger('<<<<<<<<<<<<<<Deposit value>>>>>>>>>>>>>>');
+            logger(val);
+            // Navigator.pop(context);
           },
         ),
       ],

@@ -49,6 +49,9 @@ class SummaryState extends State<Summary> {
 
   @override
   Widget build(BuildContext context) {
+    // User Provider
+    final userProvider = Provider.of<UserProvider>(context);
+    final user = userProvider.user;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -76,6 +79,14 @@ class SummaryState extends State<Summary> {
                           ),
                     ),
                     const SizedBox(height: 40),
+                    LabeledRow(
+                      label: 'Plan Name',
+                      value: capitalize(widget.goalDetails['planName']),
+                    ),
+                    Divider(
+                      height: 1,
+                      color: Colors.black.withOpacity(0.2),
+                    ),
                     LabeledRow(
                       label: 'Amount',
                       value: CurrencyConverter()
@@ -114,23 +125,60 @@ class SummaryState extends State<Summary> {
                 ),
               ),
             ),
-            Center(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: CustomButton(
-                  text: 'Choose Payment Method',
-                  url: null,
-                  method: 'POST',
-                  body: const {},
-                  onCompleted: (res) {
-                    showCustomBottomSheet(
+            // Center(
+            //   child: SizedBox(
+            //     width: MediaQuery.of(context).size.width * 0.9,
+            //     child: CustomButton(
+            //       text: 'Choose Payment Method',
+            //       url: null,
+            //       method: 'POST',
+            //       body: const {},
+            //       onCompleted: (res) {
+            //         showCustomBottomSheet(
+            //           context,
+            //           PaymentMethodWidget(
+            //             onComplete: (res) {},
+            //           ),
+            //         );
+            //       },
+            //     ),
+            //   ),
+            // ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: CustomButton(
+                text: 'Complete',
+                url: '/plan/create',
+                method: 'POST',
+                body: {
+                  'plan_name': widget.goalDetails['planName'],
+                  'type': 'SAVINGS',
+                  'description': 'savings',
+                  'target_amount': widget.goalDetails['amount'],
+                  'user_id': user!.id,
+                  'maturity_date': widget.goalDetails['timeline'],
+                },
+                onCompleted: (res) {
+                  try {
+                    if (res['isSuccessful'] == true) {
+                      context.push('/dashboard');
+                    } else {
+                      return showToast(
+                        context,
+                        'Error!',
+                        res['error'],
+                        Colors.red,
+                      );
+                    }
+                  } catch (e) {
+                    return showToast(
                       context,
-                      PaymentMethodWidget(
-                        onComplete: (res) {},
-                      ),
+                      'Error!',
+                      'Error creating plan',
+                      Colors.red,
                     );
-                  },
-                ),
+                  }
+                },
               ),
             ),
           ],

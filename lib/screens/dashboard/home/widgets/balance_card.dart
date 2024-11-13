@@ -118,12 +118,7 @@ class _BalanceCardState extends State<BalanceCard> {
           bottom: -40,
           child: GestureDetector(
             onTap: () {
-              PersistentNavBarNavigator.pushNewScreen(
-                context,
-                screen: const NewGoal(),
-                withNavBar: false,
-                pageTransitionAnimation: PageTransitionAnimation.cupertino,
-              );
+              context.go('/create_new_goal');
             },
             child: Align(
               alignment: Alignment.bottomRight,
@@ -144,11 +139,8 @@ class _BalanceCardState extends State<BalanceCard> {
           bottom: 10,
           child: GestureDetector(
             onTap: () {
-              PersistentNavBarNavigator.pushNewScreen(
-                context,
-                screen: const NewGoal(),
-                withNavBar: false,
-                pageTransitionAnimation: PageTransitionAnimation.cupertino,
+              context.go(
+                '/create_new_goal',
               );
             },
             child: Align(

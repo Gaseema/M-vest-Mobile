@@ -96,6 +96,7 @@ class TimelinePlanState extends State<TimelinePlan> {
                   body: const {},
                   onCompleted: (res) {
                     context.push('/summary', extra: {
+                      'planName': widget.paymentPlan['planName'],
                       'amount': widget.paymentPlan['amount'],
                       'frequency': widget.paymentPlan['frequency'],
                       'timeline': planEndDate,

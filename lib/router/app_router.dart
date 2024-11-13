@@ -40,7 +40,21 @@ class AppRouter {
           GoRoute(
             path: 'payment_plan',
             builder: (BuildContext context, GoRouterState state) {
-              return const PaymentPlan();
+              return PaymentPlan(planType: state.extra as String);
+            },
+          ),
+          GoRoute(
+            path: 'create_new_goal',
+            builder: (BuildContext context, GoRouterState state) {
+              return const NewGoal();
+            },
+          ),
+          GoRoute(
+            path: 'plan_details',
+            builder: (BuildContext context, GoRouterState state) {
+              return GoalDetails(
+                plan: state.extra as Map,
+              );
             },
           ),
           GoRoute(

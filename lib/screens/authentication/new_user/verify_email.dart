@@ -229,8 +229,10 @@ class _VerifyEmailState extends State<VerifyEmail> {
                             logger('<<<<<<<<user saved>>>>>>>>');
                             logger(res);
                             if (res['isSuccessful'] == true) {
-                              context.push('/register',
-                                  extra: res['data']['user']);
+                              context.push(
+                                '/register_user_data',
+                                extra: res['data']['user'],
+                              );
                             } else {
                               logger('<<<<<<<<<<verify email>>>>>>>>>>');
                               logger(res['error']);

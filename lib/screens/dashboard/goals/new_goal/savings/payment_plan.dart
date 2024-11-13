@@ -1,13 +1,15 @@
 import 'package:invest/imports/imports.dart';
 
 class PaymentPlan extends StatefulWidget {
-  const PaymentPlan({super.key});
+  final String planType;
+  const PaymentPlan({super.key, required this.planType});
 
   @override
   State<PaymentPlan> createState() => PaymentPlanState();
 }
 
 class PaymentPlanState extends State<PaymentPlan> {
+  String planName = '';
   int selectedAmount = -1;
   String selectedFrequency = '';
 
@@ -32,7 +34,12 @@ class PaymentPlanState extends State<PaymentPlan> {
   formValidationChecker() {
     logger('selectedAmount: $selectedAmount');
     logger('selectedFrequency: $selectedFrequency');
-    if (selectedAmount < 100) {
+    if (widget.planType == 'other' && planName.isEmpty) {
+      setState(() {
+        isFormValid = false;
+        formValidationError = 'Enter plan name';
+      });
+    } else if (selectedAmount < 100) {
       setState(() {
         isFormValid = false;
         formValidationError = 'Enter an amount greater than KES 100';
@@ -54,16 +61,53 @@ class PaymentPlanState extends State<PaymentPlan> {
   void initState() {
     super.initState();
     formValidationChecker();
+    setState(() {
+      planName = widget.planType == 'other' ? '' : widget.planType;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget planNameWidget = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        widget.planType == 'other'
+            ? Container(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Name your plan',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: primaryColor,
+                            fontSize: 16,
+                          ),
+                    ),
+                    const SizedBox(height: 20),
+                    InputWidget(
+                      hintText: 'Example: House Furniture',
+                      keyboardType: TextInputType.text,
+                      onChanged: (value) {
+                        setState(() {
+                          planName = value;
+                        });
+                        formValidationChecker();
+                      },
+                    ),
+                  ],
+                ),
+              )
+            : Container(),
+      ],
+    );
     Widget amount2start = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 20),
         Text(
-          'How much would you like to start with?',
+          'How much would you like to save?',
           style: Theme.of(context)
               .textTheme
               .bodyLarge!
@@ -114,6 +158,7 @@ class PaymentPlanState extends State<PaymentPlan> {
                             fontSize: 30,
                           ),
                     ),
+                    planNameWidget,
                     amount2start,
                     const SizedBox(height: 50),
                     howOften,
@@ -135,6 +180,7 @@ class PaymentPlanState extends State<PaymentPlan> {
                     context.push(
                       '/timeline_plan',
                       extra: {
+                        'planName': planName,
                         'amount': selectedAmount,
                         'frequency': selectedFrequency,
                       },

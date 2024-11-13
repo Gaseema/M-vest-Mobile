@@ -1,37 +1,11 @@
 import 'package:invest/imports/imports.dart';
 
 class GoalDetails extends StatefulWidget {
-  final int? id;
-  final String? type;
-  final String? category;
-  final String? planDescription;
-  final String? plan;
-  final double? progress;
-  final num? planBalance;
-  final num? target;
-  final String? createdAt;
-  final String? maturityDate;
-  final String? frequency;
-  final int? walletId;
-  final bool? locked;
-  final List? membersList;
+  final Map plan;
 
   const GoalDetails({
     super.key,
-    this.category,
-    this.id,
-    this.locked,
-    this.createdAt,
-    this.planDescription,
-    this.maturityDate,
-    this.plan,
-    this.progress,
-    this.planBalance,
-    this.target,
-    this.type,
-    this.walletId,
-    this.frequency,
-    this.membersList,
+    required this.plan,
   });
 
   @override
@@ -101,7 +75,7 @@ class GoalDetailsState extends State<GoalDetails> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  'Goal: ${widget.plan}',
+                  'Goal: ${capitalize(widget.plan['plan_name'])}',
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
@@ -110,7 +84,7 @@ class GoalDetailsState extends State<GoalDetails> {
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 3, 10, 3),
-                child: widget.locked!
+                child: widget.plan['lock']['is_locked']
                     ? Image.asset(
                         'assets/icons/lock.png',
                         width: 20,
@@ -132,7 +106,9 @@ class GoalDetailsState extends State<GoalDetails> {
           ),
           const SizedBox(height: 10),
           Text(
-            'KES. 20,000',
+            CurrencyConverter().convert(
+              widget.plan['wallet']['balance'].toString(),
+            ),
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: Colors.white,
                   fontSize: 20,
@@ -144,7 +120,7 @@ class GoalDetailsState extends State<GoalDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Created on ${formatDate(widget.createdAt!, false)}',
+                'Created on ${formatDate(widget.plan['createdAt'], false)}',
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: Colors.white.withOpacity(0.7),
                       fontSize: 10,
@@ -167,8 +143,8 @@ class GoalDetailsState extends State<GoalDetails> {
                 context,
                 screen: MakeTransaction(
                   transactionType: 'deposit',
-                  walletID: widget.id,
-                  category: widget.category,
+                  walletID: widget.plan['id'],
+                  category: widget.plan['category'],
                 ),
                 withNavBar: false,
                 pageTransitionAnimation: PageTransitionAnimation.cupertino,
@@ -201,9 +177,9 @@ class GoalDetailsState extends State<GoalDetails> {
                 context,
                 screen: MakeTransaction(
                   transactionType: 'withdraw',
-                  walletID: widget.id,
-                  category: widget.category,
-                  planBalance: widget.planBalance,
+                  walletID: widget.plan['id'],
+                  category: widget.plan['category'],
+                  planBalance: widget.plan['planBalance'],
                 ),
                 withNavBar: false,
                 pageTransitionAnimation: PageTransitionAnimation.cupertino,
@@ -234,34 +210,34 @@ class GoalDetailsState extends State<GoalDetails> {
       ),
     );
 
-    Widget membersListWidget = Container(
-      margin: const EdgeInsets.only(top: 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            child: Text(
-              'Members',
-              style: displayNormalSlightlyBoldBlack,
-            ),
-          ),
-          widget.membersList != []
-              ? ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: widget.membersList?.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final oneMember = widget.membersList?[index];
-                    return Text('${oneMember['name']}');
-                  },
-                )
-              : const Center(
-                  child: Text('no members'),
-                )
-        ],
-      ),
-    );
+    // Widget membersListWidget = Container(
+    //   margin: const EdgeInsets.only(top: 30),
+    //   child: Column(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: [
+    //       Container(
+    //         margin: const EdgeInsets.only(bottom: 10),
+    //         child: Text(
+    //           'Members',
+    //           style: displayNormalSlightlyBoldBlack,
+    //         ),
+    //       ),
+    //       widget.plan['membersList'] != []
+    //           ? ListView.builder(
+    //               physics: const NeverScrollableScrollPhysics(),
+    //               shrinkWrap: true,
+    //               itemCount: widget.plan['membersList'].length,
+    //               itemBuilder: (BuildContext context, int index) {
+    //                 final oneMember = widget.plan['membersList'][index];
+    //                 return Text('${oneMember['name']}');
+    //               },
+    //             )
+    //           : const Center(
+    //               child: Text('no members'),
+    //             )
+    //     ],
+    //   ),
+    // );
     Widget transactions = Container(
       margin: const EdgeInsets.only(top: 30),
       child: Column(
@@ -331,7 +307,7 @@ class GoalDetailsState extends State<GoalDetails> {
                       ),
                     ),
                     Text(
-                      '${widget.plan}',
+                      '${widget.plan['plan_name']}',
                       style: displayNormalBiggerSlightlyBoldBlack,
                     ),
                     //Container(width: 30),
@@ -341,16 +317,16 @@ class GoalDetailsState extends State<GoalDetails> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => EditPlan(
-                              initialGoalName: widget.plan,
-                              initialGoalDescription: widget.planDescription,
-                              initialTargetAmount: widget.target?.toInt(),
-                              initialCategory: widget.category,
+                              initialGoalName: 'Goal Name',
+                              initialGoalDescription: 'Goal Description',
+                              initialTargetAmount: 200,
+                              initialCategory: 'Category',
                               initialMaturityDate:
                                   DateTime.now().add(const Duration(days: 30)),
-                              initialLockPlan: widget.locked!,
-                              initialFrequency: widget.frequency,
-                              planId: widget.id,
-                              initialmembersList: widget.membersList,
+                              initialLockPlan: false,
+                              initialFrequency: 'Frequency',
+                              planId: widget.plan['id'],
+                              initialmembersList: widget.plan['membersList'],
                             ),
                           ),
                         );
@@ -396,21 +372,18 @@ class GoalDetailsState extends State<GoalDetails> {
                       ],
                     ),
                     Progress(
-                      progress: widget.progress!,
-                      planBalance: widget.planBalance!,
-                      target: widget.target,
+                      progress: calculateCurrentAmountPercentage(
+                        widget.plan['wallet']['balance'], // balance
+                        widget.plan['target_amount'], // target amount
+                      ),
+                      planBalance: widget.plan['wallet']['balance'],
+                      target: widget.plan['target_amount'],
                     ),
                     transactButtons,
                     const SizedBox(height: 20),
                     GoalPerformance(
-                      planDescription: widget.planDescription!,
-                      createdAt: widget.createdAt!,
-                      target: widget.target!,
-                      maturityDate: widget.maturityDate!,
+                      planDetails: widget.plan,
                     ),
-                    widget.membersList!.isEmpty
-                        ? Container()
-                        : membersListWidget,
                     transactions,
                   ],
                 ),

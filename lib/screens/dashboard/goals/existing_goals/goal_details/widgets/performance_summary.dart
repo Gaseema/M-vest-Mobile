@@ -1,16 +1,10 @@
 import 'package:invest/imports/imports.dart';
 
 class GoalPerformance extends StatelessWidget {
-  final String planDescription;
-  final num? target;
-  final String? createdAt;
-  final String? maturityDate;
+  final Map planDetails;
   const GoalPerformance({
     super.key,
-    this.createdAt,
-    required this.planDescription,
-    this.maturityDate,
-    this.target,
+    required this.planDetails,
   });
 
   @override
@@ -34,9 +28,9 @@ class GoalPerformance extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const PerformanceRow(
+              PerformanceRow(
                 leftText: 'Plan created on',
-                rightText: '02 May, 2024',
+                rightText: formatDate(planDetails['createdAt'], true),
               ),
               Divider(color: Colors.grey[300], thickness: 0.5),
               const PerformanceRow(
@@ -44,9 +38,11 @@ class GoalPerformance extends StatelessWidget {
                 rightText: '0.00%',
               ),
               Divider(color: Colors.grey[300], thickness: 0.5),
-              const PerformanceRow(
+              PerformanceRow(
                 leftText: 'Total deposit',
-                rightText: 'KES 0.00',
+                rightText: CurrencyConverter().convert(
+                  planDetails['wallet']['balance'].toString(),
+                ),
               ),
               Divider(color: Colors.grey[300], thickness: 0.5),
               const PerformanceRow(

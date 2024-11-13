@@ -1,6 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
 class User {
+  final int id;
   final String firstName;
   final String lastName;
   final String email;
@@ -8,6 +9,7 @@ class User {
   final String token;
 
   User({
+    required this.id,
     required this.firstName,
     required this.lastName,
     required this.email,
@@ -35,6 +37,7 @@ void updateUserProvider(
   // Update the userProvider with the new user data
   userProvider.setUser(
     User(
+      id: userData['user']['id'],
       firstName: userData['user']['first_name'],
       lastName: userData['user']['last_name'],
       email: userData['user']['email'].replaceAll(' ', ''),

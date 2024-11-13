@@ -53,28 +53,8 @@ class _UserGoalsState extends State<UserGoals> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: List.generate(userPlans.length, (index) {
-                        final plan = userPlans[index];
-                        final walletBalance = plan['Wallet']?['balance'] ?? 0;
-                        final membersList = plan['Group']?['members'] ?? [];
-                        final percentageDifference =
-                            calculateCurrentAmountPercentage(
-                                walletBalance, plan['target_amount']);
-                        logger(membersList);
                         return PlanCard(
-                          id: plan['id'],
-                          type: plan['type'],
-                          category: plan['category'],
-                          planDescription: plan['description'],
-                          plan: plan['goal_name'],
-                          progress: percentageDifference,
-                          planBalance: walletBalance,
-                          target: plan['target_amount'],
-                          createdAt: plan['createdAt'],
-                          maturityDate: plan['maturity_date'],
-                          locked: plan['locked'],
-                          walletId: plan['Wallet']?['id'],
-                          frequency: plan['frequency'],
-                          membersList: membersList,
+                          plan: userPlans[index],
                           callback: (res) {},
                         );
                       }),
@@ -87,28 +67,22 @@ class _UserGoalsState extends State<UserGoals> {
                           'assets/svg/make_plan.svg',
                           width: 200,
                         ),
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     PersistentNavBarNavigator.pushNewScreen(
-                        //       context,
-                        //       screen: const NewGoal(),
-                        //       withNavBar: false,
-                        //       pageTransitionAnimation:
-                        //           PageTransitionAnimation.cupertino,
-                        //     );
-                        //   },
-                        //   child: Container(
-                        //     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        //     decoration: BoxDecoration(
-                        //       color: primaryColor,
-                        //       borderRadius: BorderRadius.circular(7),
-                        //     ),
-                        //     child: Text(
-                        //       'Create a goal',
-                        //       style: displayNormalWhite,
-                        //     ),
-                        //   ),
-                        // )
+                        GestureDetector(
+                          onTap: () {
+                            context.go('/create_new_goal');
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                            decoration: BoxDecoration(
+                              color: primaryColor,
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: Text(
+                              'Create a goal',
+                              style: displayNormalWhite,
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   )

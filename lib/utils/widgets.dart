@@ -83,63 +83,23 @@ class TransactionCard extends StatelessWidget {
 }
 
 class PlanCard extends StatelessWidget {
-  final int? id;
-  final String? type;
-  final String? category;
-  final String? planDescription;
-  final String? plan;
-  final double? progress;
-  final num? planBalance;
-  final num? target;
-  final String? maturityDate;
-  final String? createdAt;
-  final String? frequency;
-  final bool? locked;
-  final int? walletId;
-  final ValueSetter<dynamic>? callback;
-  final List? membersList;
+  final Map plan;
+  final ValueSetter<dynamic> callback;
   const PlanCard({
     super.key,
-    @required this.type,
-    this.id,
-    this.category,
-    this.planDescription,
-    this.plan,
-    this.progress,
-    this.planBalance,
-    this.target,
-    this.createdAt,
-    this.maturityDate,
-    this.locked,
-    this.frequency,
-    this.callback,
-    this.walletId,
-    this.membersList,
+    required this.plan,
+    required this.callback,
   });
   @override
   Widget build(BuildContext context) {
+    final percentageDifference = calculateCurrentAmountPercentage(
+      plan['wallet']['balance'], // balance
+      plan['target_amount'], // target amount
+    );
     return GestureDetector(
       onTap: () {
-        PersistentNavBarNavigator.pushNewScreen(
-          context,
-          screen: GoalDetails(
-              type: type,
-              id: id,
-              category: category,
-              planDescription: planDescription,
-              plan: plan,
-              progress: progress,
-              planBalance: planBalance,
-              target: target,
-              maturityDate: maturityDate,
-              createdAt: createdAt,
-              frequency: frequency,
-              locked: locked,
-              walletId: walletId,
-              membersList: membersList),
-          withNavBar: false,
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
-        );
+        logger(plan);
+        context.go('/plan_details', extra: plan);
       },
       child: Container(
         width: SizeConfig.blockSizeHorizontal * 60,
@@ -177,8 +137,7 @@ class PlanCard extends StatelessWidget {
                         child: Container(
                           margin: const EdgeInsets.only(right: 10),
                           child: Text(
-                            //${displayName.split(' ')[0]} ${(displayName.split(' ').length > 1) ? '${displayName.split(' ')[1].substring(0, 2)}...' : ''}'
-                            '$category',
+                            capitalize(plan['plan_name']),
                             style: displayNormalBlack,
                           ),
                         ),
@@ -193,31 +152,31 @@ class PlanCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
-                    '$progress%',
+                    '$percentageDifference%',
                     style: displaySmallWhite,
                   ),
                 )
               ],
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              '$plan',
-              style: displayNormalBoldBlack,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 20),
+            // Text(
+            //   '$plan',
+            //   style: displayNormalBoldBlack,
+            // ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  CurrencyConverter().convert(planBalance.toString()),
+                  CurrencyConverter().convert(
+                    plan['wallet']['balance'].toString(),
+                  ),
                   style: displaySmallerLightGrey,
                 ),
                 Text(
-                  CurrencyConverter().convert(target.toString()),
+                  CurrencyConverter().convert(plan['target_amount'].toString()),
                   style: displaySmallerLightGrey,
                 ),
               ],
@@ -225,7 +184,7 @@ class PlanCard extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            ProgressBar(progress: progress),
+            ProgressBar(progress: percentageDifference),
           ],
         ),
       ),

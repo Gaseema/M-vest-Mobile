@@ -7,7 +7,7 @@ class ApiClient {
   ApiClient(String token) {
     _token = token;
     // _dio.options.baseUrl = 'https://api.mvest.africa';
-    _dio.options.baseUrl = 'http://192.168.100.247:8090';
+    _dio.options.baseUrl = 'http://192.168.1.24:8090';
   }
 
   Future<Response> get(String url,

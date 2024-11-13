@@ -1,5 +1,4 @@
 import 'package:invest/imports/imports.dart';
-import 'package:invest/screens/dashboard/goals/new_goal/widgets/savings_type_card.dart';
 
 class SavingsType extends StatefulWidget {
   const SavingsType({super.key});
@@ -29,48 +28,128 @@ class SavingsTypeState extends State<SavingsType> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ListView(
                   children: [
-                    const SizedBox(height: 20),
-                    SavingsTypeCard(
-                      icon: SizedBox(
-                        width: 50,
-                        child: Image.asset('assets/icons/target.png'),
-                      ),
-                      title: 'Save towards a goal',
-                      text:
-                          'Do you want to save towards a goal and build discipline with a locked plan?',
-                      color: const Color.fromRGBO(227, 252, 255, 1),
-                      onTap: (val) {
-                        context.push('/payment_plan');
-                      },
+                    Text(
+                      'Savings account',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.w100,
+                          ),
                     ),
                     const SizedBox(height: 20),
-                    SavingsTypeCard(
-                      icon: SizedBox(
-                        width: 50,
-                        child: Image.asset('assets/icons/emergency.png'),
-                      ),
-                      title: 'Save for rainy days (Emergency, short term)',
-                      text:
-                          'Do you want a plan where you have free access to your funds for rainy days? \nNote: Funds will be locked for a minimum of 1 month',
-                      color: const Color.fromRGBO(244, 244, 255, 1),
-                      onTap: (val) {
-                        context.push('/payment_plan');
-                      },
+                    GridView.count(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 10.0,
+                      mainAxisSpacing: 10.0,
+                      childAspectRatio: 0.7,
+                      children: [
+                        GradientImageContainer(
+                          imageUrl: 'assets/goals/emergency.png',
+                          text: 'Emergency',
+                          gradientOpacity: 0.7,
+                          onTap: () {
+                            context.push('/payment_plan', extra: 'emergency');
+                          },
+                        ),
+                        GradientImageContainer(
+                          imageUrl: 'assets/goals/vacation.png',
+                          text: 'Vacation',
+                          gradientOpacity: 0.7,
+                          onTap: () {
+                            context.push('/payment_plan', extra: 'vacation');
+                          },
+                        ),
+                        GradientImageContainer(
+                          imageUrl: 'assets/goals/medical.png',
+                          text: 'Medical',
+                          gradientOpacity: 0.7,
+                          onTap: () {
+                            context.push('/payment_plan', extra: 'medical');
+                          },
+                        ),
+                        GradientImageContainer(
+                          imageUrl: 'assets/goals/wedding.png',
+                          text: 'Wedding',
+                          gradientOpacity: 0.7,
+                          onTap: () {
+                            context.push('/payment_plan', extra: 'wedding');
+                          },
+                        ),
+                        GradientImageContainer(
+                          imageUrl: 'assets/goals/furniture.png',
+                          text: 'Furniture',
+                          gradientOpacity: 0.7,
+                          onTap: () {
+                            context.push('/payment_plan', extra: 'furniture');
+                          },
+                        ),
+                        GradientImageContainer(
+                          imageUrl: 'assets/goals/other.png',
+                          text: 'Other',
+                          gradientOpacity: 0.7,
+                          onTap: () {
+                            context.push('/payment_plan', extra: 'other');
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 40),
+                    Text(
+                      'Investment account',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.w100,
+                          ),
                     ),
                     const SizedBox(height: 20),
-                    // SavingsTypeCard(
-                    //   icon: SizedBox(
-                    //     width: 50,
-                    //     child: Image.asset('assets/icons/group.png'),
-                    //   ),
-                    //   title: 'Save in a group (Chama)',
-                    //   text: 'Do you want to save with friends and family?',
-                    //   color: const Color.fromRGBO(255, 246, 238, 1),
-                    //   onTap: (val) {
-                    //     context.push('/payment_plan');
-                    //   },
-                    // ),
-                    const SizedBox(height: 50),
+                    GridView.count(
+                      shrinkWrap: true,
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 10.0,
+                      mainAxisSpacing: 10.0,
+                      childAspectRatio: 0.7,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        GradientImageContainer(
+                          imageUrl: 'assets/goals/business.png',
+                          text: 'Bonds',
+                          gradientOpacity: 0.7,
+                          onTap: () {
+                            showToast(
+                              context,
+                              'Coming soon!',
+                              'Investment services not available in your country',
+                              Colors.red,
+                            );
+                          },
+                        ),
+                        GradientImageContainer(
+                          imageUrl: 'assets/goals/realestate.png',
+                          text: 'Real Estate',
+                          gradientOpacity: 0.7,
+                          onTap: () {
+                            showToast(
+                              context,
+                              'Coming soon!',
+                              'Investment services not available in your country',
+                              Colors.red,
+                            );
+                          },
+                        ),
+                        GradientImageContainer(
+                          imageUrl: 'assets/goals/stocks.png',
+                          text: 'Stocks',
+                          gradientOpacity: 0.7,
+                          onTap: () {
+                            showToast(
+                              context,
+                              'Coming soon!',
+                              'Investment services not available in your country',
+                              Colors.red,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),

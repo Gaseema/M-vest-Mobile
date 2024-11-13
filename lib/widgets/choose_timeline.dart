@@ -14,7 +14,7 @@ class _SelectTimelineWidgetState extends State<SelectTimelineWidget> {
     '3 months',
     '6 months',
     '9 months',
-    '1 Yearly',
+    '1 Year',
     'Let me choose',
   ];
 
