@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
         const AssetImage('assets/illustrations/welcome.jpg'),
         context,
       );
-      Navigator.pushReplacementNamed(context, '/home');
+      context.go('/welcome');
     });
   }
 

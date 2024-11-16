@@ -44,6 +44,7 @@ class PinCodePageState extends State<PinCodePage> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -92,9 +93,13 @@ class PinCodePageState extends State<PinCodePage> {
               ),
               const SizedBox(height: 50),
               Keypad(
-                actionButton: const Icon(Icons.fingerprint_rounded, size: 30),
+                actionButton: const Icon(
+                  Icons.fingerprint_rounded,
+                  color: Colors.black,
+                  size: 30,
+                ),
                 callback: (value) {
-                  setState(() {
+                  setState(() async {
                     if (value == '<' && codeValue.isNotEmpty) {
                       codeValue = codeValue.substring(0, codeValue.length - 1);
                       pincodeError = false;
@@ -106,7 +111,7 @@ class PinCodePageState extends State<PinCodePage> {
                         startProcessing();
 
                         // Login user
-                        apiCall(
+                        await apiCall(
                           'POST',
                           '/user/login',
                           {'user_id': widget.user['id'], 'password': codeValue},
@@ -115,8 +120,9 @@ class PinCodePageState extends State<PinCodePage> {
                           logger(res);
                           if (res['isSuccessful'] == true) {
                             updateUserProvider(userProvider, res['data']);
-                            context.go('/dashboard');
+                            context.push('/dashboard');
                           } else {
+                            pinError();
                             showToast(
                               context,
                               'Error!',
@@ -143,6 +149,7 @@ class PinCodePageState extends State<PinCodePage> {
                       ),
                 ),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

@@ -60,6 +60,7 @@ class TimelinePlanState extends State<TimelinePlan> {
     );
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,6 +106,7 @@ class TimelinePlanState extends State<TimelinePlan> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

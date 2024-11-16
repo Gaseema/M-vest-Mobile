@@ -53,7 +53,7 @@ class AppRouter {
             path: 'plan_details',
             builder: (BuildContext context, GoRouterState state) {
               return GoalDetails(
-                plan: state.extra as Map,
+                plan: state.extra as Plan,
               );
             },
           ),

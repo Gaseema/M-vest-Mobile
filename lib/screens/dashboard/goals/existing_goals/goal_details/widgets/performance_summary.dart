@@ -1,7 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
 class GoalPerformance extends StatelessWidget {
-  final Map planDetails;
+  final Plan planDetails;
   const GoalPerformance({
     super.key,
     required this.planDetails,
@@ -30,7 +30,7 @@ class GoalPerformance extends StatelessWidget {
             children: [
               PerformanceRow(
                 leftText: 'Plan created on',
-                rightText: formatDate(planDetails['createdAt'], true),
+                rightText: formatDate(planDetails.createdAt, true),
               ),
               Divider(color: Colors.grey[300], thickness: 0.5),
               const PerformanceRow(
@@ -41,7 +41,7 @@ class GoalPerformance extends StatelessWidget {
               PerformanceRow(
                 leftText: 'Total deposit',
                 rightText: CurrencyConverter().convert(
-                  planDetails['wallet']['balance'].toString(),
+                  planDetails.balance.toString(),
                 ),
               ),
               Divider(color: Colors.grey[300], thickness: 0.5),

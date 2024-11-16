@@ -2,7 +2,6 @@ import 'package:invest/imports/imports.dart';
 
 import 'package:invest/screens/dashboard/transactions/transaction_status.dart';
 
-
 class ConfirmTransaction extends StatefulWidget {
   final String? transactionType;
   final String? transactionAmount;
@@ -139,6 +138,7 @@ class ConfirmTransactionState extends State<ConfirmTransaction> {
       ),
     );
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           margin: const EdgeInsets.only(left: 20, right: 20, top: 20),

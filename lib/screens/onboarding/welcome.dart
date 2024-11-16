@@ -54,104 +54,116 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   Widget _buildContent(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: PopScope(
-        canPop: false,
-        onPopInvokedWithResult: (bool didPop, Object? result) async {
+    return PopScope(
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
           return;
-        },
-        child: Column(
-          children: [
-            Expanded(
-              child: Stack(
-                children: [
-                  Image.asset(
-                    'assets/illustrations/welcome.jpg',
-                    fit: BoxFit.fitHeight,
-                    height: double.infinity,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.white.withOpacity(0),
-                          Colors.white.withOpacity(0),
-                          Colors.white.withOpacity(0),
-                          Colors.white.withOpacity(0),
-                          Colors.white.withOpacity(0.1),
-                          Colors.white.withOpacity(0.3),
-                          Colors.white.withOpacity(0.5),
-                          Colors.white.withOpacity(0.7),
-                          Colors.white.withOpacity(0.8),
-                          Colors.white.withOpacity(1),
-                          Colors.white.withOpacity(1),
+        }
+        final bool shouldPop = await exitApp(context) ?? false;
+        if (context.mounted && shouldPop) {
+          Navigator.pop(context);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: PopScope(
+          canPop: false,
+          onPopInvokedWithResult: (bool didPop, Object? result) async {
+            return;
+          },
+          child: Column(
+            children: [
+              Expanded(
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      'assets/illustrations/welcome.jpg',
+                      fit: BoxFit.fitHeight,
+                      height: double.infinity,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.white.withOpacity(0),
+                            Colors.white.withOpacity(0),
+                            Colors.white.withOpacity(0),
+                            Colors.white.withOpacity(0),
+                            Colors.white.withOpacity(0.1),
+                            Colors.white.withOpacity(0.3),
+                            Colors.white.withOpacity(0.5),
+                            Colors.white.withOpacity(0.7),
+                            Colors.white.withOpacity(0.8),
+                            Colors.white.withOpacity(1),
+                            Colors.white.withOpacity(1),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Wrap(
+                        alignment: WrapAlignment.center,
+                        children: [
+                          AnimatedContainer(
+                            width:
+                                MediaQuery.of(context).size.width * widthFactor,
+                            duration: const Duration(seconds: 4),
+                            child: Image.asset(
+                              'assets/icons/mvest_primary.png',
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: Wrap(
-                      alignment: WrapAlignment.center,
-                      children: [
-                        AnimatedContainer(
-                          width:
-                              MediaQuery.of(context).size.width * widthFactor,
-                          duration: const Duration(seconds: 4),
-                          child: Image.asset(
-                            'assets/icons/mvest_primary.png',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(7),
-                  topRight: Radius.circular(7),
+                  ],
                 ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomText(
-                    text: 'Put your \nmoney to work',
-                    style: displayLargeTextDarkBlue(context),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(7),
+                    topRight: Radius.circular(7),
                   ),
-                  const SizedBox(height: 20),
-                  CustomText(
-                    text: 'Invest, save and grow wealth.',
-                    style: displayMediumTextDarkBlue(context),
-                  ),
-                  const SizedBox(height: 50),
-                  const SizedBox(height: 20),
-                  CustomButton(
-                    url: null,
-                    method: '',
-                    body: const {},
-                    text: 'Continue with email',
-                    onCompleted: (val) {
-                      context.push('/email');
-                    },
-                  ),
-                  const SizedBox(height: 50)
-                ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: 'Put your \nmoney to work',
+                      style: displayLargeTextDarkBlue(context),
+                    ),
+                    const SizedBox(height: 20),
+                    CustomText(
+                      text: 'Invest, save and grow wealth.',
+                      style: displayMediumTextDarkBlue(context),
+                    ),
+                    const SizedBox(height: 50),
+                    const SizedBox(height: 20),
+                    CustomButton(
+                      url: null,
+                      method: '',
+                      body: const {},
+                      text: 'Continue with email',
+                      onCompleted: (val) {
+                        context.push('/email');
+                      },
+                    ),
+                    const SizedBox(height: 50)
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -4,8 +4,6 @@ logger(text) {
   return print(text);
 }
 
-List userPlans = [];
-
 num activePage = 0;
 
 Image? myImage;

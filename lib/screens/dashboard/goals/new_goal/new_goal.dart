@@ -11,6 +11,7 @@ class _NewGoalState extends State<NewGoal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -86,6 +87,7 @@ class _NewGoalState extends State<NewGoal> {
                       ?.copyWith(color: primaryColor),
                 ),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

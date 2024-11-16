@@ -90,6 +90,7 @@ class Keypad extends StatelessWidget {
                 const Icon(
                   Icons.arrow_back_ios_new_rounded,
                   size: 20,
+                  color: Colors.black,
                 ),
                 onTap: () => callback!('<'),
                 context: context,
@@ -111,19 +112,17 @@ class Keypad extends StatelessWidget {
         color: Colors.transparent,
         width: SizeConfig.blockSizeHorizontal * 27,
         height: SizeConfig.blockSizeVertical * 10,
-        child: content is String
-            ? Center(
-                child: Text(
+        child: Center(
+          child: content is String
+              ? Text(
                   content,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
-                ),
-              )
-            : content is Icon
-                ? content
-                : const SizedBox(),
+                )
+              : content,
+        ),
       ),
     );
   }

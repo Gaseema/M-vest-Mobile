@@ -53,6 +53,7 @@ class SummaryState extends State<Summary> {
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,6 +182,7 @@ class SummaryState extends State<Summary> {
                 },
               ),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

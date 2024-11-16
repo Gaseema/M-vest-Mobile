@@ -20,7 +20,6 @@ class HomeState extends State<Home> {
     super.initState();
     fetchPlans(context).then((res) {
       setState(() {
-        userPlans = res['data'];
         fetchingUserPlans = false;
       });
     });
@@ -103,6 +102,7 @@ class HomeState extends State<Home> {
       ),
     );
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           margin: const EdgeInsets.only(left: 20, right: 20, top: 20),

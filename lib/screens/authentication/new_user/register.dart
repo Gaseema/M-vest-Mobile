@@ -59,6 +59,7 @@ class RegisterUserPageState extends State<RegisterUserPage> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -76,9 +77,8 @@ class RegisterUserPageState extends State<RegisterUserPage> {
                 height: 20,
               ),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
+                child: ListView(
+                  shrinkWrap: true,
                   children: [
                     Text(
                       "Nice to meet you. Let's sign you up.",

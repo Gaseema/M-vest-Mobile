@@ -83,7 +83,7 @@ class TransactionCard extends StatelessWidget {
 }
 
 class PlanCard extends StatelessWidget {
-  final Map plan;
+  final Plan plan;
   final ValueSetter<dynamic> callback;
   const PlanCard({
     super.key,
@@ -93,13 +93,12 @@ class PlanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final percentageDifference = calculateCurrentAmountPercentage(
-      plan['wallet']['balance'], // balance
-      plan['target_amount'], // target amount
+      plan.balance, // balance
+      plan.target, // target amount
     );
     return GestureDetector(
       onTap: () {
-        logger(plan);
-        context.go('/plan_details', extra: plan);
+        context.push('/plan_details', extra: plan);
       },
       child: Container(
         width: SizeConfig.blockSizeHorizontal * 60,
@@ -137,7 +136,7 @@ class PlanCard extends StatelessWidget {
                         child: Container(
                           margin: const EdgeInsets.only(right: 10),
                           child: Text(
-                            capitalize(plan['plan_name']),
+                            capitalize(plan.name),
                             style: displayNormalBlack,
                           ),
                         ),
@@ -171,12 +170,12 @@ class PlanCard extends StatelessWidget {
               children: [
                 Text(
                   CurrencyConverter().convert(
-                    plan['wallet']['balance'].toString(),
+                    plan.balance.toString(),
                   ),
                   style: displaySmallerLightGrey,
                 ),
                 Text(
-                  CurrencyConverter().convert(plan['target_amount'].toString()),
+                  CurrencyConverter().convert(plan.target.toString()),
                   style: displaySmallerLightGrey,
                 ),
               ],
@@ -230,61 +229,20 @@ class ProgressBar extends StatelessWidget {
 }
 
 class AllPlansCard extends StatelessWidget {
-  final int? id;
-  final String? type;
-  final String? category;
-  final String? planDescription;
-  final String? plan;
-  final double? progress;
-  final num? planBalance;
-  final num? target;
-  final String? maturityDate;
-  final String? createdAt;
-  final bool? locked;
-  final int? walletId;
-  final String? frequency;
+  final Plan planDetails;
   final ValueSetter<dynamic>? callback;
   const AllPlansCard({
     super.key,
-    @required this.type,
-    this.id,
-    this.category,
-    this.planDescription,
-    this.plan,
-    this.progress,
-    this.planBalance,
-    this.target,
-    this.createdAt,
-    this.maturityDate,
-    this.locked,
+    required this.planDetails,
     this.callback,
-    this.frequency,
-    this.walletId,
   });
   @override
   Widget build(BuildContext context) {
+    final percentageDifference = calculateCurrentAmountPercentage(
+        planDetails.balance, planDetails.target);
     return GestureDetector(
       onTap: () {
-        PersistentNavBarNavigator.pushNewScreen(
-          context,
-          screen: PlanDetails(
-            type: type,
-            id: id,
-            category: category,
-            planDescription: planDescription,
-            plan: plan,
-            progress: progress,
-            target: target,
-            maturityDate: maturityDate,
-            createdAt: createdAt,
-            locked: locked,
-            walletId: walletId,
-            planBalance: planBalance,
-            frequency: frequency,
-          ),
-          withNavBar: false,
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
-        );
+        context.push('/plan_details', extra: planDetails);
       },
       child: Container(
         width: SizeConfig.blockSizeHorizontal * 60,
@@ -319,7 +277,7 @@ class AllPlansCard extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(right: 10),
                     child: Text(
-                      '$category',
+                      planDetails.type,
                       style: displayNormalBlack,
                     ),
                   ),
@@ -331,7 +289,7 @@ class AllPlansCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
-                    '$progress%',
+                    '$percentageDifference%',
                     style: displaySmallWhite,
                   ),
                 )
@@ -341,7 +299,7 @@ class AllPlansCard extends StatelessWidget {
               height: 5,
             ),
             Text(
-              '$plan',
+              planDetails.name,
               style: displayNormalBoldBlack,
             ),
             const SizedBox(
@@ -352,13 +310,13 @@ class AllPlansCard extends StatelessWidget {
               children: [
                 Text(
                   //'${planBalance}',
-                  CurrencyConverter().convert(planBalance.toString()),
+                  CurrencyConverter().convert(planDetails.balance.toString()),
 
                   style: displaySmallerLightGrey,
                 ),
                 Text(
                   // '${target}',
-                  CurrencyConverter().convert(target.toString()),
+                  CurrencyConverter().convert(planDetails.target.toString()),
                   style: displaySmallerLightGrey,
                 ),
               ],
@@ -366,7 +324,7 @@ class AllPlansCard extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            ProgressBar(progress: progress),
+            ProgressBar(progress: percentageDifference),
           ],
         ),
       ),

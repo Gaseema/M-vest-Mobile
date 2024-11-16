@@ -2,26 +2,41 @@ import 'package:invest/imports/imports.dart';
 
 class Plan {
   final String name;
-  final String email;
-  final String phoneNo;
-  final String token;
+  final String type;
+  final String maturityDate;
+  final Map lock;
+  final String createdAt;
+  final num balance;
+  final num target;
 
   Plan({
     required this.name,
-    required this.email,
-    required this.phoneNo,
-    required this.token,
+    required this.type,
+    required this.maturityDate,
+    required this.lock,
+    required this.createdAt,
+    required this.balance,
+    required this.target,
   });
 }
 
 class PlanProvider extends ChangeNotifier {
-  Plan? _plan;
+  List<Plan> _plans = [];
 
-  Plan? get user => _plan;
+  List<Plan> get plans => _plans;
 
-  void setUser(Plan plan) {
-    _plan = plan;
+  void setPlans(List<Plan> plans) {
+    _plans = plans;
+    notifyListeners();
+  }
 
+  void addPlan(Plan plan) {
+    _plans.add(plan);
+    notifyListeners();
+  }
+
+  void removePlan(Plan plan) {
+    _plans.remove(plan);
     notifyListeners();
   }
 }

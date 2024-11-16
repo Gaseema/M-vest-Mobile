@@ -217,6 +217,7 @@ class ProfileState extends State<Profile> {
       ],
     );
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           margin: const EdgeInsets.only(left: 20, right: 20, top: 20),

@@ -1,9 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
-
 import 'package:invest/screens/dashboard/transactions/confirm_transaction.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-
 
 class MakeTransaction extends StatefulWidget {
   final String? transactionType;
@@ -128,6 +126,7 @@ class MakeTransactionState extends State<MakeTransaction> {
     // Button-like component with small 10 dots
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           margin: const EdgeInsets.only(left: 20, right: 20, top: 20),

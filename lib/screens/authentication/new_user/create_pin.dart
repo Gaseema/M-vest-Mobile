@@ -56,6 +56,7 @@ class CreatePinState extends State<CreatePin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -150,7 +151,7 @@ class CreatePinState extends State<CreatePin> {
                           {'user_id': widget.user['id'], 'pin': codeValue},
                         ).then((res) {
                           if (res['isSuccessful'] == true) {
-                            context.go('/dashboard');
+                            context.push('/dashboard');
                           } else {
                             pinError();
                           }

@@ -133,6 +133,7 @@ class PaymentPlanState extends State<PaymentPlan> {
       ],
     );
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,6 +190,7 @@ class PaymentPlanState extends State<PaymentPlan> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

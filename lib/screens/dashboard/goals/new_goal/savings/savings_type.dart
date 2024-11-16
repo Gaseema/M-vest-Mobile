@@ -11,6 +11,7 @@ class SavingsTypeState extends State<SavingsType> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,6 +24,7 @@ class SavingsTypeState extends State<SavingsType> {
               },
               statusBarBrightness: Brightness.light,
             ),
+            const SizedBox(height: 20),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),

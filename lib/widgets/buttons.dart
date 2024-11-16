@@ -79,13 +79,14 @@ class _CustomButtonState extends State<CustomButton> {
       onTap: _isLoading
           ? null
           : () async {
+              FocusScope.of(context).unfocus();
               // Check if form is valid
               if (widget.formValid == false) {
                 return showToast(
                   context,
                   'Error!',
                   widget.validationMessage ?? '',
-                  Colors.red[300]!,
+                  Colors.red[700]!,
                 );
               }
               // Check if URL is null

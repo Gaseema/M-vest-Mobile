@@ -1,7 +1,7 @@
 import 'package:invest/imports/imports.dart';
 
 class GoalDetails extends StatefulWidget {
-  final Map plan;
+  final Plan plan;
 
   const GoalDetails({
     super.key,
@@ -75,7 +75,7 @@ class GoalDetailsState extends State<GoalDetails> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  'Goal: ${capitalize(widget.plan['plan_name'])}',
+                  'Goal: ${capitalize(widget.plan.name)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
@@ -84,7 +84,7 @@ class GoalDetailsState extends State<GoalDetails> {
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 3, 10, 3),
-                child: widget.plan['lock']['is_locked']
+                child: widget.plan.lock['is_locked']
                     ? Image.asset(
                         'assets/icons/lock.png',
                         width: 20,
@@ -107,7 +107,7 @@ class GoalDetailsState extends State<GoalDetails> {
           const SizedBox(height: 10),
           Text(
             CurrencyConverter().convert(
-              widget.plan['wallet']['balance'].toString(),
+              widget.plan.balance.toString(),
             ),
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: Colors.white,
@@ -120,7 +120,7 @@ class GoalDetailsState extends State<GoalDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Created on ${formatDate(widget.plan['createdAt'], false)}',
+                'Created on ${formatDate(widget.plan.createdAt, false)}',
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: Colors.white.withOpacity(0.7),
                       fontSize: 10,
@@ -139,16 +139,16 @@ class GoalDetailsState extends State<GoalDetails> {
         children: [
           GestureDetector(
             onTap: () {
-              PersistentNavBarNavigator.pushNewScreen(
-                context,
-                screen: MakeTransaction(
-                  transactionType: 'deposit',
-                  walletID: widget.plan['id'],
-                  category: widget.plan['category'],
-                ),
-                withNavBar: false,
-                pageTransitionAnimation: PageTransitionAnimation.cupertino,
-              );
+              // PersistentNavBarNavigator.pushNewScreen(
+              //   context,
+              //   screen: MakeTransaction(
+              //     transactionType: 'deposit',
+              //     walletID: widget.plan['id'],
+              //     category: widget.plan['category'],
+              //   ),
+              //   withNavBar: false,
+              //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
+              // );
             },
             child: Column(
               children: [
@@ -173,17 +173,17 @@ class GoalDetailsState extends State<GoalDetails> {
           ),
           GestureDetector(
             onTap: () {
-              PersistentNavBarNavigator.pushNewScreen(
-                context,
-                screen: MakeTransaction(
-                  transactionType: 'withdraw',
-                  walletID: widget.plan['id'],
-                  category: widget.plan['category'],
-                  planBalance: widget.plan['planBalance'],
-                ),
-                withNavBar: false,
-                pageTransitionAnimation: PageTransitionAnimation.cupertino,
-              );
+              // PersistentNavBarNavigator.pushNewScreen(
+              //   context,
+              //   screen: MakeTransaction(
+              //     transactionType: 'withdraw',
+              //     walletID: widget.plan['id'],
+              //     category: widget.plan['category'],
+              //     planBalance: widget.plan['planBalance'],
+              //   ),
+              //   withNavBar: false,
+              //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
+              // );
             },
             child: Column(
               children: [
@@ -295,47 +295,48 @@ class GoalDetailsState extends State<GoalDetails> {
                   top: 20,
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.pop(context);
+                        context.pop();
                       },
                       child: Image.asset(
                         'assets/icons/back.png',
                         width: 30,
                       ),
                     ),
+                    const SizedBox(width: 20),
                     Text(
-                      '${widget.plan['plan_name']}',
+                      capitalize(widget.plan.name),
                       style: displayNormalBiggerSlightlyBoldBlack,
                     ),
                     //Container(width: 30),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditPlan(
-                              initialGoalName: 'Goal Name',
-                              initialGoalDescription: 'Goal Description',
-                              initialTargetAmount: 200,
-                              initialCategory: 'Category',
-                              initialMaturityDate:
-                                  DateTime.now().add(const Duration(days: 30)),
-                              initialLockPlan: false,
-                              initialFrequency: 'Frequency',
-                              planId: widget.plan['id'],
-                              initialmembersList: widget.plan['membersList'],
-                            ),
-                          ),
-                        );
-                      },
-                      child: Image.asset(
-                        'assets/icons/edit.png',
-                        width: 25,
-                      ),
-                    ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => EditPlan(
+                    //           initialGoalName: 'Goal Name',
+                    //           initialGoalDescription: 'Goal Description',
+                    //           initialTargetAmount: 200,
+                    //           initialCategory: 'Category',
+                    //           initialMaturityDate:
+                    //               DateTime.now().add(const Duration(days: 30)),
+                    //           initialLockPlan: false,
+                    //           initialFrequency: 'Frequency',
+                    //           planId: widget.plan['id'],
+                    //           initialmembersList: widget.plan['membersList'],
+                    //         ),
+                    //       ),
+                    //     );
+                    //   },
+                    //   child: Image.asset(
+                    //     'assets/icons/edit.png',
+                    //     width: 25,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -373,13 +374,13 @@ class GoalDetailsState extends State<GoalDetails> {
                     ),
                     Progress(
                       progress: calculateCurrentAmountPercentage(
-                        widget.plan['wallet']['balance'], // balance
-                        widget.plan['target_amount'], // target amount
+                        widget.plan.balance, // balance
+                        widget.plan.target, // target amount
                       ),
-                      planBalance: widget.plan['wallet']['balance'],
-                      target: widget.plan['target_amount'],
+                      planBalance: widget.plan.balance,
+                      target: widget.plan.target,
                     ),
-                    transactButtons,
+                    // transactButtons,
                     const SizedBox(height: 20),
                     GoalPerformance(
                       planDetails: widget.plan,

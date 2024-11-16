@@ -13,8 +13,20 @@ class _UserGoalsState extends State<UserGoals> {
   void initState() {
     super.initState();
     fetchPlans(context).then((res) {
+      final planProvider = Provider.of<PlanProvider>(context, listen: false);
+      List<Plan> plans = (res['data'] as List).map((planData) {
+        return Plan(
+          name: planData['plan_name'],
+          type: planData['type'],
+          maturityDate: planData['maturity_date'],
+          lock: planData['lock'],
+          balance: planData['wallet']['balance'],
+          target: planData['target_amount'],
+          createdAt: planData['createdAt'],
+        );
+      }).toList();
+      planProvider.setPlans(plans);
       setState(() {
-        userPlans = res['data'];
         fetchingUserPlans = false;
       });
     });
@@ -22,6 +34,8 @@ class _UserGoalsState extends State<UserGoals> {
 
   @override
   Widget build(BuildContext context) {
+    final planProvider = Provider.of<PlanProvider>(context);
+    final userPlans = planProvider.plans;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -60,6 +74,17 @@ class _UserGoalsState extends State<UserGoals> {
                       }),
                     ),
                   )
+                // ? SingleChildScrollView(
+                //     scrollDirection: Axis.horizontal,
+                //     child: Row(
+                //       children: List.generate(userPlans.length, (index) {
+                //         return PlanCard(
+                //           plan: userPlans[index],
+                //           callback: (res) {},
+                //         );
+                //       }),
+                //     ),
+                //   )
                 : Center(
                     child: Column(
                       children: [

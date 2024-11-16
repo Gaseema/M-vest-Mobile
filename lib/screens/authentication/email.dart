@@ -50,6 +50,7 @@ class EmailPageState extends State<EmailPage> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
@@ -155,6 +156,7 @@ class EmailPageState extends State<EmailPage> {
                 },
               ),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

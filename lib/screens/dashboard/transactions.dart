@@ -19,6 +19,7 @@ class TransactionsState extends State<Transactions> {
         Provider.of<UserTransactionsProvider>(context);
     final userTransactions = userTransactionsProvider.userTransactions;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           margin: const EdgeInsets.only(left: 20, right: 20, top: 20),

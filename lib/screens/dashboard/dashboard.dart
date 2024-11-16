@@ -96,38 +96,50 @@ class DashboardState extends State<Dashboard> {
         systemNavigationBarColor: Colors.white,
       ),
     );
-    return Scaffold(
-      body: PersistentTabView(
-        context,
-        controller: bottomNavigationController,
-        screens: _buildScreens(),
-        items: _navBarsItems(),
-        // confineInSafeArea: true,
+    return PopScope(
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          return;
+        }
+        final bool shouldPop = await exitApp(context) ?? false;
+        if (context.mounted && shouldPop) {
+          Navigator.pop(context);
+        }
+      },
+      child: Scaffold(
         backgroundColor: Colors.white,
-        handleAndroidBackButtonPress: true,
-        resizeToAvoidBottomInset: true,
-        stateManagement: true,
-        hideNavigationBarWhenKeyboardAppears: true,
-        decoration: NavBarDecoration(
-          borderRadius: BorderRadius.circular(0.0),
-          colorBehindNavBar: Colors.white,
+        body: PersistentTabView(
+          context,
+          controller: bottomNavigationController,
+          screens: _buildScreens(),
+          items: _navBarsItems(),
+          // confineInSafeArea: true,
+          backgroundColor: Colors.white,
+          handleAndroidBackButtonPress: true,
+          resizeToAvoidBottomInset: true,
+          stateManagement: true,
+          hideNavigationBarWhenKeyboardAppears: true,
+          decoration: NavBarDecoration(
+            borderRadius: BorderRadius.circular(0.0),
+            colorBehindNavBar: Colors.white,
+          ),
+          // popActionScreens: PopActionScreensType.all,
+          // itemAnimationProperties: const ItemAnimationProperties(
+          //   duration: Duration(milliseconds: 200),
+          //   curve: Curves.ease,
+          // ),
+          // screenTransitionAnimation: const ScreenTransitionAnimation(
+          //   animateTabTransition: true,
+          //   curve: Curves.ease,
+          //   duration: Duration(milliseconds: 200),
+          // ),
+          navBarStyle: NavBarStyle.style9,
+          onItemSelected: (value) {
+            setState(() {
+              activePage = value;
+            });
+          },
         ),
-        // popActionScreens: PopActionScreensType.all,
-        // itemAnimationProperties: const ItemAnimationProperties(
-        //   duration: Duration(milliseconds: 200),
-        //   curve: Curves.ease,
-        // ),
-        // screenTransitionAnimation: const ScreenTransitionAnimation(
-        //   animateTabTransition: true,
-        //   curve: Curves.ease,
-        //   duration: Duration(milliseconds: 200),
-        // ),
-        navBarStyle: NavBarStyle.style9,
-        onItemSelected: (value) {
-          setState(() {
-            activePage = value;
-          });
-        },
       ),
     );
   }

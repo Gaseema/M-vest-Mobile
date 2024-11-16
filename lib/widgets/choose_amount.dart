@@ -113,8 +113,17 @@ class _EnterAmountBottomWidgetState extends State<EnterAmountBottomWidget> {
           ),
         ),
         Keypad(
-          actionButton: null,
+          actionButton: Text(
+            'OK',
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: Colors.black,
+                ),
+          ),
           callback: (value) {
+            if (value == '.') {
+              Navigator.pop(context);
+              return;
+            }
             if (amount == '' && value == '0') {
               return;
             }

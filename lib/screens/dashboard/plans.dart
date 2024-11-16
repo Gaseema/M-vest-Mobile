@@ -16,7 +16,6 @@ class PlansState extends State<Plans> {
     super.initState();
     fetchPlans(context).then((res) {
       setState(() {
-        userPlans = res['data'];
         fetchingUserPlans = false;
       });
     });
@@ -24,6 +23,8 @@ class PlansState extends State<Plans> {
 
   @override
   Widget build(BuildContext context) {
+    final planProvider = Provider.of<PlanProvider>(context);
+    final userPlans = planProvider.plans;
     Widget featuredGoals = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -55,6 +56,7 @@ class PlansState extends State<Plans> {
     );
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -93,29 +95,8 @@ class PlansState extends State<Plans> {
                         ? ListView.builder(
                             itemCount: userPlans.length,
                             itemBuilder: (BuildContext context, int index) {
-                              final plan = userPlans[index];
-                              final walletBalance =
-                                  plan['Wallet']?['balance'] ?? 0;
-                              // final walletBalance =
-                              //     plan['Wallet']?['balance'] ?? 0;
-                              final percentageDifference =
-                                  calculateCurrentAmountPercentage(
-                                      walletBalance, plan['target_amount']);
-
                               return AllPlansCard(
-                                id: plan['id'],
-                                type: plan['type'],
-                                category: plan['category'],
-                                planDescription: plan['description'],
-                                plan: plan['goal_name'],
-                                planBalance: walletBalance,
-                                progress: percentageDifference,
-                                target: plan['target_amount'],
-                                createdAt: plan['createdAt'],
-                                maturityDate: plan['maturity_date'],
-                                locked: plan['locked'],
-                                walletId: plan['Wallet']?['id'],
-                                frequency: plan['frequency'],
+                                planDetails: userPlans[index],
                                 callback: (res) {},
                               );
                             },

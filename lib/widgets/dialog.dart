@@ -8,16 +8,8 @@ class CustomBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 30),
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color.fromRGBO(255, 253, 252, 1),
-            Color.fromRGBO(235, 235, 235, 1),
-          ],
-        ),
+        color: Colors.white,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(8),
           topRight: Radius.circular(8),
@@ -54,7 +46,7 @@ void showCustomBottomSheet(BuildContext context, Widget content) {
   );
 }
 
-showFloatingBottomSheet(BuildContext context) {
+showFloatingBottomSheet(BuildContext context, Widget content) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -68,37 +60,66 @@ showFloatingBottomSheet(BuildContext context) {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Container(
-            color: primaryColor,
-            child: Padding(
-              padding:
-                  const EdgeInsets.all(16.0), // Padding inside the bottom sheet
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    'Remember your password',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Colors.white,
-                        ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  Text(
-                    "Remember your password. If you if you forget your password you'll have reset your password",
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Colors.white,
-                        ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  ElevatedButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('Close'),
-                  ),
-                ],
-              ),
-            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 20,
+            ), // Padding inside the bottom sheet
+            color: Colors.white,
+            child: content,
           ),
         ),
       );
     },
+  );
+}
+
+exitApp(context) {
+  return showFloatingBottomSheet(
+    context,
+    Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Text(
+          'Exit Mvest?',
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: Colors.black,
+              ),
+        ),
+        const SizedBox(height: 16.0),
+        Text(
+          "Are you sure you want to go? There’s more to explore!",
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              onPressed: () => SystemNavigator.pop(),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+              ),
+              child:
+                  Text('Leave', style: Theme.of(context).textTheme.bodyMedium!),
+            ),
+            const SizedBox(width: 16.0),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: primaryColor,
+              ),
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                'Nevermind',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: Colors.white),
+              ),
+            ),
+          ],
+        )
+      ],
+    ),
   );
 }
